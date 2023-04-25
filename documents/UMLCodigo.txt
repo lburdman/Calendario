@@ -1,0 +1,147 @@
+@startuml
+class Calendar{
+-List<CalendarItem> items
++Calendar()
++Calendar(List<CalendarItem> items
++getItems():List<CalendarItem>
++addItem(CalendarItem item): void
++removeItem(CalendarItem item): void
++listEventBetween(LocalDate startDate, LocalDate endDate): List<CalendarItem>
+}
+class CalendarItem{
+-String title
+-String description
+-List<Alarm> alarms
++CalendarItem(String title, String description, list<Alarm> alarms)
++getTitle():String
++setTitle(String title): void
++getDescription(): String
++setDescription(String description): void
++iscalendarItemBetween(LocalDate startDate, LocalDate endDate) : abstract boolean
++getAlarm:list<Alarm>
++setAlarm(list<Alarm> alarms):void
++addAlarm(Alarm alarm): void
++removeAlarm(Alarm alarm): void
++deleteAlarm(): void
+}
+abstract class Alarm {
+-LocalDateTime triggerDate
+-AlarmType alarmType 
++Trigger(): void
++Alarm(LocalDateTime triggerDate, AlarmType alarmType)
++Alarm(Integer relativeInterval, AlarmType alarmType)
++getTriggerDate():LocalDateTime
++setTriggerDate(LocalDateTime triggerDate):LocalDateTime
++getAlarmType():AlarmType
++setAlarmType(AlarmType alarmType):void
+}
+enum AlarmType
+class AnnuallyRepeat extends RepeatableSpec{
+-final LocalDateTime endDate
+-final Integer qtyReps
++AnnuallyRepeat(Event event, LocalDate endDate)
++AnnuallyRepeat(Event event, Integer qtyReps)
++AnnuallyRepeat(Event event)
++ListEventRepetitions():list<CalendarItem>
+-ListRepetitionsForQty():list<CalendarItem>
+-ListRepetitionsForEndDate():list<CalendarItem>
+}
+class DailyRepeat extends RepeatableSpec{
+-final LocalDateTime endDate
+-final Integer Interval
+-final Integer qtyReps
++DailyRepeat(Integer Interval, Event event, LocalDate endDate)
++DailyRepeat(Integer Interval, Event event, Integer qtyReps)
++DailyRepeat(Integer Interval, Event event)
++getInterval():Integer
++setInterval(Integer Interval):void
++ListEventRepetitions():list<CalendarItem>
+-ListRepetitionsForQty():list<CalendarItem>
+-ListRepetitionsForEndDate():list<CalendarItem>
+}
+class MonthlyRepeat extends RepeatableSpec{
+-final LocalDateTime endDate
+-final Integer qtyReps
++MonthlyRepeat(Event event, LocalDate endDate)
++MonthlyRepeatRepeat(Event event, Integer qtyReps)
++MonthlyRepeat(Event event)
++ListEventRepetitions():list<CalendarItem>
+-ListRepetitionsForQty():list<CalendarItem>
+-ListRepetitionsForEndDate():list<CalendarItem>
+}
+class WeeklyRepeat extends RepeatableSpec{
+-final LocalDateTime endDate
+-final Integer qtyReps
+-List<DayOfWeek> daysOfWeek;
++WeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, LocalDate endDate)
++WeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, Integer qtyReps)
++WeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event)
++getDaysOfWeek():List<DayOfWeek>
++setDaysOfWeek(List<DayOfWeek> dayOfWeek):void
++ListEventRepetitions():list<CalendarItem>
+-ListRepetitionsForQty():list<CalendarItem>
+-ListRepetitionsForEndDate():list<CalendarItem>
+}
+class Email extends Alarm{
++Trigger():void
++Email(LocalDateTime activationDate)
++Email(Integer relativeInterval)
+}
+class Notification extends Alarm{
++Trigger():void
++Notification(LocalDateTime activationDate)
++Notification(Integer relativeInterval)
+}
+class Sound extends Alarm{
++Trigger():void
++Sound(LocalDateTime activationDate)
++Sound(Integer relativeInterval)
+}
+class Event extends CalendarItem{
+-LocalDateTime startDateTime
+-LocalDateTime endDateTime
+-RepeatableSpec repeatableSpec
++Event(String title, String description, List<Alarm> alarms, LocalDateTime startDateTime, LocalDateTime endDateTime)
++Event(String title, List<Alarm> alarms, LocalDateTime startDateTime, LocalDateTime endDateTime)
++getStartDateTime():LocalDateTime
++setStartDateTime(LocalDateTime startDateTime):void
++getEndDateTime():LocalDateTime
++setEndDateTime(LocalDateTime endDateTime):void
++getRepeatableSpec():RepeatableSpec
++setRepeatableSpec(RepeatableSpec repeatableSpec):void
++cloneEvent(LocalDateTime newBeginDateTime, LocalDateTime newEndDateTime):Event
++isRepeatable():boolean
++isCalendarItemBetween(LocalDate startDate, LocalDate endDate):boolean
+}
+class Task extends CalendarItem{
+-LocalDateTime expDate
+-boolean complete
++Task(String title, String description, LocalDateTime expDate)
++Task(LocalDateTime expDate)
++getExpDate():LocalDateTime
++setExpDate(LocalDateTime expDate):void
++setAsCompleted():void
++isCompleted():boolean
++isExpired():boolean
++isCalendarItemBetween(LocalDate startDate, LocalDate endDate):boolean
+}
+Abstract class RepeatableSpec{
+-RepetitionType repetitionType;
+-Event event;
++RepeatableSpec(RepetitionType repetitionType, Event event)
++getRepetitionType():RepetitionType
++setRepetitionType(RepetitionType repetitionType):void
++getEvent():Event
++listEventRepetitions():abstract List<CalendarItem> 
+}
+enum RepetitionType
+
+Calendar o-- CalendarItem
+Alarm - CalendarItem
+AlarmType - Alarm
+Event o-- RepeatableSpec
+RepeatableSpec - RepetitionType
+
+
+
+@enduml
