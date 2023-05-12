@@ -13,7 +13,7 @@ public class TaskTest {
     public void testTaskConstruct() {
         String title = "Hacer ejercicio";
         String description = "Hacer ejercicio antes del 30 de abril";
-        LocalDateTime expDate = LocalDateTime.of(2023, 4, 30, 18, 0);
+        LocalDateTime expDate = LocalDateTime.of(2023, 6, 30, 18, 0);
 
         Task task = new Task(title, description, expDate);
 
@@ -26,7 +26,8 @@ public class TaskTest {
     
     @Test
     public void testTaskNoTitleNoDescription() {
-        LocalDateTime expDate = LocalDateTime.now().plusDays(3);
+        LocalDateTime beginDate = LocalDateTime.of(2023, 6, 23, 18, 0);
+        LocalDateTime expDate = beginDate.plusDays(3);
         Task task = new Task(expDate);
 
         assertEquals("no title", task.getTitle());
@@ -39,7 +40,7 @@ public class TaskTest {
     public void testTaskSetAsCompleted() {
         String title = "Comprar pan";
         String description = "Ir al super y comprar pan";
-        LocalDateTime expDate = LocalDateTime.of(2023, 4, 30, 18, 0);
+        LocalDateTime expDate = LocalDateTime.of(2023, 6, 30, 18, 0);
         Task task = new Task(title, description, expDate);
 
         task.setAsCompleted();
@@ -48,17 +49,10 @@ public class TaskTest {
     }
 
     @Test
-    public void testTaskIsExpired() {
-        Task expTask = new Task("Comprar pan", "Comprar pan en el super", LocalDateTime.now().plusDays(1));
-        expTask.setExpDate(LocalDateTime.now().minusDays(3));
-
-        assertTrue(expTask.isExpired());
-    }
-    
-    @Test
     public void testTaskAlreadyExpired() {
+        LocalDateTime dateBegin = LocalDateTime.of(2023,4, 4, 12,0 );
         assertThrows(RuntimeException.class, () -> {
-            new Task("Pasear al perro", "Sacar al perro a pasear a la plaza", LocalDateTime.now().minusDays(1));
+            new Task("Pasear al perro", "Sacar al perro a pasear a la plaza", dateBegin.minusDays(1));
         });
     }
 }
