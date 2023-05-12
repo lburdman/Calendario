@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Task extends CalendarItem {
-    private LocalDateTime expDate;
+    protected LocalDateTime expDate;
     private boolean complete;
 
     public Task(String title, String description, LocalDateTime expDate) {
@@ -31,10 +31,6 @@ public class Task extends CalendarItem {
         return expDate;
     }
 
-    public void setExpDate(LocalDateTime expDate) {
-        this.expDate = expDate;
-    }
-
     public void setAsCompleted() {
         this.complete = true;
     }
@@ -42,11 +38,11 @@ public class Task extends CalendarItem {
     public boolean isCompleted() {
         return complete;
     }
-
+/*
     public boolean isExpired() {
         return LocalDateTime.now().isAfter(expDate);
     }
-
+*/
     @Override
     public boolean isCalendarItemBetween(LocalDate startDate, LocalDate endDate) {
         return expDate.toLocalDate().equals(startDate);
