@@ -16,7 +16,7 @@ public class RepeatableSpecTest {
     public void testNoRepeatable() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
         e.setRepeatableSpec(null);
 
         LocalDate startBetween = beginEvent.toLocalDate().minusDays(1); //2
@@ -34,7 +34,7 @@ public class RepeatableSpecTest {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
         Integer interval = 1;
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
         LocalDate endDate = beginEvent.toLocalDate().plusDays(2); //Until 5
         DailyRepeat daily = new DailyRepeat(interval, e, endDate);
         e.setRepeatableSpec(daily);
@@ -64,7 +64,7 @@ public class RepeatableSpecTest {
         LocalDateTime endEvent = beginEvent.plusHours(3);
         Integer interval = 1;
         Integer qty = 3;
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
         DailyRepeat daily = new DailyRepeat(interval, e, qty);
         e.setRepeatableSpec(daily);
 
@@ -89,7 +89,7 @@ public class RepeatableSpecTest {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
         Integer interval = 1;
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
         DailyRepeat daily = new DailyRepeat(interval, e);
         e.setRepeatableSpec(daily);
 
@@ -116,7 +116,7 @@ public class RepeatableSpecTest {
     public void testMonthlyRepeatEndDate() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         LocalDate endDate = beginEvent.toLocalDate().plusMonths(4).plusDays(3);
         MonthlyRepeat monthly = new MonthlyRepeat(e, endDate);
@@ -144,7 +144,7 @@ public class RepeatableSpecTest {
     public void testMonthlyRepeatQty() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         Integer reps = 4; //months: 4, 5, 6, 7
         MonthlyRepeat monthly = new MonthlyRepeat(e, reps);
@@ -172,7 +172,7 @@ public class RepeatableSpecTest {
     public void testMonthlyRepeatInfinit() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         //Integer reps = 4; //months: 4, 5, 6, 7
         MonthlyRepeat monthly = new MonthlyRepeat(e);
@@ -200,7 +200,7 @@ public class RepeatableSpecTest {
     public void testAnnuallyRepeatEndDate() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         LocalDate endDate = beginEvent.toLocalDate().plusYears(4).plusDays(3); //2027
         AnnuallyRepeat annually = new AnnuallyRepeat(e, endDate);
@@ -228,7 +228,7 @@ public class RepeatableSpecTest {
     public void testAnnuallyRepeatQty() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         Integer reps = 4; //years: 2023, 2024, 2025, 2026
         AnnuallyRepeat annually = new AnnuallyRepeat(e, reps);
@@ -256,7 +256,7 @@ public class RepeatableSpecTest {
     public void testAnnuallyInfinite() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         //Integer reps = 4; //years: 2023, 2024, 2025, 2026
         AnnuallyRepeat annually = new AnnuallyRepeat(e);
@@ -284,7 +284,7 @@ public class RepeatableSpecTest {
     public void testWeeklyRepeatEndDate() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         LocalDate endDate = beginEvent.toLocalDate().plusWeeks(4).plusDays(3); //05/04 (MM/DD)
         List<DayOfWeek> daysOfWeek = new ArrayList<>();
@@ -315,7 +315,7 @@ public class RepeatableSpecTest {
     public void testWeeklyRepeatQty() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         Integer reps = 4;
         List<DayOfWeek> daysOfWeek = new ArrayList<>();
@@ -342,7 +342,7 @@ public class RepeatableSpecTest {
     public void testWeeklyRepeatInfinit() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
-        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", null, beginEvent, endEvent);
+        Event e = new Event("Pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
 
         //Integer reps = 4;
         List<DayOfWeek> daysOfWeek = new ArrayList<>();

@@ -20,7 +20,7 @@ public class EventTest {
         LocalDateTime startDateEvent = LocalDateTime.of(2023,4, 30, 9, 0);
         LocalDateTime endDateEvent = LocalDateTime.of(2023, 4, 30, 13, 0);
 
-        Event event = new Event(title, description, null, startDateEvent,endDateEvent);
+        Event event = new Event(title, description, startDateEvent,endDateEvent);
 
         assertEquals(title, event.getTitle());
         assertEquals(description, event.getDescription());
@@ -52,7 +52,7 @@ public class EventTest {
         LocalDateTime startDateEvent = LocalDateTime.of(2023,4, 30, 9, 0);
         LocalDateTime endDateEvent = LocalDateTime.of(2023, 4, 30, 13, 0);
 
-        Event event = new Event(title, description, null, startDateEvent,endDateEvent);
+        Event event = new Event(title, description, startDateEvent,endDateEvent);
 
         assertEquals(title, event.getTitle());
         assertEquals(description, event.getDescription());
@@ -80,7 +80,7 @@ public class EventTest {
     public void testIsCalendarItemBetween() {
         LocalDateTime startDateEvent = LocalDateTime.of(2023, 4, 20, 14, 0);
         LocalDateTime endDateEvent = startDateEvent.plusHours(3);
-        Event e = new Event(null, null, null, startDateEvent, endDateEvent);
+        Event e = new Event(null, null, startDateEvent, endDateEvent);
         LocalDate startBetween = LocalDate.of(2023, 4, 19);
         LocalDate endBetween = startBetween.plusDays(3);
 
