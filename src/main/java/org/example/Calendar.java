@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Calendar {
     private List<CalendarItem> items;
+    final int EMPTY_ID = 0;
 
     public Calendar(List<CalendarItem> items) {
         this.items = items;
@@ -19,12 +20,28 @@ public class Calendar {
         return items;
     }
 
+    public CalendarItem getItems(int id){
+        return items.get(id);
+    }
+
     public void setItems(List<CalendarItem> items) {
         this.items = items;
     }
 
     public void addItem(CalendarItem item) {
+        item.setID(items.size());
         items.add(item);
+    }
+
+    private boolean isIdNotFound(int id, int itemSize){
+        return (id > itemSize || id < EMPTY_ID);
+    }
+
+    public boolean modifyItem(int id, CalendarItem item){
+        if (isIdNotFound(id,items.size())) return false;
+        item.setID(id);
+        items.set(id, item);
+        return true;
     }
 
     public void removeItem(CalendarItem item) {
@@ -51,4 +68,16 @@ public class Calendar {
         }
         return result;
     }
+
+    public boolean addAlarmItem(int id, Alarm alarm){
+        if (isIdNotFound(id, items.size())) return false;
+        items.get(id).addAlarm(alarm);
+        return true;
+    }
+
+    public void removeAlarmItem(int idItem, int idAlarm){
+        items.get(idItem).removeAlarm(idAlarm);
+    }
+
+
 }

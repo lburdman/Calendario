@@ -10,15 +10,15 @@ public class Event extends CalendarItem {
     private RepeatableSpec repeatableSpec;
 
 
-    public Event(String title, String description, List<Alarm> alarms, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        super(title, description, alarms);
+    public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        super(title, description);
         this.startDateTime = (startDateTime != null) ? startDateTime : LocalDateTime.now().withMinute(0).withSecond(0).plusHours(1);
         this.endDateTime = (endDateTime != null && endDateTime.isAfter(startDateTime)) ? endDateTime : this.startDateTime.plusHours(1);
         this.repeatableSpec = repeatableSpec;
     }
 
-    public Event(String title, List<Alarm> alarms, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        super(title, null, alarms);
+    public Event(String title, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        super(title, null);
         this.startDateTime = (startDateTime != null) ? startDateTime : LocalDateTime.now().withMinute(0).withSecond(0).plusHours(1);
         this.endDateTime = (endDateTime != null && endDateTime.isAfter(startDateTime)) ? endDateTime : this.startDateTime.plusHours(1);
         this.repeatableSpec = repeatableSpec;
@@ -49,7 +49,7 @@ public class Event extends CalendarItem {
     }
 
     public Event cloneEvent(LocalDateTime newBeginDateTime, LocalDateTime newEndDateTime) {
-        return new Event(getTitle(), getDescription(), getAlarms(), newBeginDateTime, newEndDateTime);
+        return new Event(getTitle(), getDescription(), newBeginDateTime, newEndDateTime);
     }
 
     public boolean isRepeatable() {

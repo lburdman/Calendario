@@ -7,11 +7,11 @@ public class Notification extends Alarm {
     public void trigger() {
         //makes a notification appear
     }
-    public Notification(LocalDateTime activationDate) {
-        super(activationDate, AlarmType.NOTIFICATION);
+    public Notification(int id, LocalDateTime activationDate) {
+        super(id, activationDate, AlarmType.NOTIFICATION);
     }
 
-    public Notification(Integer relativeInterval) {
-        super(relativeInterval, AlarmType.NOTIFICATION);
+    public Notification(int id, Integer relativeInterval) {
+        super(id, relativeInterval, AlarmType.NOTIFICATION);
     }
 }

@@ -7,11 +7,11 @@ public class Sound extends Alarm {
     public void trigger() {
         //makes a sound
     }
-    public Sound(LocalDateTime activationDate) {
-        super(activationDate, AlarmType.SOUND);
+    public Sound(Integer id, LocalDateTime activationDate) {
+        super(id, activationDate, AlarmType.SOUND);
     }
 
-    public Sound(Integer relativeInterval) {
-        super(relativeInterval, AlarmType.SOUND);
+    public Sound(Integer id, Integer relativeInterval) {
+        super(id, relativeInterval, AlarmType.SOUND);
     }
 }

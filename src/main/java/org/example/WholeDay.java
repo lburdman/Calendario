@@ -4,20 +4,20 @@ import java.time.LocalDateTime;
 import java.time.LocalDate;
 
 public class WholeDay extends Task{
-    private LocalDateTime startDateTime;
+    private LocalDateTime beginDateTime;
 
     public WholeDay(String title, String description, LocalDate beginDate){
         super(title, description, null);
-        this.startDateTime = beginDate.atStartOfDay();
-        expDate = startDateTime.plusDays(1);
+        this.beginDateTime = beginDate.atStartOfDay();
+        expDate = beginDate.atTime(23,59,59);
     }
 
     public LocalDateTime getStartDateTime(){
-        return startDateTime;
+        return beginDateTime;
     }
 
     public void setStartDateTime(LocalDate startDate) {
-        this.startDateTime = startDate.atStartOfDay();
-        expDate = startDateTime.plusDays(1);
+        this.beginDateTime = startDate.atStartOfDay();
+        expDate = beginDateTime.plusDays(1);
     }
 }

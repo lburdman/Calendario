@@ -8,17 +8,13 @@ public class Task extends CalendarItem {
     private boolean complete;
 
     public Task(String title, String description, LocalDateTime expDate) {
-        super(title, description, null);
-        if(expDate.isAfter(LocalDateTime.now())) {
-            this.expDate = expDate;
-        } else {
-            throw new RuntimeException("Invalid date");
-        }
+        super(title, description);
+        this.expDate = expDate;
         this.complete = false;
     }
 
     public Task(LocalDateTime expDate) {
-        super(null, null, null);
+        super(null, null);
         if(expDate.isAfter(LocalDateTime.now())) {
             this.expDate = expDate;
         } else {

@@ -7,11 +7,11 @@ public class Email extends Alarm {
     public void trigger() {
         //sends an Email
     }
-    public Email(LocalDateTime activationDate) {
-        super(activationDate, AlarmType.EMAIL);
+    public Email(int id, LocalDateTime activationDate) {
+        super(id, activationDate, AlarmType.EMAIL);
     }
 
-    public Email(Integer relativeInterval) {
-        super(relativeInterval, AlarmType.EMAIL);
+    public Email(int id, Integer relativeInterval) {
+        super(id, relativeInterval, AlarmType.EMAIL);
     }
 }
