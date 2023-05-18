@@ -1,17 +1,18 @@
 package org.example;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Notification extends Alarm {
     @Override
     public void trigger() {
-        //makes a notification appear
+        System.out.println("Trigger notification alarm\n");
     }
-    public Notification(int id, LocalDateTime activationDate) {
-        super(id, activationDate, AlarmType.NOTIFICATION);
+    public Notification(LocalDateTime activationDate) {
+        super(activationDate, AlarmType.NOTIFICATION);
     }
 
-    public Notification(int id, Integer relativeInterval) {
-        super(id, relativeInterval, AlarmType.NOTIFICATION);
+    public Notification(Duration relativeInterval) {
+        super(relativeInterval, AlarmType.NOTIFICATION);
     }
 }

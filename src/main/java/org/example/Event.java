@@ -2,58 +2,66 @@ package org.example;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.UUID;
 
+
+/*
+* ClonedEvent extends Event...
+*   Event parentEvent;
+*
+*
+* */
 public class Event extends CalendarItem {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private RepeatableSpec repeatableSpec;
-
+    private RepeatableSpec repeatableSpec = null;
+    private UUID parentId = null;
 
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(title, description);
         this.startDateTime = (startDateTime != null) ? startDateTime : LocalDateTime.now().withMinute(0).withSecond(0).plusHours(1);
         this.endDateTime = (endDateTime != null && endDateTime.isAfter(startDateTime)) ? endDateTime : this.startDateTime.plusHours(1);
-        this.repeatableSpec = repeatableSpec;
     }
 
     public Event(String title, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(title, null);
         this.startDateTime = (startDateTime != null) ? startDateTime : LocalDateTime.now().withMinute(0).withSecond(0).plusHours(1);
         this.endDateTime = (endDateTime != null && endDateTime.isAfter(startDateTime)) ? endDateTime : this.startDateTime.plusHours(1);
-        this.repeatableSpec = repeatableSpec;
     }
 
     public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
-
     public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
     }
-
     public LocalDateTime getEndDateTime() {
         return endDateTime;
     }
-
     public void setEndDateTime(LocalDateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
-
     public RepeatableSpec getRepeatableSpec() {
         return repeatableSpec;
     }
-
     public void setRepeatableSpec(RepeatableSpec repeatableSpec) {
         this.repeatableSpec = repeatableSpec;
     }
-
-    public Event cloneEvent(LocalDateTime newBeginDateTime, LocalDateTime newEndDateTime) {
-        return new Event(getTitle(), getDescription(), newBeginDateTime, newEndDateTime);
+    public UUID getParentId() {
+        return parentId;
+    }
+    public void setParentId(UUID parentId) {
+        this.parentId = parentId;
     }
 
     public boolean isRepeatable() {
         return repeatableSpec != null;
+    }
+    public Event clone(LocalDateTime newStartDateTime, LocalDateTime newEndDateTime) {
+        Event clonedEvent = new Event(this.getTitle(), this.getDescription(), newStartDateTime, newEndDateTime);
+        clonedEvent.setParentId(this.getId());
+
+        return clonedEvent;
     }
 
     @Override

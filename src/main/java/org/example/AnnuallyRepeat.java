@@ -5,66 +5,54 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.RepetitionType.ANNUALLY;
-
 public class AnnuallyRepeat extends RepeatableSpec {
-    private final LocalDate endDate;
-    private final Integer qtyReps;
-
     public AnnuallyRepeat(Event event, LocalDate endDate) {
-        super(ANNUALLY, event);
-        this.endDate = endDate;
-        this.qtyReps = null;
+        super(event.getStartDateTime(), event.getEndDateTime(), endDate, null);
     }
     public AnnuallyRepeat(Event event, Integer qtyReps) {
-        super(ANNUALLY, event);
-        this.endDate = null;
-        this.qtyReps = qtyReps;
+        super(event.getStartDateTime(), event.getEndDateTime(), null, qtyReps);
     }
 
     public AnnuallyRepeat(Event event) {
-        super(ANNUALLY, event);
-        this.endDate = null;
-        this.qtyReps = null;
+        super(event.getStartDateTime(), event.getEndDateTime(), null, null);
     }
-    @Override
-    public List<CalendarItem> listEventRepetitions() {
-        List<CalendarItem> result = new ArrayList<>();
 
-        if(endDate != null) {
-            result = listRepetitionsForEndDate();
-        } else if(qtyReps != null) {
-            result = listRepetitionsForQty();
+    @Override
+    public List<Event> getEventRepetitions(Event e) {
+        List<Event> result = new ArrayList<>();
+        RepeatableSpec rs = e.getRepeatableSpec();
+
+        if(rs.getEndDate() != null) {
+            result = listAnnuallyRepetitionsForEndDate(e, rs.getEndDate());
+        } else if(rs.getQtyReps() != null) {
+            result = listAnnuallyRepetitionsForQty(e, rs.getQtyReps());
         }
         return result;
     }
 
-    private List<CalendarItem> listRepetitionsForQty() {
-        Event e = getEvent();
-        LocalDateTime startDateTime = e.getStartDateTime().plusYears(1);
-        LocalDateTime endDateTime = e.getEndDateTime().plusYears(1);
-        List<CalendarItem> result = new ArrayList<>();
+    private List<Event> listAnnuallyRepetitionsForQty(Event e, Integer qtyReps) {
+        LocalDateTime startDateTime = e.getStartDateTime();
+        LocalDateTime endDateTime = e.getEndDateTime();
+        List<Event> result = new ArrayList<>();
         int reps = 1;
 
         while(reps < qtyReps) {
-            result.add(e.cloneEvent(startDateTime, endDateTime));
-            startDateTime = startDateTime.plusYears(1);
-            endDateTime = endDateTime.plusYears(1);
+            Event clonedEvent = e.clone(startDateTime.plusYears(1), endDateTime.plusYears(1));
+            result.add(clonedEvent);
             reps++;
         }
         return result;
     }
 
-    private List<CalendarItem> listRepetitionsForEndDate() {
-        Event e = getEvent();
-        LocalDateTime startDateTime = e.getStartDateTime().plusYears(1);
-        LocalDateTime endDateTime = e.getEndDateTime().plusYears(1);
-        List<CalendarItem> result = new ArrayList<>();
+    private List<Event> listAnnuallyRepetitionsForEndDate(Event e, LocalDate endDate) {
+        LocalDateTime startDateTime = e.getStartDateTime();
+        LocalDateTime endDateTime = e.getEndDateTime();
+        List<Event> result = new ArrayList<>();
 
         while(!startDateTime.toLocalDate().isAfter(endDate)) {
-            result.add(e.cloneEvent(startDateTime, endDateTime));
             startDateTime = startDateTime.plusYears(1);
-            endDateTime = endDateTime.plusYears(1);
+            Event clonedEvent = e.clone(startDateTime, endDateTime.plusYears(1));
+            result.add(clonedEvent);
         }
         return result;
     }

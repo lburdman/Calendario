@@ -43,4 +43,7 @@ public class Task extends CalendarItem {
     public boolean isCalendarItemBetween(LocalDate startDate, LocalDate endDate) {
         return expDate.toLocalDate().equals(startDate);
     }
+
+    public void setDueDate(LocalDateTime dueDate) {
+    }
 }

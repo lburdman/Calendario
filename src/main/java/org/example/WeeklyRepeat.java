@@ -6,32 +6,22 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.RepetitionType.WEEKLY;
-
 public class WeeklyRepeat extends RepeatableSpec {
     private List<DayOfWeek> daysOfWeek;
-    private final LocalDate endDate;
-    private final Integer qtyReps;
 
     public WeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, LocalDate endDate) {
-        super(WEEKLY, event);
+        super(event.getStartDateTime(), event.getEndDateTime(), endDate, null);
         this.daysOfWeek = daysOfWeek;
-        this.endDate = endDate;
-        this.qtyReps = null;
     }
     
     public WeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, Integer qtyReps) {
-        super(WEEKLY, event);
+        super(event.getStartDateTime(), event.getEndDateTime(), null, qtyReps);
         this.daysOfWeek = daysOfWeek;
-        this.endDate = null;
-        this.qtyReps = qtyReps;
     }
 
     public WeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event) {
-        super(WEEKLY, event);
+        super(event.getStartDateTime(), event.getEndDateTime(), null, null);
         this.daysOfWeek = daysOfWeek;
-        this.endDate = null;
-        this.qtyReps = null;
     }
 
     public List<DayOfWeek> getDaysOfWeek() {
@@ -43,6 +33,57 @@ public class WeeklyRepeat extends RepeatableSpec {
     }
 
     @Override
+    public List<Event> getEventRepetitions(Event e) {
+        List<Event> result = new ArrayList<>();
+        RepeatableSpec rs = e.getRepeatableSpec();
+
+        if(rs.getEndDate() != null) {
+            result = listWeeklyRepetitionsForEndDate(e, rs.getEndDate());
+        } else if(rs.getQtyReps() != null) {
+            result = listWeeklyRepetitionsForQty(e, rs.getQtyReps());
+        }
+        return result;
+    }
+
+    private List<Event> listWeeklyRepetitionsForQty(Event e, Integer qtyReps) {
+        LocalDate nextDate = e.getStartDateTime().toLocalDate().plusDays(1);
+        LocalDateTime startDateTime = e.getStartDateTime();
+        LocalDateTime endDateTime = e.getEndDateTime();
+        List<Event> result = new ArrayList<>();
+        int count = 0;
+        int repsCount = 1;
+
+        while(repsCount < qtyReps) {
+            count++;
+            if(this.daysOfWeek.contains(nextDate.getDayOfWeek())) {
+                Event clonedEvent = e.clone(startDateTime.plusDays(count), endDateTime.plusDays(count));
+                result.add(clonedEvent);
+                repsCount++;
+            }
+            nextDate = nextDate.plusDays(1);
+        }
+        return result;
+    }
+
+    private List<Event> listWeeklyRepetitionsForEndDate(Event e, LocalDate endDate) {
+        LocalDate nextDate = e.getStartDateTime().toLocalDate().plusDays(1);
+        LocalDateTime startDateTime = e.getStartDateTime();
+        LocalDateTime endDateTime = e.getEndDateTime();
+        List<Event> result = new ArrayList<>();
+        int count = 0;
+
+        while(!nextDate.isAfter(endDate)) {
+            count++;
+            if(this.daysOfWeek.contains(nextDate.getDayOfWeek())) {
+                Event clonedEvent = e.clone(startDateTime.plusDays(count), startDateTime.plusDays(count));
+                result.add(clonedEvent);
+            }
+            nextDate = nextDate.plusDays(1);
+        }
+        return result;
+    }
+
+    /*@Override
     public List<CalendarItem> listEventRepetitions() {
         List<CalendarItem> result = new ArrayList<>();
 
@@ -90,6 +131,6 @@ public class WeeklyRepeat extends RepeatableSpec {
             nextDate = nextDate.plusDays(1);
         }
         return result;
-    }
+    }*/
 
 }

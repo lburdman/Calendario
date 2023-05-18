@@ -79,7 +79,7 @@ public class CalendarTest {
     @Test
     public void testAddWholeDayTask() {
         Calendar calendar = new Calendar();
-        WholeDay wholeDay = new WholeDay("Estudiar Algoritmos","Estudiar polimorfismo", LocalDate.of(2023, 6, 3));
+        WholeDayTask wholeDay = new WholeDayTask("Estudiar Algoritmos","Estudiar polimorfismo", LocalDate.of(2023, 6, 3));
         calendar.addItem(wholeDay);
         var wholeDayTask = calendar.getItems(0);
         assertEquals(wholeDay, wholeDayTask);
@@ -98,7 +98,7 @@ public class CalendarTest {
     public void testAddAlarm(){
 
         Calendar calendar = new Calendar();
-        WholeDay wholeDay = new WholeDay("Estudiar Algoritmos","Estudiar polimorfismo", LocalDate.of(2023, 6, 3));
+        WholeDayTask wholeDay = new WholeDayTask("Estudiar Algoritmos","Estudiar polimorfismo", LocalDate.of(2023, 6, 3));
         calendar.addItem(wholeDay);
 
         Alarm notification = new Notification(0, LocalDateTime.of(2023, 6, 3, 16, 0));
@@ -112,7 +112,7 @@ public class CalendarTest {
     public void testRemoveAlarm(){
 
         Calendar calendar = new Calendar();
-        WholeDay wholeDay = new WholeDay("Estudiar Algoritmos","Estudiar polimorfismo", LocalDate.of(2023, 6, 3));
+        WholeDayTask wholeDay = new WholeDayTask("Estudiar Algoritmos","Estudiar polimorfismo", LocalDate.of(2023, 6, 3));
         calendar.addItem(wholeDay);
 
         Alarm notification = new Notification(0, LocalDateTime.of(2023, 6, 3, 16, 0));

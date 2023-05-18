@@ -1,24 +1,33 @@
 package org.example;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public abstract class Alarm {
     private LocalDateTime triggerDate; //If it has a certain date where it triggers
+    private Duration relativeInterval;
     private AlarmType alarmType;
-    protected Integer id;
+    private boolean active = true;
 
     public abstract void trigger(); //an override method that will be implemented in the subclasses
 
-    public Alarm(Integer id, LocalDateTime triggerDate, AlarmType alarmType) {
-        this.id = id;
+    public Alarm(LocalDateTime triggerDate, AlarmType alarmType) {
         this.triggerDate = triggerDate;
         this.alarmType = alarmType;
     }
 
-    public Alarm(Integer id, Integer relativeInterval, AlarmType alarmType) {
-        this.id = id;
-        this.triggerDate = LocalDateTime.now().withNano(0).plusMinutes(relativeInterval);
+    public Alarm(Duration relativeInterval, AlarmType alarmType) {
+        this.relativeInterval = relativeInterval;
         this.alarmType = alarmType;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void deactivateAlarm() {
+        this.active = false;
     }
 
     public LocalDateTime getTriggerDate() {
@@ -37,7 +46,11 @@ public abstract class Alarm {
         this.alarmType = alarmType;
     }
 
-    public Integer getId() {
-        return id;
+    public Duration getRelativeInterval() {
+        return relativeInterval;
+    }
+
+    public void setRelativeInterval(Duration relativeInterval) {
+        this.relativeInterval = relativeInterval;
     }
 }

@@ -29,7 +29,7 @@ public class AlarmTest {
     @Test
     public void testNewEmailWithDate() {
         LocalDateTime triggerDate = LocalDateTime.of(2023, 4, 30, 18, 0);
-        Alarm alarm = new Email(1, triggerDate);
+        Alarm alarm = new Email(triggerDate);
 
         assertEquals(alarm.getAlarmType(), AlarmType.EMAIL);
         assertEquals(alarm.getTriggerDate(), triggerDate);

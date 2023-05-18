@@ -1,66 +1,106 @@
 package org.example;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class Calendar {
-    private List<CalendarItem> items;
-    final int EMPTY_ID = 0;
-
-    public Calendar(List<CalendarItem> items) {
-        this.items = items;
-    }
+    private final Map<UUID, Event> events;
+    private final Map<UUID, Task> tasks;
 
     public Calendar() {
-        this.items = new ArrayList<>();
+        this.events = new HashMap<>();
+        this.tasks = new HashMap<>();
     }
 
-    public List<CalendarItem> getItems() {
-        return items;
+    public Event createEvent(String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        Event event = new Event(title, description, startDateTime, endDateTime);
+        this.events.put(event.getId(), event);
+        return event;
     }
 
-    public CalendarItem getItems(int id){
-        return items.get(id);
+    public Task createTask(String title, String description, LocalDateTime dueDate) {
+        Task task = new Task(title, description, dueDate);
+        this.tasks.put(task.getId(), task);
+        return task;
     }
 
-    public void setItems(List<CalendarItem> items) {
-        this.items = items;
+    public Event getEvent(UUID id){
+        return this.events.get(id);
     }
 
-    public void addItem(CalendarItem item) {
-        item.setID(items.size());
-        items.add(item);
+    public Task getTask(UUID id){
+        return this.tasks.get(id);
     }
 
-    private boolean isIdNotFound(int id, int itemSize){
-        return (id > itemSize || id < EMPTY_ID);
-    }
-
-    public boolean modifyItem(int id, CalendarItem item){
-        if (isIdNotFound(id,items.size())) return false;
-        item.setID(id);
-        items.set(id, item);
+    public boolean updateEvent(UUID id, String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        Event event = this.events.get(id);
+        if (event == null) return false;
+        event.setTitle(title);
+        event.setDescription(description);
+        event.setStartDateTime(startDateTime);
+        event.setEndDateTime(endDateTime);
         return true;
     }
 
-    public void removeItem(CalendarItem item) {
-        items.remove(item);
+    public boolean updateTask(UUID id, String title, String description, LocalDateTime dueDate) {
+        Task task = this.tasks.get(id);
+        if (task == null) return false;
+        task.setTitle(title);
+        task.setDescription(description);
+        task.setDueDate(dueDate);
+        return true;
     }
 
-    public List<CalendarItem> listEventsBetween(LocalDate startDate, LocalDate endDate) {
-        List<CalendarItem> result = new ArrayList<>();
+    public void removeEvent(UUID id) {
+        this.events.remove(id);
+    }
 
-        for(CalendarItem ci : items) {
-            if(ci.isCalendarItemBetween(startDate, endDate)) {
-                result.add(ci);
-            }
-            if(ci instanceof Event event) {
-                if (event.getRepeatableSpec() != null) {
-                    List<CalendarItem> repeatedItems = event.getRepeatableSpec().listEventRepetitions();
-                    for (CalendarItem rci : repeatedItems) {
-                        if (rci.isCalendarItemBetween(startDate, endDate)) {
-                            result.add(rci);
+    public void removeTask(UUID id) {
+        this.tasks.remove(id);
+    }
+
+    public boolean addAlarmToEvent(UUID eventId, LocalDateTime triggerDate, AlarmType alarmType) {
+        Event event = this.events.get(eventId);
+        if (event == null) return false;
+
+        Alarm alarm = createAlarm(triggerDate, alarmType);
+        if (alarm == null) return false;
+
+        event.addAlarm(alarm);
+        return true;
+    }
+
+    public boolean addAlarmToTask(UUID taskId, LocalDateTime triggerDate, AlarmType alarmType) {
+        Task task = this.tasks.get(taskId);
+        if (task == null) return false;
+
+        Alarm alarm = createAlarm(triggerDate, alarmType);
+        if (alarm == null) return false;
+
+        task.addAlarm(alarm);
+        return true;
+    }
+
+    private Alarm createAlarm(LocalDateTime triggerDate, AlarmType alarmType) {
+        return switch (alarmType) {
+            case NOTIFICATION -> new Notification(triggerDate);
+            case SOUND -> new Sound(triggerDate);
+            case EMAIL -> new Email(triggerDate);
+        };
+    }
+
+    public List<Event> listEventsBetween(LocalDate startDate, LocalDate endDate) {
+        List<Event> result = new ArrayList<>();
+
+        for(Event event : this.events.values()) {
+            if(event.isCalendarItemBetween(startDate, endDate)) {
+                result.add(event);
+                if(event.isRepeatable()) {
+                    List<Event> repeatedEvents = event.getRepeatableSpec().getEventRepetitions(event);
+                    for(Event repeatedEvent : repeatedEvents) {
+                        if(repeatedEvent.isCalendarItemBetween(startDate, endDate)) {
+                            result.add(repeatedEvent);
                         }
                     }
                 }
@@ -69,15 +109,15 @@ public class Calendar {
         return result;
     }
 
-    public boolean addAlarmItem(int id, Alarm alarm){
-        if (isIdNotFound(id, items.size())) return false;
-        items.get(id).addAlarm(alarm);
-        return true;
-    }
+    public List<Task> listTasksBetween(LocalDate startDate, LocalDate endDate) {
+        List<Task> result = new ArrayList<>();
 
-    public void removeAlarmItem(int idItem, int idAlarm){
-        items.get(idItem).removeAlarm(idAlarm);
+        for(Task task : this.tasks.values()) {
+            if (task.isCalendarItemBetween(startDate, endDate)) {
+                result.add(task);
+            }
+        }
+        return result;
     }
-
 
 }

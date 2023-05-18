@@ -5,26 +5,33 @@ import java.time.LocalDate;
 import java.util.List;
 
 public abstract class RepeatableSpec {
-    private RepetitionType repetitionType;
-    private Event event;
+    private final LocalDateTime startDateTime;
+    private final LocalDateTime endDateTime;
+    private final LocalDate endDate;
+    private final Integer qtyReps;
 
-    public RepeatableSpec(RepetitionType repetitionType, Event event) {
-        this.repetitionType = repetitionType;
-        this.event = event;
+    public abstract List<Event> getEventRepetitions(Event e);
+
+    public RepeatableSpec(LocalDateTime startDateTime, LocalDateTime endDateTime, LocalDate endDate, Integer qtyReps) {
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.endDate = endDate;
+        this.qtyReps = qtyReps;
     }
 
-    public RepetitionType getRepetitionType() {
-        return repetitionType;
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
     }
 
-    public void setRepetitionType(RepetitionType repetitionType) {
-        this.repetitionType = repetitionType;
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
     }
 
-    public Event getEvent() {
-        return event;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public abstract List<CalendarItem> listEventRepetitions();
-
+    public Integer getQtyReps() {
+        return qtyReps;
+    }
 }

@@ -5,31 +5,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.RepetitionType.DAILY;
-
 public class DailyRepeat extends RepeatableSpec {
     private Integer interval;
-    private final LocalDate endDate;
-    private final Integer qtyReps;
 
     public DailyRepeat(Integer interval, Event event, LocalDate endDate) {
-        super(DAILY, event);
+        super(event.getStartDateTime(), event.getEndDateTime(), endDate, null);
         this.interval = (interval != null) ? interval : 1;
-        this.endDate = endDate;
-        this.qtyReps = null;
     }
     public DailyRepeat(Integer interval, Event event, Integer qtyReps) {
-        super(DAILY, event);
+        super(event.getStartDateTime(), event.getEndDateTime(), null, qtyReps);
         this.interval = (interval != null) ? interval : 1;
-        this.endDate = null;
-        this.qtyReps = qtyReps;
     }
 
     public DailyRepeat(Integer interval, Event event) {
-        super(DAILY, event);
+        super(event.getStartDateTime(), event.getEndDateTime(), null, null);
         this.interval = (interval != null) ? interval : 1;
-        this.endDate = null;
-        this.qtyReps = null;
     }
 
     public Integer getInterval() {
@@ -41,44 +31,43 @@ public class DailyRepeat extends RepeatableSpec {
     }
 
     @Override
-    public List<CalendarItem> listEventRepetitions() {
-        List<CalendarItem> result = new ArrayList<>();
+    public List<Event> getEventRepetitions(Event e) {
+        List<Event> result = new ArrayList<>();
+        RepeatableSpec rs = e.getRepeatableSpec();
 
-        if(endDate != null) {
-            result = listRepetitionsForEndDate();
-        } else if(qtyReps != null) {
-            result = listRepetitionsForQty();
+        if(rs.getEndDate() != null) {
+            result = listDailyRepetitionsForEndDate(e, rs.getEndDate());
+        } else if(rs.getQtyReps() != null) {
+            result = listDailyRepetitionsForQty(e, rs.getQtyReps());
         }
         return result;
     }
 
-    private List<CalendarItem> listRepetitionsForQty() {
-        Event e = getEvent();
-        LocalDateTime startDateTime = e.getStartDateTime().plusDays(interval);
-        LocalDateTime endDateTime = e.getEndDateTime().plusDays(interval);
-        List<CalendarItem> result = new ArrayList<>();
+    private List<Event> listDailyRepetitionsForQty(Event e, Integer qtyReps) {
+        LocalDateTime startDateTime = e.getStartDateTime();
+        LocalDateTime endDateTime = e.getEndDateTime();
+        List<Event> result = new ArrayList<>();
         int reps = 1;
 
         while(reps < qtyReps) {
-            result.add(e.cloneEvent(startDateTime, endDateTime));
-            startDateTime = startDateTime.plusDays(interval);
-            endDateTime = endDateTime.plusDays(interval);
+            Event clonedEvent = e.clone(startDateTime.plusDays(this.interval), endDateTime.plusDays(this.interval));
+            result.add(clonedEvent);
             reps++;
         }
         return result;
     }
 
-    private List<CalendarItem> listRepetitionsForEndDate() {
-        Event e = getEvent();
-        LocalDateTime startDateTime = e.getStartDateTime().plusDays(interval);
-        LocalDateTime endDateTime = e.getEndDateTime().plusDays(interval);
-        List<CalendarItem> result = new ArrayList<>();
+    private List<Event> listDailyRepetitionsForEndDate(Event e, LocalDate endDate) {
+        LocalDateTime startDateTime = e.getStartDateTime();
+        LocalDateTime endDateTime = e.getEndDateTime();
+        List<Event> result = new ArrayList<>();
 
         while(!startDateTime.toLocalDate().isAfter(endDate)) {
-            result.add(e.cloneEvent(startDateTime, endDateTime));
-            startDateTime = startDateTime.plusDays(interval);
-            endDateTime = endDateTime.plusDays(interval);
+            startDateTime = startDateTime.plusDays(this.interval);
+            Event clonedEvent = e.clone(startDateTime, endDateTime.plusDays(this.interval));
+            result.add(clonedEvent);
         }
+
         return result;
     }
 }

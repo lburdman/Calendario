@@ -2,19 +2,19 @@ Les dejo las correcciones del TP Entrega 1
 
 Correcciones
 
-- Calendario tiene que poder crear una tarea o evento en base a informacion que se le pase.
++ Calendario tiene que poder crear una tarea o evento en base a informacion que se le pase.
 No se le pasa el item ya creado. Tambien deberia poder actualizar un evento/tarea o borrarlo.
--  Admeas, Calendario debe recibir informacion de qué tipo de alarma crear y crearle una alarma
++  Admeas, Calendario debe recibir informacion de qué tipo de alarma crear y crearle una alarma
 al evento/tarea segun eso, las alarmas no vienen ya creadas, al igual que los eventos/tareas, el calendario las crea.
-- No usar instanceof. Si necesitas, separa los objetos en dos collecciones distintas o busca
++ No usar instanceof. Si necesitas, separa los objetos en dos collecciones distintas o busca
 otra forma de encontrar las ocurrencias de un evento.
 - No hacer llamados estaticos como LocalDateTime.now()
-- Las tareas deberían poder ser de día completo también
-- RepeatableSpec no tiene que tener una referencia al evento. Si necesitas las fechas de inicio
++ Las tareas deberían poder ser de día completo también
++ RepeatableSpec no tiene que tener una referencia al evento. Si necesitas las fechas de inicio
 o fin se las podes pasar los metodos correspondientes.
-- Por que RepeatableSpec tiene un tipo? No se usa en ningun lado, y tampoco debería, si es una clase
++ Por que RepeatableSpec tiene un tipo? No se usa en ningun lado, y tampoco debería, si es una clase
 abstracta. Cada clase hija sabrá comportarse adecuadamente
-- Obtener las ocurrencias entre dos fechas NO tiene que devolver instancias de CalendarItem. Si necesitas,
++ Obtener las ocurrencias entre dos fechas NO tiene que devolver instancias de CalendarItem. Si necesitas,
 podes devolver objetos de algun otro tipo que tengan la informacion de a que item pertenece y sus momentos de
 inicio, fin, alarmas, etc. Cada uno va a tener momentos distintos.
 
