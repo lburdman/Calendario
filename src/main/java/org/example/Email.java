@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Email extends Alarm {
@@ -11,7 +12,7 @@ public class Email extends Alarm {
         super(activationDate, AlarmType.EMAIL);
     }
 
-    public Email(Integer relativeInterval) {
+    public Email(Duration relativeInterval) {
         super(relativeInterval, AlarmType.EMAIL);
     }
 }

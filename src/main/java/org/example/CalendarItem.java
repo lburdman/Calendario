@@ -6,7 +6,7 @@ import java.util.*;
 public abstract class CalendarItem {
     private String title;
     private String description;
-    private List<Alarm> alarms;
+    private final List<Alarm> alarms;
     private final UUID id = UUID.randomUUID();
 
     public CalendarItem(String title, String description) {
