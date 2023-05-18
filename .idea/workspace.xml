@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="CalendarTest">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/RepeatableEventBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/RepeatableType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documents/correcciones.txt" beforeDir="false" afterPath="$PROJECT_DIR$/documents/correcciones.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Alarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Alarm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/AnnuallyRepeat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/AnnuallyRepeat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/CalendarItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/CalendarItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DailyRepeat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DailyRepeat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Email.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ExpirationDate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MonthlyRepeat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MonthlyRepeat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Notification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RepeatableSpec.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/RepeatableSpec.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RepetitionType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Sound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/WeeklyRepeat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/WeeklyRepeat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/WholeDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/WholeDayTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AlarmTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/AlarmTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/CalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/CalendarTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="JUnit4 Test Class" />
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="etapa1" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2OFZwcLA4POcj0hyefNuqsQQuI0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
+    "onboarding.tips.debug.path": "C:/Users/lucas/IdeaProjects/etapa1/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.example" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.example" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.All in etapa1">
+    <configuration name="All in etapa1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="calendario" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RepeatableSpecTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="calendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.RepeatableSpecTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskTest.testTaskAlreadyExpired" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="calendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.TaskTest" />
+      <option name="METHOD_NAME" value="testTaskAlreadyExpired" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in etapa1" />
+        <item itemvalue="JUnit.All in etapa1" />
+        <item itemvalue="JUnit.RepeatableSpecTest" />
+        <item itemvalue="JUnit.TaskTest.testTaskAlreadyExpired" />
+        <item itemvalue="JUnit.All in etapa1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="" />
+      <created>1681158533552</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681158533552</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Creación de clases y tests. El proyecto está listo para comenzar!">
+      <created>1681165572824</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681165572824</updated>
+    </task>
+    <task id="LOCAL-00002" summary="atributos y test Task">
+      <created>1681319497858</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681319497858</updated>
+    </task>
+    <task id="LOCAL-00003" summary="gitignore">
+      <created>1681320937943</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681320937943</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Arreglos en TaskTest, un poco de logica de Task, falta hacer funcionar testTaskAlreadyExpired()">
+      <created>1681576469453</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681576469453</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Mejoras en Task, preparación de Alarm, agregue subclases Notification, Email, Sound que extienden a Alarm">
+      <created>1681594665218</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681594665218</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Reorganizacion">
+      <created>1682111240447</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682111240447</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Reorganizacion, se agregaron varias clases para el manejo de objetos.&#10;DailyRepeat y RepeatableSpec para los eventos repetitivos.&#10;Finalization como interfaz implementada por EndInDate, EndAfterRepetitions. &#10;CalendarItem como superclase de Task y Event">
+      <created>1682116694479</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682116694479</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Reajustando algunos problemas, faltan tests.&#10;Tests de Alarm">
+      <created>1682186537990</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682186537991</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Test de Alarm terminados.">
+      <created>1682206883748</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682206883748</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Test RepeatableSpec.&#10;listEventsBetween(), listEventRepetitions()">
+      <created>1682224081901</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682224081901</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Arreglos en la implementacion de Alarm con un intervalo de tiempo (redondeo sin nanosegundos)&#10;Correccion asimismo en sus tests">
+      <created>1682286247812</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682286247813</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Implementacion de listEventRepetitions() en AnnuallyRepeat y MonthlyRepeat.&#10;Se eliminaron Finalization, y sus subclases porque no se usan">
+      <created>1682288616267</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682288616268</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Implementacion de listEventRepetitions() en WeeklyRepeat.">
+      <created>1682301786416</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682301786416</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Tests RepeatableSpec">
+      <created>1682306178410</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1682306178410</updated>
+    </task>
+    <task id="LOCAL-00015" summary="CalendarTest">
+      <created>1682350419070</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1682350419070</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Creación de clases y tests. El proyecto está listo para comenzar!" />
+    <MESSAGE value="atributos y test Task" />
+    <MESSAGE value="gitignore" />
+    <MESSAGE value="Arreglos en TaskTest, un poco de logica de Task, falta hacer funcionar testTaskAlreadyExpired()" />
+    <MESSAGE value="Mejoras en Task, preparación de Alarm, agregue subclases Notification, Email, Sound que extienden a Alarm" />
+    <MESSAGE value="Reorganizacion" />
+    <MESSAGE value="Reorganizacion, se agregaron varias clases para el manejo de objetos.&#10;DailyRepeat y RepeatableSpec para los eventos repetitivos.&#10;Finalization como interfaz implementada por EndInDate, EndAfterRepetitions. &#10;CalendarItem como superclase de Task y Event" />
+    <MESSAGE value="Reajustando algunos problemas, faltan tests.&#10;Tests de Alarm" />
+    <MESSAGE value="Test de Alarm terminados." />
+    <MESSAGE value="Test RepeatableSpec.&#10;listEventsBetween(), listEventRepetitions()" />
+    <MESSAGE value="Arreglos en la implementacion de Alarm con un intervalo de tiempo (redondeo sin nanosegundos)&#10;Correccion asimismo en sus tests" />
+    <MESSAGE value="Implementacion de listEventRepetitions() en AnnuallyRepeat y MonthlyRepeat.&#10;Se eliminaron Finalization, y sus subclases porque no se usan" />
+    <MESSAGE value="Implementacion de listEventRepetitions() en WeeklyRepeat." />
+    <MESSAGE value="Tests RepeatableSpec" />
+    <MESSAGE value="CalendarTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="CalendarTest" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1682306166537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
