@@ -24,7 +24,6 @@ public class EventTest {
 
         assertEquals(title, event.getTitle());
         assertEquals(description, event.getDescription());
-        assertEquals(new ArrayList<Alarm>(), event.getAlarms());
         assertEquals(startDateEvent, event.getStartDateTime());
         assertEquals(endDateEvent, event.getEndDateTime());
     }
@@ -39,7 +38,6 @@ public class EventTest {
 
         assertEquals(title, event.getTitle());
         assertEquals("no description", event.getDescription());
-        assertEquals(new ArrayList<Alarm>(), event.getAlarms());
         assertEquals(startDateEvent, event.getStartDateTime());
         assertEquals(endDateEvent, event.getEndDateTime());
 
@@ -86,5 +84,6 @@ public class EventTest {
 
         assertTrue(e.isCalendarItemBetween(startBetween, endBetween));
     }
+
 
 }

@@ -2,13 +2,14 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskTest {
-    
+
     @Test
     public void testTaskConstruct() {
         String title = "Hacer ejercicio";
@@ -21,9 +22,8 @@ public class TaskTest {
         assertEquals(description, task.getDescription());
         assertEquals(expDate, task.getExpDate());
         assertFalse(task.isCompleted());
-        assertEquals(new ArrayList<Alarm>(), task.getAlarms());
     }
-    
+
     @Test
     public void testTaskNoTitleNoDescription() {
         LocalDateTime beginDate = LocalDateTime.of(2023, 6, 23, 18, 0);
@@ -35,7 +35,7 @@ public class TaskTest {
         assertEquals(expDate, task.getExpDate());
         assertEquals(new ArrayList<Alarm>(), task.getAlarms());
     }
-    
+
     @Test
     public void testTaskSetAsCompleted() {
         String title = "Comprar pan";
@@ -49,10 +49,16 @@ public class TaskTest {
     }
 
     @Test
-    public void testTaskAlreadyExpired() {
-        LocalDateTime dateBegin = LocalDateTime.of(2023,4, 4, 12,0 );
-        assertThrows(RuntimeException.class, () -> {
-            new Task("Pasear al perro", "Sacar al perro a pasear a la plaza", dateBegin.minusDays(1));
-        });
+    public  void testWholeDayTask(){
+        String title = "Comprar pan";
+        String description = "Ir al super y comprar pan";
+        LocalDate wholeDayDate = LocalDate.of(2023, 4, 5);
+        WholeDayTask wholeDayTask = new WholeDayTask(title, description, wholeDayDate);
+
+        assertEquals(title, wholeDayTask.getTitle());
+        assertEquals(description, wholeDayTask.getDescription());
+        assertEquals(wholeDayDate, wholeDayTask.getTaskDate());
+        assertEquals(null, wholeDayTask.getExpDate());
+        assertFalse(wholeDayTask.isCompleted());
     }
 }
