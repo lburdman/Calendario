@@ -15,11 +15,7 @@ public class Task extends CalendarItem {
 
     public Task(LocalDateTime expDate) {
         super(null, null);
-        if(expDate.isAfter(LocalDateTime.now())) {
-            this.expDate = expDate;
-        } else {
-            throw new RuntimeException("Invalid date");
-        }
+        this.expDate = expDate;
         this.complete = false;
     }
 
@@ -34,11 +30,7 @@ public class Task extends CalendarItem {
     public boolean isCompleted() {
         return complete;
     }
-/*
-    public boolean isExpired() {
-        return LocalDateTime.now().isAfter(expDate);
-    }
-*/
+
     @Override
     public boolean isCalendarItemBetween(LocalDate startDate, LocalDate endDate) {
         return expDate.toLocalDate().equals(startDate);

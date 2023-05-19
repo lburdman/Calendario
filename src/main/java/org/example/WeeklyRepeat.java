@@ -13,7 +13,7 @@ public class WeeklyRepeat extends RepeatableSpec {
         super(event.getStartDateTime(), event.getEndDateTime(), endDate, null);
         this.daysOfWeek = daysOfWeek;
     }
-    
+
     public WeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, Integer qtyReps) {
         super(event.getStartDateTime(), event.getEndDateTime(), null, qtyReps);
         this.daysOfWeek = daysOfWeek;
@@ -28,8 +28,8 @@ public class WeeklyRepeat extends RepeatableSpec {
         return daysOfWeek;
     }
 
-    public void setDaysOfWeek(List<DayOfWeek> dayOfWeek) { 
-        this.daysOfWeek = dayOfWeek; 
+    public void setDaysOfWeek(List<DayOfWeek> dayOfWeek) {
+        this.daysOfWeek = dayOfWeek;
     }
 
     @Override
@@ -82,55 +82,4 @@ public class WeeklyRepeat extends RepeatableSpec {
         }
         return result;
     }
-
-    /*@Override
-    public List<CalendarItem> listEventRepetitions() {
-        List<CalendarItem> result = new ArrayList<>();
-
-        if(endDate != null) {
-            result = listRepetitionsForEndDate();
-        } else if(qtyReps != null) {
-            result = listRepetitionsForQty();
-        }
-        return result;
-    }
-
-    private List<CalendarItem> listRepetitionsForQty() {
-        Event e = getEvent();
-        LocalDate nextDate = e.getStartDateTime().toLocalDate().plusDays(1);
-        LocalDateTime startDateTime = e.getStartDateTime();
-        LocalDateTime endDateTime = e.getEndDateTime();
-        List<CalendarItem> result = new ArrayList<>();
-        int count = 0;
-        int repsCount = 1;
-
-        while(repsCount < qtyReps) {
-            count++;
-            if(daysOfWeek.contains(nextDate.getDayOfWeek())) {
-                result.add(e.cloneEvent(startDateTime.plusDays(count), endDateTime.plusDays(count)));
-                repsCount++;
-            }
-            nextDate = nextDate.plusDays(1);
-        }
-        return result;
-    }
-
-    private List<CalendarItem> listRepetitionsForEndDate() {
-        Event e = getEvent();
-        LocalDate nextDate = e.getStartDateTime().toLocalDate().plusDays(1);
-        LocalDateTime startDateTime = e.getStartDateTime();
-        LocalDateTime endDateTime = e.getEndDateTime();
-        List<CalendarItem> result = new ArrayList<>();
-        int count = 0;
-
-        while(!nextDate.isAfter(endDate)) {
-            count++;
-            if(daysOfWeek.contains(nextDate.getDayOfWeek())) {
-                result.add(e.cloneEvent(startDateTime.plusDays(count), endDateTime.plusDays(count)));
-            }
-            nextDate = nextDate.plusDays(1);
-        }
-        return result;
-    }*/
-
 }

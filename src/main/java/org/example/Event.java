@@ -4,13 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
-/*
-* ClonedEvent extends Event...
-*   Event parentEvent;
-*
-*
-* */
 public class Event extends CalendarItem {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
@@ -19,14 +12,14 @@ public class Event extends CalendarItem {
 
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(title, description);
-        this.startDateTime = (startDateTime != null) ? startDateTime : LocalDateTime.now().withMinute(0).withSecond(0).plusHours(1);
-        this.endDateTime = (endDateTime != null && endDateTime.isAfter(startDateTime)) ? endDateTime : this.startDateTime.plusHours(1);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     public Event(String title, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(title, null);
-        this.startDateTime = (startDateTime != null) ? startDateTime : LocalDateTime.now().withMinute(0).withSecond(0).plusHours(1);
-        this.endDateTime = (endDateTime != null && endDateTime.isAfter(startDateTime)) ? endDateTime : this.startDateTime.plusHours(1);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     public LocalDateTime getStartDateTime() {

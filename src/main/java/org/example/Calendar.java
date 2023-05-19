@@ -52,12 +52,16 @@ public class Calendar {
         return true;
     }
 
-    public void removeEvent(UUID id) {
+    public boolean removeEvent(UUID id) {
+        if (idNotFoundEvent(id)) return false;
         this.events.remove(id);
+        return true;
     }
 
-    public void removeTask(UUID id) {
+    public boolean removeTask(UUID id) {
+        if (idNotFoundTask(id)) return false;
         this.tasks.remove(id);
+        return true;
     }
 
     public boolean addAlarmToEvent(UUID eventId, LocalDateTime triggerDate, AlarmType alarmType) {
@@ -118,6 +122,14 @@ public class Calendar {
             }
         }
         return result;
+    }
+
+    private boolean idNotFoundEvent(UUID id){
+        return (!this.events.containsKey(id));
+    }
+
+    private boolean idNotFoundTask(UUID id){
+        return (!this.tasks.containsKey(id));
     }
 
 }
