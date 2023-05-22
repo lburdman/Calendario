@@ -1,5 +1,7 @@
 package org.example;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -9,6 +11,10 @@ public class Event extends CalendarItem {
     private LocalDateTime endDateTime;
     private RepeatableSpec repeatableSpec = null;
     private UUID parentId = null;
+
+    public Event() {
+
+    }
 
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(title, description);
@@ -46,7 +52,7 @@ public class Event extends CalendarItem {
     public void setParentId(UUID parentId) {
         this.parentId = parentId;
     }
-
+    @JsonIgnore
     public boolean isRepeatable() {
         return repeatableSpec != null;
     }

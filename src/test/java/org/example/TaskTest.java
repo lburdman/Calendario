@@ -21,7 +21,7 @@ public class TaskTest {
         assertEquals(title, task.getTitle());
         assertEquals(description, task.getDescription());
         assertEquals(expDate, task.getExpDate());
-        assertFalse(task.isCompleted());
+        assertFalse(task.getComplete());
     }
 
     @Test
@@ -43,9 +43,9 @@ public class TaskTest {
         LocalDateTime expDate = LocalDateTime.of(2023, 6, 30, 18, 0);
         Task task = new Task(title, description, expDate);
 
-        task.setAsCompleted();
+        task.setComplete();
 
-        assertTrue(task.isCompleted());
+        assertTrue(task.getComplete());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TaskTest {
         assertEquals(title, wholeDayTask.getTitle());
         assertEquals(description, wholeDayTask.getDescription());
         assertEquals(wholeDayDate, wholeDayTask.getTaskDate());
-        assertEquals(null, wholeDayTask.getExpDate());
-        assertFalse(wholeDayTask.isCompleted());
+        assertNull(wholeDayTask.getExpDate());
+        assertFalse(wholeDayTask.getComplete());
     }
 }

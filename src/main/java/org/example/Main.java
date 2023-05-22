@@ -1,14 +1,32 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import java.io.File;
+import java.io.IOException;
+
+import static java.lang.System.*;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Intro with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        out.print("Hello and welcome!\n");
+        Calendar c;
+        ObjectMapper om = new ObjectMapper().registerModule(new JavaTimeModule());
+        String path = "target/calendar.json";
+        File f = new File(path);
 
-        // Press Mayús+F10 or click the green arrow button in the gutter to run the code.
-        Calendar c = new Calendar();
+        try {
+            if(f.exists()) {
+                c = om.readValue(f, Calendar.class);
+                out.printf("Loading existing calendar from %s.\n", path);
+            } else {
+                c = new Calendar();
+                out.print("Creating new calendar.\n");
+            }
+            om.writeValue(new File(path), c);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

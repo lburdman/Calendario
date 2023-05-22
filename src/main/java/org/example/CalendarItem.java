@@ -6,8 +6,11 @@ import java.util.*;
 public abstract class CalendarItem {
     private String title;
     private String description;
-    private final List<Alarm> alarms;
+    private List<Alarm> alarms;
     private final UUID id = UUID.randomUUID();
+
+    public CalendarItem() {
+    }
 
     public CalendarItem(String title, String description) {
         this.title = (title != null) ?  title : "no title";
@@ -33,6 +36,10 @@ public abstract class CalendarItem {
         this.description = description.isBlank() ? "no description" : description;
     }
 
+    public void setAlarms(List<Alarm> alarms) {
+        this.alarms = alarms;
+    }
+
     public List<Alarm> getAlarms() {
         return alarms;
     }
@@ -44,7 +51,6 @@ public abstract class CalendarItem {
     public void deleteAllAlarms() {
         this.alarms.clear();
     }
-
     public UUID getId() {
         return id;
     }

@@ -5,12 +5,28 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Calendar {
-    private final Map<UUID, Event> events;
-    private final Map<UUID, Task> tasks;
+    private Map<UUID, Event> events;
+    private Map<UUID, Task> tasks;
 
     public Calendar() {
         this.events = new HashMap<>();
         this.tasks = new HashMap<>();
+    }
+
+    public Map<UUID, Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Map<UUID, Event> events) {
+        this.events = events;
+    }
+
+    public Map<UUID, Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Map<UUID, Task> tasks) {
+        this.tasks = tasks;
     }
 
     public Event createEvent(String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -48,7 +64,7 @@ public class Calendar {
         if (task == null) return false;
         task.setTitle(title);
         task.setDescription(description);
-        task.setDueDate(dueDate);
+        task.setExpDate(dueDate);
         return true;
     }
 
@@ -131,9 +147,4 @@ public class Calendar {
     private boolean idNotFoundTask(UUID id){
         return (!this.tasks.containsKey(id));
     }
-
-    public void saveEvent(FileHandler fileHandler, String path){
-        fileHandler.saveCalendar(events, tasks, path);
-    }
-
 }

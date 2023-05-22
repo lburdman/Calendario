@@ -7,6 +7,9 @@ public class Task extends CalendarItem {
     protected LocalDateTime expDate;
     private boolean complete;
 
+    public Task () {
+
+    }
     public Task(String title, String description, LocalDateTime expDate) {
         super(title, description);
         this.expDate = expDate;
@@ -23,19 +26,20 @@ public class Task extends CalendarItem {
         return expDate;
     }
 
-    public void setAsCompleted() {
+    public void setExpDate(LocalDateTime expDate) {
+        this.expDate = expDate;
+    }
+
+    public void setComplete() {
         this.complete = true;
     }
 
-    public boolean isCompleted() {
+    public boolean getComplete() {
         return complete;
     }
 
     @Override
     public boolean isCalendarItemBetween(LocalDate startDate, LocalDate endDate) {
         return expDate.toLocalDate().equals(startDate);
-    }
-
-    public void setDueDate(LocalDateTime dueDate) {
     }
 }

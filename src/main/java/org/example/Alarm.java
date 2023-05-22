@@ -2,7 +2,6 @@ package org.example;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public abstract class Alarm {
     private LocalDateTime triggerDate; //If it has a certain date where it triggers
@@ -53,4 +52,5 @@ public abstract class Alarm {
     public void setRelativeInterval(Duration relativeInterval) {
         this.relativeInterval = relativeInterval;
     }
+
 }
