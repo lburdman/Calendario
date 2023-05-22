@@ -132,4 +132,8 @@ public class Calendar {
         return (!this.tasks.containsKey(id));
     }
 
+    public void saveEvent(FileHandler fileHandler, String path){
+        fileHandler.saveCalendar(events, tasks, path);
+    }
+
 }
