@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -146,5 +147,66 @@ public class Calendar {
 
     private boolean idNotFoundTask(UUID id){
         return (!this.tasks.containsKey(id));
+    }
+
+
+    public RepeatableSpec createAnnuallyRepeat(Event event, Integer qtyReps){
+        RepeatableSpec rs = new AnnuallyRepeat(event, qtyReps);
+        return rs;
+    }
+
+    public RepeatableSpec createAnnuallyRepeat(Event event){
+        RepeatableSpec rs = new AnnuallyRepeat(event);
+        return rs;
+    }
+
+    public RepeatableSpec createAnnuallyRepeat(Event event, LocalDate endDate){
+        RepeatableSpec rs = new AnnuallyRepeat(event, endDate);
+        return rs;
+    }
+
+    public RepeatableSpec createMonthlyRepeat(Event event, Integer qtyReps){
+        RepeatableSpec rs = new MonthlyRepeat(event, qtyReps);
+        return rs;
+    }
+
+    public RepeatableSpec createMonthlyRepeat(Event event){
+        RepeatableSpec rs = new MonthlyRepeat(event);
+        return rs;
+    }
+
+    public RepeatableSpec createMonthlyRepeat(Event event, LocalDate endDate){
+        RepeatableSpec rs = new MonthlyRepeat(event, endDate);
+        return rs;
+    }
+
+    public RepeatableSpec createDailyRepeat(Integer interval, Event event, int qtyReps){
+        RepeatableSpec rs = new DailyRepeat(interval, event, qtyReps);
+        return rs;
+    }
+
+    public RepeatableSpec createDailyRepeat(Integer interval, Event event){
+        RepeatableSpec rs = new DailyRepeat(interval, event);
+        return rs;
+    }
+
+    public RepeatableSpec createDailyRepeat(Integer interval, Event event, LocalDate endDate){
+        RepeatableSpec rs = new DailyRepeat(interval, event, endDate);
+        return rs;
+    }
+
+    public RepeatableSpec createWeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, int qtyReps){
+        RepeatableSpec rs = new WeeklyRepeat(daysOfWeek, event, qtyReps);
+        return rs;
+    }
+
+    public RepeatableSpec createWeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event){
+        RepeatableSpec rs = new WeeklyRepeat(daysOfWeek, event);
+        return rs;
+    }
+
+    public RepeatableSpec createWeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, LocalDate endDate){
+        RepeatableSpec rs = new WeeklyRepeat(daysOfWeek, event, endDate);
+        return rs;
     }
 }
