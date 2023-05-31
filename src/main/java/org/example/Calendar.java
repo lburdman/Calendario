@@ -150,63 +150,63 @@ public class Calendar {
     }
 
 
-    public RepeatableSpec createAnnuallyRepeat(Event event, Integer qtyReps){
+    public void asignAnnuallyRepToEvent(Event event, Integer qtyReps){
         RepeatableSpec rs = new AnnuallyRepeat(event, qtyReps);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createAnnuallyRepeat(Event event){
+    public void asignAnnuallyRepToEvent(Event event){
         RepeatableSpec rs = new AnnuallyRepeat(event);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createAnnuallyRepeat(Event event, LocalDate endDate){
+    public void asignAnnuallyRepToEvent(Event event, LocalDate endDate){
         RepeatableSpec rs = new AnnuallyRepeat(event, endDate);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createMonthlyRepeat(Event event, Integer qtyReps){
+    public void asignMonthlyRepToEvent(Event event, Integer qtyReps){
         RepeatableSpec rs = new MonthlyRepeat(event, qtyReps);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createMonthlyRepeat(Event event){
+    public void asignMonthlyRepToEvent(Event event){
         RepeatableSpec rs = new MonthlyRepeat(event);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createMonthlyRepeat(Event event, LocalDate endDate){
+    public void asignMonthlyRepToEvent(Event event, LocalDate endDate){
         RepeatableSpec rs = new MonthlyRepeat(event, endDate);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createDailyRepeat(Integer interval, Event event, int qtyReps){
+    public void asignDailyRepToEvent(Integer interval, Event event, int qtyReps){
         RepeatableSpec rs = new DailyRepeat(interval, event, qtyReps);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createDailyRepeat(Integer interval, Event event){
+    public void asignDailyRepToEvent(Integer interval, Event event){
         RepeatableSpec rs = new DailyRepeat(interval, event);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createDailyRepeat(Integer interval, Event event, LocalDate endDate){
+    public void asignDailyRepToEvent(Integer interval, Event event, LocalDate endDate){
         RepeatableSpec rs = new DailyRepeat(interval, event, endDate);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createWeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, int qtyReps){
+    public void asignWeeklyRepToEvent(List<DayOfWeek> daysOfWeek, Event event, int qtyReps){
         RepeatableSpec rs = new WeeklyRepeat(daysOfWeek, event, qtyReps);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createWeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event){
+    public void asignWeeklyRepToEvent(List<DayOfWeek> daysOfWeek, Event event){
         RepeatableSpec rs = new WeeklyRepeat(daysOfWeek, event);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 
-    public RepeatableSpec createWeeklyRepeat(List<DayOfWeek> daysOfWeek, Event event, LocalDate endDate){
+    public void asignWeeklyRepToEvent(List<DayOfWeek> daysOfWeek, Event event, LocalDate endDate){
         RepeatableSpec rs = new WeeklyRepeat(daysOfWeek, event, endDate);
-        return rs;
+        event.setRepeatableSpec(rs);
     }
 }
