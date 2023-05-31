@@ -2,6 +2,7 @@ package org.example;
 
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -61,11 +62,33 @@ public class CalendarTest {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
         LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
         Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        RepeatableSpec rs = c.createAnnuallyRepeat(e, 4);
+        e.setRepeatableSpec(rs);
 
         assertEquals(title, e.getTitle());
         assertEquals(description, e.getDescription());
         assertEquals(beginEvent, e.getStartDateTime());
         assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
+    }
+
+    @Test
+    public void testCreateEventMonthlQtyRep(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        RepeatableSpec repeatableSpec1 = new MonthlyRepeat(e,4);
+        e.setRepeatableSpec(repeatableSpec1);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+
 
     }
 
@@ -208,6 +231,183 @@ public class CalendarTest {
         UUID id = t.getId();
 
         assertTrue(c.addAlarmToTask(id, LocalDateTime.of(2023, 6, 3, 16, 0), AlarmType.NOTIFICATION));
+    }
+
+    @Test
+    public void testCreateEventWithAnnuallyRepeat(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        RepeatableSpec rs = c.createAnnuallyRepeat(e);
+        e.setRepeatableSpec(rs);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+    }
+
+    @Test
+    public void testCreateEventWithAnnuallyRepeatQty(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        RepeatableSpec rs = c.createAnnuallyRepeat(e, 8);
+        e.setRepeatableSpec(rs);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
+    }
+
+    @Test
+    public void testCreateEventWithAnnuallyRepeatExpDate(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        LocalDate endDate = beginEvent.toLocalDate().plusYears(4).plusDays(3);
+        RepeatableSpec rs = c.createAnnuallyRepeat(e, endDate);
+        e.setRepeatableSpec(rs);
+
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
+    }
+
+    @Test
+    public void testCreateEventWithMonthlyRepeat(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        RepeatableSpec rs = c.createMonthlyRepeat(e);
+        e.setRepeatableSpec(rs);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
+    }
+
+    @Test
+    public void testCreateEventWithMonthlyRepeatQty(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        RepeatableSpec rs = c.createMonthlyRepeat(e, 4);
+        e.setRepeatableSpec(rs);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
+    }
+
+    @Test
+    public void testCreateEventWithMonthlyRepeatExpDate(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        LocalDate endDate = beginEvent.toLocalDate().plusMonths(4).plusDays(3);
+        RepeatableSpec rs = c.createMonthlyRepeat(e, endDate);
+        e.setRepeatableSpec(rs);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
+    }
+
+    @Test
+    public void testCreateEventWithDailyRepeat(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        Integer interval = 1;
+        RepeatableSpec rs = c.createDailyRepeat(interval, e);
+        e.setRepeatableSpec(rs);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
+    }
+
+    @Test
+    public void testCreateEventWithDailyRepeatQty(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        Integer interval = 1;
+        RepeatableSpec rs = c.createDailyRepeat(interval, e, 4);
+        e.setRepeatableSpec(rs);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
+    }
+
+    @Test
+    public void testCreateEventWithDailyRepeatExpDate(){
+        String title = "pasear al perro";
+        String description = "Salir afuera y pasear al perro";
+        Calendar c = new Calendar();
+        LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
+        LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
+        Event e = c.createEvent("pasear al perro", "Salir afuera y pasear al perro", beginEvent, endEvent);
+        LocalDate endDate = beginEvent.toLocalDate().plusDays(2); //Until 5
+        Integer interval = 1;
+        RepeatableSpec rs = c.createDailyRepeat(interval, e, endDate);
+        e.setRepeatableSpec(rs);
+
+        assertEquals(title, e.getTitle());
+        assertEquals(description, e.getDescription());
+        assertEquals(beginEvent, e.getStartDateTime());
+        assertEquals(endEvent, e.getEndDateTime());
+        assertEquals(rs, e.getRepeatableSpec());
+
     }
 
 
