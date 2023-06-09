@@ -45,6 +45,13 @@
             <version>2.14.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>20</version>
+            <scope>compile</scope>
+        </dependency>
+
 
     </dependencies>
 
