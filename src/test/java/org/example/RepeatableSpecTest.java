@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.*;
 import org.junit.Test;
 
 import java.time.LocalDate;

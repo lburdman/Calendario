@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.model.Alarm;
+import org.example.model.Task;
+import org.example.model.WholeDayTask;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

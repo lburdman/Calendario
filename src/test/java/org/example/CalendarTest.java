@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.*;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -7,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.junit.jupiter.api.Assertions;
 
 import java.io.File;
 import java.io.IOException;
