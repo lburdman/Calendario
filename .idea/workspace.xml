@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Etapa 2, implementacion de escritura y lectura">
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Empieza etapa 3, clases de modelo movidas hacia model">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/FileHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +25,7 @@
         <option value="Interface" />
         <option value="JUnit4 Test Class" />
         <option value="Enum" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -98,13 +105,29 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example.model" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in etapa1">
+  <component name="RunManager" selected="Application.MainApp">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Main" />
+      <option name="MAIN_CLASS_NAME" value="org.example.model.Main" />
+      <module name="etapa1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.MainApp" />
       <module name="etapa1" />
       <extension name="coverage">
         <pattern>
@@ -130,7 +153,7 @@
       <module name="calendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.*" />
+          <option name="PATTERN" value="org.example.model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -145,7 +168,7 @@
       <module name="calendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.*" />
+          <option name="PATTERN" value="org.example.model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -172,11 +195,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainApp" />
         <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="JUnit.RepeatableSpecTest" />
-        <item itemvalue="JUnit.TaskTest.testTaskAlreadyExpired" />
       </list>
     </recent_temporary>
   </component>
@@ -322,7 +345,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684796922255</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Empieza etapa 3, dependencia JavaFX y creacion de paquetes">
+      <created>1686334152802</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1686334152802</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Empieza etapa 3, clases de modelo movidas hacia model">
+      <created>1686334312882</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1686334312882</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -401,7 +438,9 @@
     <MESSAGE value="CalendarTest" />
     <MESSAGE value="Correcciones, falta sacar .now(), rehacer tests" />
     <MESSAGE value="Etapa 2, implementacion de escritura y lectura" />
-    <option name="LAST_COMMIT_MESSAGE" value="Etapa 2, implementacion de escritura y lectura" />
+    <MESSAGE value="Empieza etapa 3, dependencia JavaFX y creacion de paquetes" />
+    <MESSAGE value="Empieza etapa 3, clases de modelo movidas hacia model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Empieza etapa 3, clases de modelo movidas hacia model" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1684796559155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

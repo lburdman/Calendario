@@ -9,24 +9,10 @@ import java.io.IOException;
 import static java.lang.System.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         out.print("Hello and welcome!\n");
-        Calendar c;
-        ObjectMapper om = new ObjectMapper().registerModule(new JavaTimeModule());
-        String path = "target/calendar.json";
-        File f = new File(path);
-
-        try {
-            if(f.exists()) {
-                c = om.readValue(f, Calendar.class);
-                out.printf("Loading existing calendar from %s.\n", path);
-            } else {
-                c = new Calendar();
-                out.print("Creating new calendar.\n");
-            }
-            om.writeValue(new File(path), c);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        FileHandler fh = new FileHandler();
+        Calendar c = fh.getCalendar();
+        fh.saveCalendar(c);
     }
 }

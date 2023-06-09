@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controller.DayController">
+
+    <Label fx:id="dayLabel" text="Events for the day" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10"/>
+
+    <VBox fx:id="dayView" spacing="10" AnchorPane.topAnchor="30" AnchorPane.bottomAnchor="40" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+    </VBox>
+
+    <HBox spacing="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10">
+        <Button fx:id="addEventButton" text="Add Event"/>
+        <Button fx:id="addTaskButton" text="Add Task"/>
+    </HBox>
+
+</AnchorPane>
+
+
+
+        <!--<Text fx:id="hour0" text="00:00" GridPane.rowIndex="0"/>
+        <Text fx:id="hour1" text="01:00" GridPane.rowIndex="1"/>
+        <Text fx:id="hour2" text="02:00" GridPane.rowIndex="2"/>
+        <Text fx:id="hour3" text="03:00" GridPane.rowIndex="3"/>
+        <Text fx:id="hour4" text="04:00" GridPane.rowIndex="4"/>
+        <Text fx:id="hour5" text="05:00" GridPane.rowIndex="5"/>
+        <Text fx:id="hour6" text="06:00" GridPane.rowIndex="6"/>
+        <Text fx:id="hour7" text="07:00" GridPane.rowIndex="7"/>
+        <Text fx:id="hour8" text="08:00" GridPane.rowIndex="8"/>
+        <Text fx:id="hour9" text="09:00" GridPane.rowIndex="9"/>
+        <Text fx:id="hour10" text="10:00" GridPane.rowIndex="10"/>
+        <Text fx:id="hour11" text="11:00" GridPane.rowIndex="11"/>
+        <Text fx:id="hour12" text="12:00" GridPane.rowIndex="12"/>
+        <Text fx:id="hour13" text="13:00" GridPane.rowIndex="13"/>
+        <Text fx:id="hour14" text="14:00" GridPane.rowIndex="14"/>
+        <Text fx:id="hour15" text="15:00" GridPane.rowIndex="15"/>
+        <Text fx:id="hour16" text="16:00" GridPane.rowIndex="16"/>
+        <Text fx:id="hour17" text="17:00" GridPane.rowIndex="17"/>
+        <Text fx:id="hour18" text="18:00" GridPane.rowIndex="18"/>
+        <Text fx:id="hour19" text="19:00" GridPane.rowIndex="19"/>
+        <Text fx:id="hour20" text="20:00" GridPane.rowIndex="20"/>
+        <Text fx:id="hour21" text="21:00" GridPane.rowIndex="21"/>
+        <Text fx:id="hour22" text="22:00" GridPane.rowIndex="22"/>
+        <Text fx:id="hour23" text="23:00" GridPane.rowIndex="23"/>-->
+
