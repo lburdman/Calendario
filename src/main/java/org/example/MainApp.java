@@ -1,31 +1,27 @@
 package org.example;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import org.example.view.DayView;
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DayView.fxml"));
-            Parent root = loader.load();
+        DayView dayView = new DayView();
+        Scene scene = new Scene(dayView);
 
-            Scene scene = new Scene(root);
-            primaryStage.setTitle("Day View");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        primaryStage.setTitle("Day View");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.setWidth(200);
+        primaryStage.setHeight(600);
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 }
+

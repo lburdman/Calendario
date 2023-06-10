@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Empieza etapa 3, clases de modelo movidas hacia model">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/FileHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="FALLA empezamos DayView">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/view/DayView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +101,9 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lucas\IdeaProjects\etapa1\src\main\resources\org\example\view" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.example.model" />
     </key>
@@ -129,6 +128,7 @@
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.MainApp" />
       <module name="etapa1" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../../../../JavaFX/javafx-sdk-20.0.1/lib --add-modules javafx.controls,javafx.fxml " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.example.*" />
@@ -193,6 +193,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.MainApp" />
+      <item itemvalue="JUnit.All in etapa1" />
+      <item itemvalue="JUnit.RepeatableSpecTest" />
+      <item itemvalue="JUnit.TaskTest.testTaskAlreadyExpired" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainApp" />
@@ -359,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686334312882</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="FALLA empezamos DayView">
+      <created>1686347743464</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1686347743464</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -440,7 +454,8 @@
     <MESSAGE value="Etapa 2, implementacion de escritura y lectura" />
     <MESSAGE value="Empieza etapa 3, dependencia JavaFX y creacion de paquetes" />
     <MESSAGE value="Empieza etapa 3, clases de modelo movidas hacia model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Empieza etapa 3, clases de modelo movidas hacia model" />
+    <MESSAGE value="FALLA empezamos DayView" />
+    <option name="LAST_COMMIT_MESSAGE" value="FALLA empezamos DayView" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1684796559155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
