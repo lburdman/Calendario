@@ -19,6 +19,6 @@ El objetivo del TP es implementar una aplicación de tipo calendario, similar a 
 
 El trabajo se desarrolla en 3 etapas:
 
-- [ ] **Etapa 1:** Logica del Negocio
+- [x] **Etapa 1:** Logica del Negocio
 - [ ] **Etapa 2:** Persistencia
 - [ ] **Etapa 3:** Interfaz Grafica
