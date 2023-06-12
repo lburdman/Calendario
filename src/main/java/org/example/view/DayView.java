@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import org.example.model.Event;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -61,11 +62,22 @@ public class DayView extends BorderPane {
         this.setBottom(buttonsBox);
     }
 
-    public void updateGridWithEvents(List<Event> events) {
+    public void updateGridWithEvents(List<Event> events, LocalDate currentDate) {
         clearGrid();
         for (Event event : events) {
+            LocalDate eventStart = event.getStartDateTime().toLocalDate();
+            LocalDate eventEnd = event.getEndDateTime().toLocalDate();
+
             int startHour = event.getStartDateTime().toLocalTime().getHour();
             int endHour = event.getEndDateTime().toLocalTime().getHour();
+
+            if (eventStart.isBefore(currentDate)) {
+                startHour = 0;
+            }
+
+            if (eventEnd.isAfter(currentDate)) {
+                endHour = 23;
+            }
 
             for (int hour = startHour; hour <= endHour; hour++) {
                 Label hourCell = (Label) getNodeFromGridPane(gridPane, 1, hour+1);
