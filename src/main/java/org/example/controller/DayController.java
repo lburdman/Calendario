@@ -1,65 +1,67 @@
 package org.example.controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.layout.*;
 import org.example.model.Calendar;
+import org.example.model.Event;
+import org.example.view.DayView;
+import org.example.view.EventDialog;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+
 public class DayController {
-
-    @FXML
-    private VBox dayView;
-
-    @FXML
-    private Label dayLabel;
-
-    @FXML
-    private Button addEventButton;
-
-    @FXML
-    private Button addTaskButton;
-
-    public void initialize() {
-        for (int i = 0; i < 24; i++) {
-            HBox hourBox = new HBox();
-            hourBox.setId("hour-" + i);
-            Label hourLabel = new Label(String.format("%02d:00", i));
-            hourBox.getChildren().add(hourLabel);
-            dayView.getChildren().add(hourBox);
-        }
-    }
-}
-/*
-public class DayController {
-
-    @FXML
-    private ListView<String> hourlyEventList;
-
-    @FXML
-    private Button addEventButton;
-
-    // Modelo - referencia a los datos (eventos, tareas)
     private Calendar calendar;
+    private DayView dayView;
+    private LocalDate currentDate;
 
-    public DayController(Calendar calendar) {
+    public DayController(Calendar calendar, DayView dayView) {
         this.calendar = calendar;
+        this.dayView = dayView;
+        this.currentDate = LocalDate.now();
+        initialize();
+        updateEventsInView();
     }
 
-    @FXML
+    private void updateEventsInView() {
+        List<Event> events = calendar.listEventsBetween(currentDate, currentDate.plusDays(1));
+        dayView.updateGridWithEvents(events);
+    }
+
     private void initialize() {
-        for (int i = 0; i < 24; i++) {
-            hourlyEventList.getItems().add(String.format("%02d:00", i));
+        dayView.getPrevDayButton().setOnAction(event -> {
+            changeDate(-1);
+            updateEventsInView();
+        });
+        dayView.getNextDayButton().setOnAction(event -> {
+            changeDate(1);
+            updateEventsInView();
+        });
+        dayView.getAddEventButton().setOnAction(event -> {
+            showEventDialog();
+            updateEventsInView();
+        });
+    }
+
+    private void showEventDialog() {
+        EventDialog eventDialog = new EventDialog();
+        Map<String, Object> eventData = eventDialog.displayAndGetEventData();
+
+        if (eventData != null) {
+           String title = (String) eventData.get("title");
+           String description = (String) eventData.get("description");
+           LocalDateTime startDateTime = (LocalDateTime) eventData.get("startDateTime");
+           LocalDateTime endDateTime = (LocalDateTime) eventData.get("endDateTime");
+
+           calendar.createEvent(title, description, startDateTime, endDateTime);
         }
     }
 
-    @FXML
-    private void addEvent() {
-        // Maneja el click en el botón agregar evento
+    private void changeDate(int days) {
+        currentDate = currentDate.plusDays(days);
+        dayView.setDateLabel(currentDate);
     }
 
-    @FXML
-    private void addTask() {
-        // Maneja el click en el botón agregar evento
-    }
-}*/
+    // Aquí puedes agregar más lógica para actualizar el modelo y/o cambiar la vista
+}
 

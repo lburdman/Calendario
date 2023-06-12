@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="FALLA empezamos DayView">
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Primer ventana, imprimio algo!!!">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/EventController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/EventDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/view/DayView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/module-info.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +107,8 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lucas\IdeaProjects\etapa1\src\main\java" />
+      <recent name="C:\Users\lucas\IdeaProjects\etapa1\src\main\java\org\example" />
       <recent name="C:\Users\lucas\IdeaProjects\etapa1\src\main\resources\org\example\view" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -111,7 +118,7 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in etapa1">
+  <component name="RunManager" selected="Application.MainApp">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.model.Main" />
       <module name="etapa1" />
@@ -128,7 +135,7 @@
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.MainApp" />
       <module name="etapa1" />
-      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../../../../JavaFX/javafx-sdk-20.0.1/lib --add-modules javafx.controls,javafx.fxml " />
+      <option name="PROGRAM_PARAMETERS" value="--module-path $PROJECT_DIR$/../../../../JavaFX/javafx-sdk-20.0.1/lib --add-modules javafx.controls " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.example.*" />
@@ -202,8 +209,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="Application.MainApp" />
+        <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="JUnit.RepeatableSpecTest" />
@@ -373,7 +380,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686347743464</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Primer ventana, imprimio algo!!!">
+      <created>1686441580896</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1686441580896</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Primer ventana, imprimio algo!!!">
+      <created>1686441613683</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1686441613683</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -455,7 +476,8 @@
     <MESSAGE value="Empieza etapa 3, dependencia JavaFX y creacion de paquetes" />
     <MESSAGE value="Empieza etapa 3, clases de modelo movidas hacia model" />
     <MESSAGE value="FALLA empezamos DayView" />
-    <option name="LAST_COMMIT_MESSAGE" value="FALLA empezamos DayView" />
+    <MESSAGE value="Primer ventana, imprimio algo!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Primer ventana, imprimio algo!!!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1684796559155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
