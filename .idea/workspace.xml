@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Agregado de funcionalidades a DayView, ya pinta los eventos">
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Se puede hacer superposicion de eventos en horas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -395,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686599765880</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Se arregló problema de listar eventos entre fechas distintas">
+      <created>1686604885881</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1686604885881</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,7 +486,9 @@
     <MESSAGE value="FALLA empezamos DayView" />
     <MESSAGE value="Primer ventana, imprimio algo!!!" />
     <MESSAGE value="Agregado de funcionalidades a DayView, ya pinta los eventos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Agregado de funcionalidades a DayView, ya pinta los eventos" />
+    <MESSAGE value="Se arregló problema de listar eventos entre fechas distintas" />
+    <MESSAGE value="Se puede hacer superposicion de eventos en horas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se puede hacer superposicion de eventos en horas" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1684796559155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

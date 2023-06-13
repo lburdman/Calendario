@@ -21,7 +21,7 @@ public class MainApp extends Application {
         primaryStage.setTitle("Day View");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        primaryStage.setWidth(250);
+        primaryStage.setWidth(300);
         primaryStage.setHeight(700);
         primaryStage.show();
     }
