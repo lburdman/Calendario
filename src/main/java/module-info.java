@@ -12,4 +12,7 @@ module org.example {
     opens org.example to javafx.fxml, com.fasterxml.jackson.databind;
     opens org.example.controller to javafx.fxml;
     exports org.example;
+
+    exports org.example.model;
+    opens org.example.model to com.fasterxml.jackson.databind;
 }
