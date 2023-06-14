@@ -17,12 +17,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class WeekView extends BorderPane {
-    private Label weekLabel;
-    private Button prevWeekButton;
-    private Button nextWeekButton;
-    private GridPane gridPane;
-    private Button addEventButton;
-    private Button addTaskButton;
+    private final Label weekLabel;
+    private final Button prevWeekButton;
+    private final Button nextWeekButton;
+    private final GridPane gridPane;
 
     private static final String[] DAYS_OF_WEEK = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
@@ -38,16 +36,6 @@ public class WeekView extends BorderPane {
         dateNavigation.setAlignment(Pos.CENTER);
         dateNavigation.getChildren().addAll(prevWeekButton, weekLabel, nextWeekButton);
 
-/*
-        viewSelector = new ComboBox<>();
-        viewSelector.getItems().addAll("Day view", "Week view", "Month view");
-        viewSelector.setValue("Week view");
-
-        VBox topContainer = new VBox(5);
-        topContainer.setAlignment(Pos.CENTER);
-        topContainer.getChildren().addAll(viewSelector, dateNavigation);
-*/
-
         gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setPadding(new Insets(10));
@@ -56,16 +44,8 @@ public class WeekView extends BorderPane {
 
         makeGrid();
 
-        addEventButton = new Button("Add Event");
-        addTaskButton = new Button("Add Task");
-        HBox buttonsBox = new HBox(10); // 10px de espacio entre botones
-        buttonsBox.setPadding(new Insets(10));
-        buttonsBox.setAlignment(Pos.CENTER);
-        buttonsBox.getChildren().addAll(addEventButton, addTaskButton);
-
         this.setTop(dateNavigation);
         this.setCenter(gridPane);
-        this.setBottom(buttonsBox);
     }
 
     public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
@@ -155,7 +135,7 @@ public class WeekView extends BorderPane {
                 Pane hourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);
                 if (hourCell != null) {
                     hourCell.getChildren().clear();
-                    hourCell.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 80px;");
+                    hourCell.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 160px;");
                 }
             }
         }
@@ -193,24 +173,12 @@ public class WeekView extends BorderPane {
         }
     }
 
-    public Label getWeekLabel() {
-        return weekLabel;
-    }
-
     public Button getPrevWeekButton() {
         return prevWeekButton;
     }
 
     public Button getNextWeekButton() {
         return nextWeekButton;
-    }
-
-    public Button getAddEventButton() {
-        return addEventButton;
-    }
-
-    public Button getAddTaskButton() {
-        return addTaskButton;
     }
 
     public void setWeekLabel(LocalDate startDate) {

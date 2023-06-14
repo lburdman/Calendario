@@ -3,16 +3,13 @@ package org.example.controller;
 import org.example.model.Calendar;
 import org.example.model.Event;
 import org.example.view.DayView;
-import org.example.view.EventDialog;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 public class DayController {
-    private Calendar calendar;
-    private DayView dayView;
+    private final Calendar calendar;
+    private final DayView dayView;
     private LocalDate currentDate;
 
     public DayController(Calendar calendar, DayView dayView) {
@@ -30,49 +27,19 @@ public class DayController {
 
     private void initialize() {
         dayView.getPrevDayButton().setOnAction(event -> {
-            changeDate(-1);
+            currentDate = currentDate.minusDays(1);
+            dayView.setDateLabel(currentDate);
             updateEventsInView();
         });
         dayView.getNextDayButton().setOnAction(event -> {
-            changeDate(1);
+            currentDate = currentDate.plusDays(1);
+            dayView.setDateLabel(currentDate);
             updateEventsInView();
         });
-        dayView.getAddEventButton().setOnAction(event -> {
-            showEventDialog();
-            updateEventsInView();
-        });
-        /*dayView.getViewSelector().valueProperty().addListener((obs, oldValue, newValue) -> {
-            switch (newValue) {
-                case "Day view":
-                    break;
-                case "Week view":
-                    // Change view -> week
-                    break;
-                case "Month view":
-                    // Change view -> month
-                    break;
-            }
-        });*/
     }
 
-    private void showEventDialog() {
-        EventDialog eventDialog = new EventDialog();
-        Map<String, Object> eventData = eventDialog.displayAndGetEventData();
-
-        if (eventData != null) {
-           String title = (String) eventData.get("title");
-           String description = (String) eventData.get("description");
-           LocalDateTime startDateTime = (LocalDateTime) eventData.get("startDateTime");
-           LocalDateTime endDateTime = (LocalDateTime) eventData.get("endDateTime");
-
-           calendar.createEvent(title, description, startDateTime, endDateTime);
-        }
+    public LocalDate getCurrentDate() {
+        return currentDate;
     }
-
-    private void changeDate(int days) {
-        currentDate = currentDate.plusDays(days);
-        dayView.setDateLabel(currentDate);
-    }
-
 }
 

@@ -16,12 +16,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DayView extends BorderPane {
-    private Label dateLabel;
-    private Button prevDayButton;
-    private Button nextDayButton;
-    private GridPane gridPane;
-    private Button addEventButton;
-    private Button addTaskButton;
+    private final Label dateLabel;
+    private final Button prevDayButton;
+    private final Button nextDayButton;
+    private final GridPane gridPane;
 
     public DayView() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM d (EEEE), yyyy");
@@ -34,14 +32,6 @@ public class DayView extends BorderPane {
         dateNavigation.setAlignment(Pos.CENTER);
         dateNavigation.getChildren().addAll(prevDayButton, dateLabel, nextDayButton);
 
-        /*viewSelector = new ComboBox<>();
-        viewSelector.getItems().addAll("Day view", "Week view", "Month view");
-        viewSelector.setValue("Day view");
-
-        VBox topContainer = new VBox(5);
-        topContainer.setAlignment(Pos.CENTER);
-        topContainer.getChildren().addAll(viewSelector, dateNavigation);
-*/
         gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setPadding(new Insets(10));
@@ -50,16 +40,8 @@ public class DayView extends BorderPane {
 
         makeGrid();
 
-        addEventButton = new Button("Add Event");
-        addTaskButton = new Button("Add Task");
-        HBox buttonsBox = new HBox(10);
-        buttonsBox.setPadding(new Insets(10));
-        buttonsBox.setAlignment(Pos.CENTER);
-        buttonsBox.getChildren().addAll(addEventButton, addTaskButton);
-
         this.setTop(dateNavigation);
         this.setCenter(gridPane);
-        this.setBottom(buttonsBox);
     }
 
     public void updateGridWithEvents(List<Event> events, LocalDate currentDate) {
@@ -165,8 +147,6 @@ public class DayView extends BorderPane {
             hourLabel.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray;");
             hourCell.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray;");
 
-            //hourCell.setMinWidth(100);
-            //hourCell.setMaxWidth(150);
             hourCell.setPrefWidth(gridPane.getWidth() - 5);
 
             gridPane.add(hourLabel, 0, hour + 1);
@@ -180,14 +160,6 @@ public class DayView extends BorderPane {
 
     public Button getNextDayButton() {
         return nextDayButton;
-    }
-
-    public Button getAddEventButton() {
-        return addEventButton;
-    }
-
-    public Button getAddTaskButton() {
-        return addTaskButton;
     }
 
     public void setDateLabel(LocalDate date) {
