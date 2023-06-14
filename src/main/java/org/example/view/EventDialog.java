@@ -32,7 +32,9 @@ public class EventDialog {
         TextField titleField = new TextField();
         TextField descriptionField = new TextField();
         DatePicker startDatePicker = new DatePicker();
+        startDatePicker.setValue(LocalDate.now());
         DatePicker endDatePicker = new DatePicker();
+        endDatePicker.setValue(LocalDate.now());
         LocalTimePicker startTimePicker = new LocalTimePicker();
         LocalTimePicker endTimePicker = new LocalTimePicker();
 
@@ -42,10 +44,10 @@ public class EventDialog {
         grid.add(descriptionField, 1, 1);
         grid.add(new Label("Start Date:"), 0, 2);
         grid.add(startDatePicker, 1, 2);
-        grid.add(new Label("Start Time:"), 0, 4);
-        grid.add(startTimePicker, 1, 4);
-        grid.add(new Label("End Date:"), 0, 3);
-        grid.add(endDatePicker, 1, 3);
+        grid.add(new Label("Start Time:"), 0, 3);
+        grid.add(startTimePicker, 1, 3);
+        grid.add(new Label("End Date:"), 0, 4);
+        grid.add(endDatePicker, 1, 4);
         grid.add(new Label("End Time:"), 0, 5);
         grid.add(endTimePicker, 1, 5);
 
@@ -54,8 +56,8 @@ public class EventDialog {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButton) {
                 LocalDate startDate = startDatePicker.getValue();
-                LocalDate endDate = endDatePicker.getValue();
                 LocalTime startTime = startTimePicker.getLocalTime();
+                LocalDate endDate = endDatePicker.getValue();
                 LocalTime endTime = endTimePicker.getLocalTime();
                 String title = titleField.getText();
                 String description = descriptionField.getText();

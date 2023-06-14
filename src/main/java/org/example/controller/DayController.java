@@ -41,6 +41,18 @@ public class DayController {
             showEventDialog();
             updateEventsInView();
         });
+        /*dayView.getViewSelector().valueProperty().addListener((obs, oldValue, newValue) -> {
+            switch (newValue) {
+                case "Day view":
+                    break;
+                case "Week view":
+                    // Change view -> week
+                    break;
+                case "Month view":
+                    // Change view -> month
+                    break;
+            }
+        });*/
     }
 
     private void showEventDialog() {
@@ -62,6 +74,5 @@ public class DayController {
         dayView.setDateLabel(currentDate);
     }
 
-    // Aquí puedes agregar más lógica para actualizar el modelo y/o cambiar la vista
 }
 

@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -23,7 +22,6 @@ public class DayView extends BorderPane {
     private GridPane gridPane;
     private Button addEventButton;
     private Button addTaskButton;
-    private ComboBox<String> viewSelector;
 
     public DayView() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM d (EEEE), yyyy");
@@ -36,14 +34,14 @@ public class DayView extends BorderPane {
         dateNavigation.setAlignment(Pos.CENTER);
         dateNavigation.getChildren().addAll(prevDayButton, dateLabel, nextDayButton);
 
-        viewSelector = new ComboBox<>();
+        /*viewSelector = new ComboBox<>();
         viewSelector.getItems().addAll("Day view", "Week view", "Month view");
         viewSelector.setValue("Day view");
 
         VBox topContainer = new VBox(5);
         topContainer.setAlignment(Pos.CENTER);
         topContainer.getChildren().addAll(viewSelector, dateNavigation);
-
+*/
         gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setPadding(new Insets(10));
@@ -54,136 +52,15 @@ public class DayView extends BorderPane {
 
         addEventButton = new Button("Add Event");
         addTaskButton = new Button("Add Task");
-        HBox buttonsBox = new HBox(10); // 10px de espacio entre botones
+        HBox buttonsBox = new HBox(10);
         buttonsBox.setPadding(new Insets(10));
         buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.getChildren().addAll(addEventButton, addTaskButton);
 
-        this.setTop(topContainer);
+        this.setTop(dateNavigation);
         this.setCenter(gridPane);
         this.setBottom(buttonsBox);
     }
-
-  /*  public void updateGridWithEvents(List<Event> events, LocalDate currentDate) {
-        clearGrid();
-        Map<Integer, Integer> eventCountPerHour = new HashMap<>();
-        double spacing = 2.0;
-
-        for (Event event : events) {
-            LocalDate eventStart = event.getStartDateTime().toLocalDate();
-            LocalDate eventEnd = event.getEndDateTime().toLocalDate();
-
-            int startHour = event.getStartDateTime().toLocalTime().getHour();
-            int endHour = event.getEndDateTime().toLocalTime().getHour();
-
-            if (eventStart.isBefore(currentDate)) {
-                startHour = 0;
-            }
-
-            if (eventEnd.isAfter(currentDate)) {
-                endHour = 23;
-            }
-
-            for (int hour = startHour; hour <= endHour; hour++) {
-                Pane hourCell = (Pane) getNodeFromGridPane(gridPane, 1, hour + 1);
-
-                if (hourCell != null) {
-                    int eventsInThisHour = eventCountPerHour.getOrDefault(hour, 0);
-
-                    double eventWidth = (hourCell.getWidth() - spacing * (eventsInThisHour + 1)) / (eventsInThisHour + 1);
-
-                    Rectangle eventRect = new Rectangle();
-                    eventRect.setWidth(eventWidth);
-                    eventRect.setHeight(hourCell.getHeight());
-                    eventRect.setFill(Color.GREENYELLOW);
-
-                    StackPane stackPane = new StackPane();
-                    stackPane.getChildren().add(eventRect);
-
-                    if (hour == startHour) {
-                        Text eventText = new Text(event.getTitle());
-                        stackPane.getChildren().add(eventText);
-                    }
-
-                    stackPane.setLayoutX(eventsInThisHour * (eventWidth + spacing));
-                    hourCell.getChildren().add(stackPane);
-
-                    eventCountPerHour.put(hour, eventsInThisHour + 1);
-                }
-            }
-        }
-    }*/
-
-    /*public void updateGridWithEvents(List<Event> events, LocalDate currentDate) {
-        clearGrid();
-        double spacing = 2.0;
-        Map<Integer, List<Event>> eventsPerHour = new HashMap<>();
-        Map<Event, Double> eventWidths = new HashMap<>();
-        Map<Event, Double> eventPositions = new HashMap<>();
-
-        for (Event event : events) {
-            LocalDate eventStart = event.getStartDateTime().toLocalDate();
-            LocalDate eventEnd = event.getEndDateTime().toLocalDate();
-
-            int startHour = event.getStartDateTime().toLocalTime().getHour();
-            int endHour = event.getEndDateTime().toLocalTime().getHour();
-
-            if (eventStart.isBefore(currentDate)) {
-                startHour = 0;
-            }
-
-            if (eventEnd.isAfter(currentDate)) {
-                endHour = 23;
-            }
-
-            for (int hour = startHour; hour <= endHour; hour++) {
-                eventsPerHour.computeIfAbsent(hour, k -> new ArrayList<>()).add(event);
-            }
-        }
-
-        for (int hour : eventsPerHour.keySet()) {
-            List<Event> eventsInThisHour = eventsPerHour.get(hour);
-            Pane hourCell = (Pane) getNodeFromGridPane(gridPane, 1, hour + 1);
-
-            if (hourCell != null) {
-                double totalWidth = hourCell.getWidth() - (eventsInThisHour.size() + 1) * spacing;
-                double eventWidth = totalWidth / eventsInThisHour.size();
-
-                for (int i = 0; i < eventsInThisHour.size(); i++) {
-                    Event event = eventsInThisHour.get(i);
-
-                    if (eventWidths.containsKey(event)) {
-                        eventWidth = eventWidths.get(event);
-                    } else {
-                        eventWidths.put(event, eventWidth);
-                    }
-
-                    double positionX = i * (eventWidth + spacing);
-                    if (eventPositions.containsKey(event)) {
-                        positionX = eventPositions.get(event);
-                    } else {
-                        eventPositions.put(event, positionX);
-                    }
-
-                    Rectangle eventRect = new Rectangle();
-                    eventRect.setWidth(eventWidth);
-                    eventRect.setHeight(hourCell.getHeight());
-                    eventRect.setFill(Color.GREENYELLOW);
-
-                    StackPane stackPane = new StackPane();
-                    stackPane.getChildren().add(eventRect);
-
-                    if (hour == event.getStartDateTime().toLocalTime().getHour()) {
-                        Text eventText = new Text(event.getTitle());
-                        stackPane.getChildren().add(eventText);
-                    }
-
-                    stackPane.setLayoutX(positionX);
-                    hourCell.getChildren().add(stackPane);
-                }
-            }
-        }
-    }*/
 
     public void updateGridWithEvents(List<Event> events, LocalDate currentDate) {
         clearGrid();
@@ -311,10 +188,6 @@ public class DayView extends BorderPane {
 
     public Button getAddTaskButton() {
         return addTaskButton;
-    }
-
-    public ComboBox<String> getViewSelector() {
-        return viewSelector;
     }
 
     public void setDateLabel(LocalDate date) {
