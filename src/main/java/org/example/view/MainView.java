@@ -11,6 +11,7 @@ import org.example.controller.MainController;
 public class MainView extends BorderPane {
     private final DayView dayView;
     private final WeekView weekView;
+    private final MonthView monthView;
     private final ComboBox<String> viewSelector;
     private final Button addEventButton;
     private final Button addTaskButton;
@@ -20,6 +21,7 @@ public class MainView extends BorderPane {
         this.mainController = mainController;
         dayView = new DayView(this.mainController);
         weekView = new WeekView();
+        monthView = new MonthView();
 
         viewSelector = new ComboBox<>();
         viewSelector.getItems().addAll("Day view", "Week view", "Month view");
@@ -48,6 +50,10 @@ public class MainView extends BorderPane {
         return weekView;
     }
 
+    public MonthView getMonthView() {
+        return monthView;
+    }
+
     public ComboBox<String> getViewSelector() {
         return viewSelector;
     }
@@ -60,5 +66,4 @@ public class MainView extends BorderPane {
         return addTaskButton;
     }
 }
-
 
