@@ -52,6 +52,97 @@ public class WeekView extends BorderPane {
         clearGrid();
         double spacing = 2.0;
 
+        // Sort the events by start time
+        events.sort(Comparator.comparing(Event::getStartDateTime));
+
+        Map<Integer, List<Event>> eventsPerDayAndHour = new HashMap<>();
+
+        // Define the date range of the week view
+        LocalDate endDate = startDate.plusDays(6);
+
+        // First pass: calculate the number of overlapping events for each day and hour
+        for (Event event : events) {
+            LocalDate eventStart = event.getStartDateTime().toLocalDate();
+            LocalDate eventEnd = event.getEndDateTime().toLocalDate();
+
+            int startHour = event.getStartDateTime().toLocalTime().getHour();
+            int endHour = event.getEndDateTime().toLocalTime().getHour();
+
+            int startDay = eventStart.isBefore(startDate) ? 0 : eventStart.getDayOfWeek().getValue() % 7;
+            int endDay = eventEnd.isAfter(endDate) ? 6 : eventEnd.getDayOfWeek().getValue() % 7;
+
+            for (int day = startDay; day <= endDay; day++) {
+                int currentStartHour = (day == startDay) ? startHour : 0;
+                int currentEndHour = (day == endDay) ? endHour : 23;
+
+                for (int hour = currentStartHour; hour <= currentEndHour; hour++) {
+                    int key = day * 24 + hour;
+                    eventsPerDayAndHour.computeIfAbsent(key, k -> new ArrayList<>()).add(event);
+                }
+            }
+        }
+
+        // Second pass: draw the events with the calculated widths and positions
+        for (Event event : events) {
+            int startHour = event.getStartDateTime().toLocalTime().getHour();
+            int endHour = event.getEndDateTime().toLocalTime().getHour();
+            int startDay = event.getStartDateTime().toLocalDate().getDayOfWeek().getValue() % 7;
+            int endDay = event.getEndDateTime().toLocalDate().getDayOfWeek().getValue() % 7;
+
+            int maxOverlap = 1;
+            for (int day = startDay; day <= endDay; day++) {
+                int currentStartHour = (day == startDay) ? startHour : 0;
+                int currentEndHour = (day == endDay) ? endHour : 23;
+
+                for (int hour = currentStartHour; hour <= currentEndHour; hour++) {
+                    int key = day * 24 + hour;
+                    maxOverlap = Math.max(maxOverlap, eventsPerDayAndHour.get(key).size());
+                }
+            }
+
+            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, startDay + 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
+            double eventWidth = totalWidth / maxOverlap;
+
+            // Draw the event in the grid
+            for (int day = startDay; day <= endDay; day++) {
+                int currentStartHour = (day == startDay) ? startHour : 0;
+                int currentEndHour = (day == endDay) ? endHour : 23;
+
+                for (int hour = currentStartHour; hour <= currentEndHour; hour++) {
+                    int key = day * 24 + hour;
+                    double positionX = eventsPerDayAndHour.get(key).indexOf(event) * (eventWidth + spacing);
+                    drawEvent(event, day, hour, eventWidth, positionX);
+                }
+            }
+        }
+    }
+
+    private void drawEvent(Event event, int day, int hour, double eventWidth, double positionX) {
+        Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);
+
+        Rectangle eventRect = new Rectangle();
+        eventRect.setWidth(eventWidth);
+        eventRect.setHeight(dayHourCell.getHeight());
+        eventRect.setFill(Color.GREENYELLOW);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(eventRect);
+
+        // If it's the first hour of the event, add the event title
+        if (hour == event.getStartDateTime().toLocalTime().getHour() && day == event.getStartDateTime().toLocalDate().getDayOfWeek().getValue() % 7) {
+            Text eventText = new Text(event.getTitle());
+            stackPane.getChildren().add(eventText);
+        }
+
+        stackPane.setLayoutX(positionX);
+        dayHourCell.getChildren().add(stackPane);
+    }
+
+
+    /*public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
+        clearGrid();
+        double spacing = 2.0;
+
         events.sort(Comparator.comparing(Event::getStartDateTime));
 
         Map<Integer, List<Event>> eventsPerDayAndHour = new HashMap<>();
@@ -127,7 +218,7 @@ public class WeekView extends BorderPane {
                 }
             }
         }
-    }
+    }*/
 
     private void clearGrid() {
         for (int day = 0; day < 7; day++) {

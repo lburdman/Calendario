@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import org.example.model.Event;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -48,35 +49,31 @@ public class DayView extends BorderPane {
         clearGrid();
         double spacing = 2.0;
 
+        // Sort the events by start time
         events.sort(Comparator.comparing(Event::getStartDateTime));
 
         Map<Integer, List<Event>> eventsPerHour = new HashMap<>();
-        Map<Event, Double> eventWidths = new HashMap<>();
-        Map<Event, Double> eventPositions = new HashMap<>();
 
+        // First pass: calculate the number of overlapping events for each hour
         for (Event event : events) {
-            LocalDate eventStart = event.getStartDateTime().toLocalDate();
-            LocalDate eventEnd = event.getEndDateTime().toLocalDate();
+            LocalDateTime eventStart = event.getStartDateTime();
+            LocalDateTime eventEnd = event.getEndDateTime();
 
-            int startHour = event.getStartDateTime().toLocalTime().getHour();
-            int endHour = event.getEndDateTime().toLocalTime().getHour();
-
-            if (eventStart.isBefore(currentDate)) {
-                startHour = 0;
-            }
-
-            if (eventEnd.isAfter(currentDate)) {
-                endHour = 23;
-            }
+            int startHour = eventStart.toLocalDate().isBefore(currentDate) ? 0 : eventStart.toLocalTime().getHour();
+            int endHour = eventEnd.toLocalDate().isAfter(currentDate) ? 23 : eventEnd.toLocalTime().getHour();
 
             for (int hour = startHour; hour <= endHour; hour++) {
                 eventsPerHour.computeIfAbsent(hour, k -> new ArrayList<>()).add(event);
             }
         }
 
+        // Second pass: draw the events with the calculated widths and positions
         for (Event event : events) {
-            int startHour = event.getStartDateTime().toLocalTime().getHour();
-            int endHour = event.getEndDateTime().toLocalTime().getHour();
+            LocalDateTime eventStart = event.getStartDateTime();
+            LocalDateTime eventEnd = event.getEndDateTime();
+
+            int startHour = eventStart.toLocalDate().isBefore(currentDate) ? 0 : eventStart.toLocalTime().getHour();
+            int endHour = eventEnd.toLocalDate().isAfter(currentDate) ? 23 : eventEnd.toLocalTime().getHour();
 
             int maxOverlap = 1;
             for (int hour = startHour; hour <= endHour; hour++) {
@@ -86,37 +83,35 @@ public class DayView extends BorderPane {
             double totalWidth = ((Pane) getNodeFromGridPane(gridPane, 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
             double eventWidth = totalWidth / maxOverlap;
 
-            eventWidths.put(event, eventWidth);
-
-            double positionX;
-
             for (int hour = startHour; hour <= endHour; hour++) {
-                List<Event> eventsInThisHour = eventsPerHour.get(hour);
-                Pane hourCell = (Pane) getNodeFromGridPane(gridPane, 1, hour + 1);
-
-                if (hour == startHour) {
-                    positionX = eventsInThisHour.indexOf(event) * (eventWidth + spacing);
-                    eventPositions.put(event, positionX);
-                }
-
-                Rectangle eventRect = new Rectangle();
-                eventRect.setWidth(eventWidth);
-                eventRect.setHeight(hourCell.getHeight());
-                eventRect.setFill(Color.GREENYELLOW);
-
-                StackPane stackPane = new StackPane();
-                stackPane.getChildren().add(eventRect);
-
-                if (hour == startHour) {
-                    Text eventText = new Text(event.getTitle());
-                    stackPane.getChildren().add(eventText);
-                }
-
-                stackPane.setLayoutX(eventPositions.get(event));
-                hourCell.getChildren().add(stackPane);
+                double positionX = eventsPerHour.get(hour).indexOf(event) * (eventWidth + 2.0);
+                drawEvent(event, hour, eventWidth, positionX);
             }
         }
     }
+
+
+    private void drawEvent(Event event, int hour, double eventWidth, double positionX) {
+        Pane hourCell = (Pane) getNodeFromGridPane(gridPane, 1, hour + 1);
+
+        Rectangle eventRect = new Rectangle();
+        eventRect.setWidth(eventWidth);
+        eventRect.setHeight(hourCell.getHeight());
+        eventRect.setFill(Color.GREENYELLOW);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(eventRect);
+
+        // Add text to the first rectangle
+        if (hour == event.getStartDateTime().toLocalTime().getHour()) {
+            Text eventText = new Text(event.getTitle());
+            stackPane.getChildren().add(eventText);
+        }
+        stackPane.setLayoutX(positionX);
+
+        hourCell.getChildren().add(stackPane);
+    }
+
 
 
     private void clearGrid() {

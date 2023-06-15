@@ -1,15 +1,5 @@
 package org.example.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -225,42 +215,4 @@ public class Calendar {
         event.setRepeatableSpec(rs);
     }
 
-
-    public void saveEventsToJsonFile(String filePath, Event event)throws IOException{
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        try (OutputStream outputStream = new FileOutputStream(filePath)){
-            objectMapper.writeValue(outputStream, event);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void saveTasksToJsonFile(String filePath, Task task) throws IOException{
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        try (OutputStream outputStream = new FileOutputStream(filePath)){
-            objectMapper.writeValue(outputStream, task);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Event loadEventFromJsonFile(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-
-        byte[] jsonData = Files.readAllBytes(Path.of(filePath));
-        return objectMapper.readValue(jsonData, Event.class);
-    }
-
-    public Task loadTaskFromJsonFile(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-
-        byte[] jsonData = Files.readAllBytes(Path.of(filePath));
-        return objectMapper.readValue(jsonData, Task.class);
-    }
 }

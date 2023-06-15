@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="WeekView, WeekController, hace falta arreglos">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/MainView.java" afterDir="false" />
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/MemoryPersistenceHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/PersistenceHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/model/MemoryPersistenceHandlerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/WeekController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/WeekController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" afterDir="false" />
     </list>
@@ -22,11 +21,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="JUnit4 Test Class" />
         <option value="Enum" />
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -114,10 +113,11 @@
       <recent name="org.example.model" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.example.model" />
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainApp">
+  <component name="RunManager" selected="JUnit.All in etapa1">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.model.Main" />
       <module name="etapa1" />
@@ -208,8 +208,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainApp" />
         <item itemvalue="JUnit.All in etapa1" />
+        <item itemvalue="Application.MainApp" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="JUnit.RepeatableSpecTest" />
@@ -421,7 +421,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686774045304</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos">
+      <created>1686780070660</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1686780070660</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos">
+      <created>1686780097531</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1686780097531</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -483,7 +497,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Creación de clases y tests. El proyecto está listo para comenzar!" />
     <MESSAGE value="atributos y test Task" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="Arreglos en TaskTest, un poco de logica de Task, falta hacer funcionar testTaskAlreadyExpired()" />
@@ -508,7 +521,8 @@
     <MESSAGE value="Se arregló problema de listar eventos entre fechas distintas" />
     <MESSAGE value="Se puede hacer superposicion de eventos en horas" />
     <MESSAGE value="WeekView, WeekController, hace falta arreglos" />
-    <option name="LAST_COMMIT_MESSAGE" value="WeekView, WeekController, hace falta arreglos" />
+    <MESSAGE value="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1684796559155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
