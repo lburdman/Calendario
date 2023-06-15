@@ -16,6 +16,7 @@ public class MainController {
     private final Stage stage;
     private DayController dayController;
     private WeekController weekController;
+    private MonthController monthController;
     private final Integer DAY_WIDTH = 300;
     private final Calendar calendar;
 
@@ -28,6 +29,7 @@ public class MainController {
     public void initialize() {
         this.dayController = new DayController(calendar, mainView.getDayView());
         this.weekController = new WeekController(calendar, mainView.getWeekView());
+        this.monthController = new MonthController(calendar, mainView.getMonthView());
         mainView.getViewSelector().valueProperty().addListener((obs, oldValue, newValue) -> {
             switch (newValue) {
                 case "Day view":
@@ -43,8 +45,10 @@ public class MainController {
                     updateEventsInView();
                     break;
                 case "Month view":
-                    //mainView.setCenter(mainView.getMonthView());
-                    //updateEventsInView();
+                    mainView.setCenter(mainView.getMonthView());
+                    stage.setWidth(DAY_WIDTH * 3);
+                    stage.setHeight(DAY_WIDTH * 2);
+                    updateEventsInView();
                     break;
             }
         });
@@ -98,6 +102,10 @@ public class MainController {
         return weekController;
     }
 
+    public MonthController getMonthController() {
+        return monthController;
+    }
+
     public void removeEvent(Event event) {
         calendar.removeEvent(event.getId());
         updateEventsInView();
@@ -107,4 +115,3 @@ public class MainController {
         this.mainView = mainView;
     }
 }
-
