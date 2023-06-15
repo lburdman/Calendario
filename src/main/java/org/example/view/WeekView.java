@@ -56,8 +56,8 @@ public class WeekView extends BorderPane {
         events.sort(Comparator.comparing(Event::getStartDateTime));
 
         Map<Integer, List<Event>> eventsPerDayAndHour = new HashMap<>();
+        Map<Event, Integer> eventRelativePosition = new HashMap<>();
 
-        // Define the date range of the week view
         LocalDate endDate = startDate.plusDays(6);
 
         // First pass: calculate the number of overlapping events for each day and hour
@@ -80,6 +80,9 @@ public class WeekView extends BorderPane {
                     eventsPerDayAndHour.computeIfAbsent(key, k -> new ArrayList<>()).add(event);
                 }
             }
+
+            int firstKey = startDay * 24 + startHour;
+            eventRelativePosition.put(event, eventsPerDayAndHour.get(firstKey).indexOf(event));
         }
 
         // Second pass: draw the events with the calculated widths and positions
@@ -103,19 +106,20 @@ public class WeekView extends BorderPane {
             double totalWidth = ((Pane) getNodeFromGridPane(gridPane, startDay + 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
             double eventWidth = totalWidth / maxOverlap;
 
+            double positionX = eventRelativePosition.get(event) * (eventWidth + spacing);
+
             // Draw the event in the grid
             for (int day = startDay; day <= endDay; day++) {
                 int currentStartHour = (day == startDay) ? startHour : 0;
                 int currentEndHour = (day == endDay) ? endHour : 23;
 
                 for (int hour = currentStartHour; hour <= currentEndHour; hour++) {
-                    int key = day * 24 + hour;
-                    double positionX = eventsPerDayAndHour.get(key).indexOf(event) * (eventWidth + spacing);
                     drawEvent(event, day, hour, eventWidth, positionX);
                 }
             }
         }
     }
+
 
     private void drawEvent(Event event, int day, int hour, double eventWidth, double positionX) {
         Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);

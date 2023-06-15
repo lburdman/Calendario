@@ -9,8 +9,10 @@ import org.example.view.MainView;
 public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
-        MainView mainView = new MainView();
-        MainController mainController = new MainController(mainView, primaryStage);
+        MainController mainController = new MainController(primaryStage);
+        MainView mainView = new MainView(mainController);
+        mainController.setMainView(mainView);
+        mainController.initialize();
 
         Scene scene = new Scene(mainView);
 

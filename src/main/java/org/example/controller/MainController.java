@@ -12,23 +12,22 @@ import java.util.List;
 import java.util.Map;
 
 public class MainController {
-    private final MainView mainView;
+    private MainView mainView;
     private final Stage stage;
-    private final DayController dayController;
-    private final WeekController weekController;
+    private DayController dayController;
+    private WeekController weekController;
     private final Integer DAY_WIDTH = 300;
     private final Calendar calendar;
 
-    public MainController(MainView mainView, Stage stage) {
-        this.mainView = mainView;
+    public MainController(Stage stage) {
         this.stage = stage;
         this.calendar = new Calendar(); // Then it will be loaded
-        this.dayController = new DayController(calendar, mainView.getDayView());
-        this.weekController = new WeekController(calendar, mainView.getWeekView());
-        initialize();
+
     }
 
-    private void initialize() {
+    public void initialize() {
+        this.dayController = new DayController(calendar, mainView.getDayView());
+        this.weekController = new WeekController(calendar, mainView.getWeekView());
         mainView.getViewSelector().valueProperty().addListener((obs, oldValue, newValue) -> {
             switch (newValue) {
                 case "Day view":
@@ -89,6 +88,23 @@ public class MainController {
 
                 break;
         }
+    }
+
+    public DayController getDayController() {
+        return dayController;
+    }
+
+    public WeekController getWeekController() {
+        return weekController;
+    }
+
+    public void removeEvent(Event event) {
+        calendar.removeEvent(event.getId());
+        updateEventsInView();
+    }
+
+    public void setMainView(MainView mainView) {
+        this.mainView = mainView;
     }
 }
 

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import org.example.controller.MainController;
 
 public class MainView extends BorderPane {
     private final DayView dayView;
@@ -13,9 +14,11 @@ public class MainView extends BorderPane {
     private final ComboBox<String> viewSelector;
     private final Button addEventButton;
     private final Button addTaskButton;
+    private final MainController mainController;
 
-    public MainView() {
-        dayView = new DayView();
+    public MainView(MainController mainController) {
+        this.mainController = mainController;
+        dayView = new DayView(this.mainController);
         weekView = new WeekView();
 
         viewSelector = new ComboBox<>();

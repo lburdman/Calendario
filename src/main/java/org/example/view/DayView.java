@@ -9,8 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import org.example.controller.MainController;
 import org.example.model.Event;
 
 import java.time.LocalDate;
@@ -23,8 +23,9 @@ public class DayView extends BorderPane {
     private final Button prevDayButton;
     private final Button nextDayButton;
     private final GridPane gridPane;
+    private final MainController mainController;
 
-    public DayView() {
+    public DayView(MainController mainController) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM d (EEEE), yyyy");
 
         dateLabel = new Label(LocalDate.now().format(dateFormatter));
@@ -45,6 +46,7 @@ public class DayView extends BorderPane {
 
         this.setTop(dateNavigation);
         this.setCenter(gridPane);
+        this.mainController = mainController;
     }
 
     public void updateGridWithEvents(List<Event> events, LocalDate currentDate) {
@@ -55,6 +57,7 @@ public class DayView extends BorderPane {
         events.sort(Comparator.comparing(Event::getStartDateTime));
 
         Map<Integer, List<Event>> eventsPerHour = new HashMap<>();
+        Map<Event, Integer> eventRelativePosition = new HashMap<>();
 
         // First pass: calculate the number of overlapping events for each hour
         for (Event event : events) {
@@ -67,6 +70,8 @@ public class DayView extends BorderPane {
             for (int hour = startHour; hour <= endHour; hour++) {
                 eventsPerHour.computeIfAbsent(hour, k -> new ArrayList<>()).add(event);
             }
+
+            eventRelativePosition.put(event, eventsPerHour.get(startHour).indexOf(event));
         }
 
         // Second pass: draw the events with the calculated widths and positions
@@ -85,8 +90,9 @@ public class DayView extends BorderPane {
             double totalWidth = ((Pane) getNodeFromGridPane(gridPane, 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
             double eventWidth = totalWidth / maxOverlap;
 
+            double positionX = eventRelativePosition.get(event) * (eventWidth + spacing);
+
             for (int hour = startHour; hour <= endHour; hour++) {
-                double positionX = eventsPerHour.get(hour).indexOf(event) * (eventWidth + 2.0);
                 drawEvent(event, hour, eventWidth, positionX);
             }
         }
@@ -100,13 +106,6 @@ public class DayView extends BorderPane {
         eventRect.setHeight(hourCell.getHeight());
         eventRect.setFill(Color.GREENYELLOW);
 
-        eventRect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println(eventRect.getEvent().getTitle());
-            }
-        });
-
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(eventRect);
 
@@ -115,10 +114,15 @@ public class DayView extends BorderPane {
             Text eventText = new Text(event.getTitle());
             stackPane.getChildren().add(eventText);
         }
+
         stackPane.setLayoutX(positionX);
 
         hourCell.getChildren().add(stackPane);
+
+        eventRect.setOnMouseClicked(event1 -> EventRectangleView
+                .showDetails(eventRect, hourCell, mainController));
     }
+
 
     private void clearGrid() {
         for (int hour = 0; hour < 24; hour++) {
