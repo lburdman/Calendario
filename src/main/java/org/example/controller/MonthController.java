@@ -7,6 +7,7 @@ import org.example.view.WeekView;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MonthController {
@@ -17,7 +18,7 @@ public class MonthController {
     public MonthController(Calendar calendar, MonthView monthView) {
         this.calendar = calendar;
         this.monthView = monthView;
-        this.startDate = LocalDate.now().with(DayOfWeek.SUNDAY); // Set to the start of the current week (Monday)
+        this.startDate = LocalDate.now().withDayOfMonth(1);
         initialize();
         //updateEventsInView();
     }
@@ -32,13 +33,17 @@ public class MonthController {
         monthView.getPrevMonthButton().setOnAction(event -> {
             startDate = startDate.minusMonths(1);
             monthView.setMonthLabel(startDate);
+            monthView.updateGrid(startDate);
             //updateEventsInView();
+
         });
         monthView.getNextMonthButton().setOnAction(event -> {
             startDate = startDate.plusMonths(1);
             monthView.setMonthLabel(startDate);
+            monthView.updateGrid(startDate);
             //updateEventsInView();
         });
+
     }
 
     public LocalDate getStartDate() {
