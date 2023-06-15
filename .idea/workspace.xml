@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/MemoryPersistenceHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/PersistenceHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/model/MemoryPersistenceHandlerTest.java" afterDir="false" />
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Corrección de la etapa 2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/RectangleEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +20,8 @@
         <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit4 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -435,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686780097531</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Corrección de la etapa 2">
+      <created>1686796936585</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1686796936585</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -497,7 +500,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="atributos y test Task" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="Arreglos en TaskTest, un poco de logica de Task, falta hacer funcionar testTaskAlreadyExpired()" />
     <MESSAGE value="Mejoras en Task, preparación de Alarm, agregue subclases Notification, Email, Sound que extienden a Alarm" />
@@ -522,7 +524,8 @@
     <MESSAGE value="Se puede hacer superposicion de eventos en horas" />
     <MESSAGE value="WeekView, WeekController, hace falta arreglos" />
     <MESSAGE value="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos" />
+    <MESSAGE value="Corrección de la etapa 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrección de la etapa 2" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1684796559155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -1,10 +1,12 @@
 package org.example.view;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -90,14 +92,20 @@ public class DayView extends BorderPane {
         }
     }
 
-
     private void drawEvent(Event event, int hour, double eventWidth, double positionX) {
         Pane hourCell = (Pane) getNodeFromGridPane(gridPane, 1, hour + 1);
 
-        Rectangle eventRect = new Rectangle();
+        RectangleEvent eventRect = new RectangleEvent(event);
         eventRect.setWidth(eventWidth);
         eventRect.setHeight(hourCell.getHeight());
         eventRect.setFill(Color.GREENYELLOW);
+
+        eventRect.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println(eventRect.getEvent().getTitle());
+            }
+        });
 
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(eventRect);
@@ -111,8 +119,6 @@ public class DayView extends BorderPane {
 
         hourCell.getChildren().add(stackPane);
     }
-
-
 
     private void clearGrid() {
         for (int hour = 0; hour < 24; hour++) {
