@@ -1,5 +1,6 @@
 package org.example.view;
 
+import com.fasterxml.jackson.core.JsonParser;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,9 +39,8 @@ public class MonthView extends BorderPane {
         gridPane.setPadding(new Insets(50));
         gridPane.setVgap(50);
         gridPane.setHgap(50);
-        //gridPane.autosize();
 
-        makeGrid(firstDayOfMonth);
+        updateGrid(firstDayOfMonth);
 
         this.setTop(monthNavigation);
         this.setCenter(gridPane);
@@ -52,7 +52,7 @@ public class MonthView extends BorderPane {
         monthLabel.setText(formattedStartDate);
     }
 
-    private void makeGrid(LocalDate firstDayOfMonth) {
+    public void updateGrid(LocalDate firstDayOfMonth) {
         gridPane.getChildren().clear();
         gridPane.setMinWidth(100);
         int startColumn = firstDayOfMonth.getDayOfWeek().getValue();
@@ -78,5 +78,10 @@ public class MonthView extends BorderPane {
 
     public Button getNextMonthButton() {
         return nextMonthButton;
+    }
+
+
+    public Label getMonthLabel(){
+        return monthLabel;
     }
 }
