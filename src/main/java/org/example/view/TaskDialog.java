@@ -11,15 +11,14 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EventDialog {
-
-    public EventDialog() {
+public class TaskDialog {
+    public TaskDialog() {
     }
 
-    public Map<String, Object> displayAndGetEventData() {
+    public Map<String, Object> displayAndGetTaskData() {
         Dialog<Map<String, Object>> dialog = new Dialog<>();
-        dialog.setTitle("Add Event");
-        dialog.setHeaderText("Enter event details:");
+        dialog.setTitle("Add Task");
+        dialog.setHeaderText("Enter task details:");
 
         ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
@@ -31,24 +30,23 @@ public class EventDialog {
 
         TextField titleField = new TextField();
         TextField descriptionField = new TextField();
-        DatePicker startDatePicker = new DatePicker();
-        startDatePicker.setValue(LocalDate.now());
-        DatePicker endDatePicker = new DatePicker();
-        endDatePicker.setValue(LocalDate.now());
-        LocalTimePicker startTimePicker = new LocalTimePicker();
+        //DatePicker startDatePicker = new DatePicker();
+        //startDatePicker.setValue(LocalDate.now());
+        DatePicker expDatePicker = new DatePicker();
+        expDatePicker.setValue(LocalDate.now());
+        //LocalTimePicker startTimePicker = new LocalTimePicker();
         LocalTimePicker endTimePicker = new LocalTimePicker();
-
 
         grid.add(new Label("Title:"), 0, 0);
         grid.add(titleField, 1, 0);
         grid.add(new Label("Description:"), 0, 1);
         grid.add(descriptionField, 1, 1);
-        grid.add(new Label("Start Date:"), 0, 2);
-        grid.add(startDatePicker, 1, 2);
-        grid.add(new Label("Start Time:"), 0, 3);
-        grid.add(startTimePicker, 1, 3);
+        //grid.add(new Label("Start Date:"), 0, 2);
+        //grid.add(startDatePicker, 1, 2);
+        //grid.add(new Label("Start Time:"), 0, 3);
+        //grid.add(startTimePicker, 1, 3);
         grid.add(new Label("End Date:"), 0, 4);
-        grid.add(endDatePicker, 1, 4);
+        grid.add(expDatePicker, 1, 4);
         grid.add(new Label("End Time:"), 0, 5);
         grid.add(endTimePicker, 1, 5);
 
@@ -56,20 +54,20 @@ public class EventDialog {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButton) {
-                LocalDate startDate = startDatePicker.getValue();
-                LocalTime startTime = startTimePicker.getLocalTime();
-                LocalDate endDate = endDatePicker.getValue();
+                //LocalDate startDate = startDatePicker.getValue();
+                //LocalTime startTime = startTimePicker.getLocalTime();
+                LocalDate endDate = expDatePicker.getValue();
                 LocalTime endTime = endTimePicker.getLocalTime();
                 String title = titleField.getText();
                 String description = descriptionField.getText();
 
-                LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+                //LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
                 LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);
 
                 Map<String, Object> result = new HashMap<>();
                 result.put("title", title);
                 result.put("description", description);
-                result.put("startDateTime", startDateTime);
+                //result.put("startDateTime", startDateTime);
                 result.put("endDateTime", endDateTime);
 
                 return result;

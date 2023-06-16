@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.example.controller.MainController;
 import org.example.model.Event;
+import org.example.model.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -169,6 +170,10 @@ public class DayView extends BorderPane {
 
     public void setDateLabel(LocalDate date) {
         dateLabel.setText(date.format(DateTimeFormatter.ofPattern("d MMMM (EEEE), yyyy")));
+    }
+
+    public void updateGridWithTasks(List<Task> tasks, LocalDate currentDate) {
+        //completar
     }
 }
 

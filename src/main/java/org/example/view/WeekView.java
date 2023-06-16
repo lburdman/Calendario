@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.example.model.Event;
+import org.example.model.Task;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -285,6 +286,10 @@ public class WeekView extends BorderPane {
         String formattedEndDate = endDate.format(formatter);
 
         weekLabel.setText("Week from " + formattedStartDate + " to " + formattedEndDate);
+    }
+
+    public void updateGridWithTasks(List<Task> tasks, LocalDate currentDate) {
+        //completar
     }
 }
 

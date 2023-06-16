@@ -21,7 +21,7 @@ public class MainView extends BorderPane {
         this.mainController = mainController;
         dayView = new DayView(this.mainController);
         weekView = new WeekView();
-        monthView = new MonthView();
+        monthView = new MonthView(this.mainController);
 
         viewSelector = new ComboBox<>();
         viewSelector.getItems().addAll("Day view", "Week view", "Month view");
