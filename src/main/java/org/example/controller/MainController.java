@@ -3,8 +3,10 @@ package org.example.controller;
 import javafx.stage.Stage;
 import org.example.model.Calendar;
 import org.example.model.Event;
+import org.example.model.Task;
 import org.example.view.EventDialog;
 import org.example.view.MainView;
+import org.example.view.TaskDialog;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,24 +39,32 @@ public class MainController {
                     stage.setWidth(DAY_WIDTH);
                     stage.setHeight(DAY_WIDTH * 2.2);
                     updateEventsInView();
+                    updateTaskInView();
                     break;
                 case "Week view":
                     mainView.setCenter(mainView.getWeekView());
                     stage.setWidth(DAY_WIDTH * 4.2);
                     stage.setHeight(DAY_WIDTH * 2.2);
                     updateEventsInView();
+                    updateTaskInView();
                     break;
                 case "Month view":
                     mainView.setCenter(mainView.getMonthView());
                     stage.setWidth(DAY_WIDTH * 3);
                     stage.setHeight(DAY_WIDTH * 2);
                     updateEventsInView();
+                    updateTaskInView();
                     break;
             }
         });
         mainView.getAddEventButton().setOnAction(event -> {
             showEventDialog();
             updateEventsInView();
+        });
+
+        mainView.getAddTaskButton().setOnAction(event -> {
+            showTaskDialog();
+            updateTaskInView();
         });
     }
 
@@ -89,7 +99,9 @@ public class MainController {
                 mainView.getWeekView().updateGridWithEvents(events, startWeekDay);
                 break;
             case "Month view":
-
+                LocalDate startMonthDay = monthController.getStartDate();
+                events = calendar.listEventsBetween(startMonthDay, startMonthDay.plusMonths(1).minusDays(1));
+                mainView.getMonthView().updateGridWithEvents(events, startMonthDay);
                 break;
         }
     }
@@ -113,5 +125,43 @@ public class MainController {
 
     public void setMainView(MainView mainView) {
         this.mainView = mainView;
+    }
+
+    private void showTaskDialog() {
+        TaskDialog taskDialog = new TaskDialog();
+        Map<String, Object> taskData = taskDialog.displayAndGetTaskData();
+
+        if (taskData != null) {
+            String title = (String) taskData.get("title");
+            String description = (String) taskData.get("description");
+            //LocalDateTime startDateTime = (LocalDateTime) taskData.get("startDateTime");
+            LocalDateTime expDate = (LocalDateTime) taskData.get("expDate");
+
+            calendar.createTask(title, description, expDate);
+        }
+    }
+
+    private void updateTaskInView() {
+        String currentView = mainView.getViewSelector().getValue();
+
+        List<Task> tasks;
+
+        switch (currentView) {
+            case "Day view":
+                LocalDate currentDate = dayController.getCurrentDate();
+                tasks = calendar.listTasksBetween(currentDate, currentDate);
+                mainView.getDayView().updateGridWithTasks(tasks, currentDate);
+                break;
+            case "Week view":
+                LocalDate startWeekDay = weekController.getStartDate();
+                tasks = calendar.listTasksBetween(startWeekDay, startWeekDay.plusDays(6));
+                mainView.getWeekView().updateGridWithTasks(tasks, startWeekDay);
+                break;
+            case "Month view":
+                LocalDate startMonthDay = monthController.getStartDate();
+                tasks = calendar.listTasksBetween(startMonthDay, startMonthDay.plusMonths(1).minusDays(1));
+                mainView.getMonthView().updateGridWithTasks(tasks, startMonthDay);
+                break;
+        }
     }
 }

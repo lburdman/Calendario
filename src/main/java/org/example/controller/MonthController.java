@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.model.Calendar;
 import org.example.model.Event;
+import org.example.model.Task;
 import org.example.view.MonthView;
 import org.example.view.WeekView;
 
@@ -20,13 +21,20 @@ public class MonthController {
         this.monthView = monthView;
         this.startDate = LocalDate.now().withDayOfMonth(1);
         initialize();
-        //updateEventsInView();
+        updateEventsInView();
+        updateTasksInView();
     }
 
     private void updateEventsInView() {
-        //LocalDate endDate = startDate.plusDays(6);
-        //List<Event> events = calendar.listEventsBetween(startDate, endDate);
-        //weekView.updateGridWithEvents(events, startDate);
+        LocalDate endDate = startDate.plusMonths(1).minusDays(1);
+        List<Event> events = calendar.listEventsBetween(startDate, endDate);
+        monthView.updateGridWithEvents(events, startDate);
+    }
+
+    private void updateTasksInView() {
+        LocalDate endDate = startDate.plusMonths(1).minusDays(1);
+        List<Task> tasks = calendar.listTasksBetween(startDate, endDate);
+        monthView.updateGridWithTasks(tasks, startDate);
     }
 
     private void initialize() {
@@ -34,14 +42,16 @@ public class MonthController {
             startDate = startDate.minusMonths(1);
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
-            //updateEventsInView();
+            updateEventsInView();
+            updateTasksInView();
 
         });
         monthView.getNextMonthButton().setOnAction(event -> {
             startDate = startDate.plusMonths(1);
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
-            //updateEventsInView();
+            updateEventsInView();
+            updateTasksInView();
         });
 
     }
