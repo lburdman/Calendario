@@ -53,10 +53,10 @@ public class MonthView extends BorderPane {
         this.setCenter(gridPane);
         this.mainController = mainController;
     }
-//Todavia no funciona upgradegridwithEvents... problemas en drawgrid
+
     public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
         clearGrid();
-/*
+
         double spacing = 2.0;
 
         // Sort the events by start time
@@ -67,13 +67,13 @@ public class MonthView extends BorderPane {
 
         LocalDate endDate = startDate.plusMonths(1).minusDays(1);
 
-        // First pass: calculate the number of overlapping events for each hour
+        // First pass: calculate the number of overlapping events for each day
         for (Event event : events) {
             LocalDateTime eventStart = event.getStartDateTime();
             LocalDateTime eventEnd = event.getEndDateTime();
 
             int startDay = eventStart.toLocalDate().isBefore(startDate) ? 0 : eventStart.toLocalDate().getDayOfMonth();
-            int endDay = eventEnd.toLocalDate().isAfter(startDate) ? 1 : eventEnd.toLocalDate().getDayOfMonth();
+            int endDay = eventEnd.toLocalDate().isAfter(endDate) ? eventEnd.toLocalDate().lengthOfMonth() : eventEnd.toLocalDate().getDayOfMonth();
 
             for (int day = startDay; day <= endDay; day++) {
                 eventsPerDay.computeIfAbsent(day, k -> new ArrayList<>()).add(event);
@@ -84,47 +84,44 @@ public class MonthView extends BorderPane {
 
         // Second pass: draw the events with the calculated widths and positions
         for (Event event : events) {
-            LocalDateTime eventStart = event.getStartDateTime();
-            LocalDateTime eventEnd = event.getEndDateTime();
+            LocalDate eventStart = event.getStartDateTime().toLocalDate();
+            LocalDate eventEnd = event.getEndDateTime().toLocalDate();
 
-            int startDay = eventStart.toLocalDate().isBefore(startDate) ? 0 : eventStart.toLocalDate().getDayOfMonth();
-            int endDay = eventEnd.toLocalDate().isAfter(startDate) ? eventEnd.toLocalDate().lengthOfMonth() : eventEnd.toLocalDate().getDayOfMonth();
+            int startDay = eventStart.isBefore(startDate) ? 0 : eventStart.getDayOfMonth();
+            int endDay = eventEnd.isAfter(endDate) ? eventEnd.lengthOfMonth() : eventEnd.getDayOfMonth();
 
             int maxOverlap = 1;
             for (int day = startDay; day <= endDay; day++) {
-                maxOverlap = Math.max(maxOverlap, eventsPerDay.computeIfAbsent(day, k -> new ArrayList<>()).size());
+                maxOverlap = Math.max(maxOverlap, eventsPerDay.get(day).size());
             }
 
             int startColumn = LocalDate.now().withDayOfMonth(1).getDayOfWeek().getValue();
+            int row =  (startDay + startColumn - 2) / NUM_DAYS_IN_WEEK + 1;
+            int rowCell = (row == 2 || row == 3 || row == 4 || row == 5) ? row * 2 : row + 1;
 
-
-            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, (startDay + startColumn - 2) % NUM_DAYS_IN_WEEK, (startDay + startColumn - 2) / NUM_DAYS_IN_WEEK + 2)).getWidth() - (maxOverlap + 1) * spacing;
+            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, (startDay + startColumn - 2) % NUM_DAYS_IN_WEEK, rowCell)).getWidth() - (maxOverlap + 1) * spacing;
             double eventWidth = totalWidth / maxOverlap;
 
 
-            Integer relativePosition = eventRelativePosition.get(event);
-            if (relativePosition != null) {
-                double positionX = relativePosition * (eventWidth + spacing);
+            double positionX = eventRelativePosition.get(event) * (eventWidth + spacing);
 
-                for (int day = startDay; day <= endDay; day++) {
-                    drawEvent(event, day, eventWidth, positionX);
-                }
+            for (int day = startDay; day <= endDay; day++) {
+                drawEvent(event, day, eventWidth, positionX);
             }
         }
-
- */
-
     }
 
     private void drawEvent(Event event, int day, double eventWidth, double positionX) {
-/*
+
         int startColumn = LocalDate.now().withDayOfMonth(1).getDayOfWeek().getValue();
-        Pane dayCell = (Pane) getNodeFromGridPane(gridPane, (day + startColumn - 2) % NUM_DAYS_IN_WEEK,  (day + startColumn - 2) / NUM_DAYS_IN_WEEK + 2);
+        int row =  (day + startColumn - 2) / NUM_DAYS_IN_WEEK + 1;
+        int rowCell = (row == 2 || row == 3 || row == 4 || row == 5) ? row * 2 : row + 1;
+        Pane dayCell = (Pane) getNodeFromGridPane(gridPane, (day + startColumn - 2) % NUM_DAYS_IN_WEEK,  rowCell);
 
         RectangleEvent eventRect = new RectangleEvent(event);
         eventRect.setWidth(eventWidth);
         eventRect.setHeight(dayCell.getHeight());
-        eventRect.setFill(Color.GREENYELLOW);
+        eventRect.setFill(Color.ORCHID);
 
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(eventRect);
@@ -141,19 +138,29 @@ public class MonthView extends BorderPane {
 
         eventRect.setOnMouseClicked(event1 -> EventRectangleView
                 .showDetails(eventRect, dayCell, mainController));
-
-
- */
-
     }
 
     private void clearGrid() {
+       /*
         int startColumn = LocalDate.now().withDayOfMonth(1).getDayOfWeek().getValue();
 
         for (int day = 1; day <= LocalDate.now().lengthOfMonth(); day++) {
             Node cell = getNodeFromGridPane(gridPane, (day + startColumn - 2) % NUM_DAYS_IN_WEEK, (day + startColumn - 2) / NUM_DAYS_IN_WEEK +1);
             if (cell != null && cell.getClass().equals(Pane.class)) {
                 Pane dayCell = (Pane) cell;
+                dayCell.getChildren().clear();
+                dayCell.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 200px;");
+            }
+        }
+
+        */
+        int startColumn = LocalDate.now().withDayOfMonth(1).getDayOfWeek().getValue();
+
+        for (int day = 1; day < LocalDate.now().lengthOfMonth(); day++) {
+            int row =  (day + startColumn - 2) / NUM_DAYS_IN_WEEK + 1;
+            int rowCell = (row == 2 || row == 3 || row == 4 || row == 5) ? row * 2 : row + 1;
+            Pane dayCell = (Pane) getNodeFromGridPane(gridPane, (day + startColumn - 2) % NUM_DAYS_IN_WEEK, rowCell);
+            if (dayCell != null) {
                 dayCell.getChildren().clear();
                 dayCell.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 200px;");
             }
