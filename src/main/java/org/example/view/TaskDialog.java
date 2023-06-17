@@ -30,32 +30,41 @@ public class TaskDialog {
 
         TextField titleField = new TextField();
         TextField descriptionField = new TextField();
-        //DatePicker startDatePicker = new DatePicker();
-        //startDatePicker.setValue(LocalDate.now());
+        CheckBox wholeDayField = new CheckBox();
         DatePicker expDatePicker = new DatePicker();
         expDatePicker.setValue(LocalDate.now());
-        //LocalTimePicker startTimePicker = new LocalTimePicker();
         LocalTimePicker endTimePicker = new LocalTimePicker();
+        CheckBox alarmField = new CheckBox();
+
+        ComboBox<String>typeAlarm = new ComboBox<>();
+        typeAlarm.getItems().addAll("Sound", "Notification", "Email");
+
+
+        expDatePicker.setDisable(true);
+        endTimePicker.setDisable(true);
+
+        expDatePicker.disableProperty().bind(wholeDayField.selectedProperty());
+        endTimePicker.disableProperty().bind(wholeDayField.selectedProperty());
 
         grid.add(new Label("Title:"), 0, 0);
         grid.add(titleField, 1, 0);
         grid.add(new Label("Description:"), 0, 1);
         grid.add(descriptionField, 1, 1);
-        //grid.add(new Label("Start Date:"), 0, 2);
-        //grid.add(startDatePicker, 1, 2);
-        //grid.add(new Label("Start Time:"), 0, 3);
-        //grid.add(startTimePicker, 1, 3);
-        grid.add(new Label("End Date:"), 0, 4);
-        grid.add(expDatePicker, 1, 4);
-        grid.add(new Label("End Time:"), 0, 5);
-        grid.add(endTimePicker, 1, 5);
+        grid.add(new Label("Whole Day Task: "), 0, 2);
+        grid.add(wholeDayField, 1,2);
+        grid.add(new Label("End Date:"), 0, 3);
+        grid.add(expDatePicker, 1, 3);
+        grid.add(new Label("End Time:"), 0, 4);
+        grid.add(endTimePicker, 1, 4);
+        grid.add(new Label ("Alarm: "), 0,5);
+        grid.add(alarmField, 1, 5);
+        grid.add(new Label("Type alarm:"), 0,6);
+        grid.add(typeAlarm,1,6);
 
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButton) {
-                //LocalDate startDate = startDatePicker.getValue();
-                //LocalTime startTime = startTimePicker.getLocalTime();
                 LocalDate endDate = expDatePicker.getValue();
                 LocalTime endTime = endTimePicker.getLocalTime();
                 String title = titleField.getText();
@@ -67,7 +76,6 @@ public class TaskDialog {
                 Map<String, Object> result = new HashMap<>();
                 result.put("title", title);
                 result.put("description", description);
-                //result.put("startDateTime", startDateTime);
                 result.put("endDateTime", endDateTime);
 
                 return result;

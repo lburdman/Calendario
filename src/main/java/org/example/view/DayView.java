@@ -105,7 +105,7 @@ public class DayView extends BorderPane {
         RectangleEvent eventRect = new RectangleEvent(event);
         eventRect.setWidth(eventWidth);
         eventRect.setHeight(hourCell.getHeight());
-        eventRect.setFill(Color.GREENYELLOW);
+        eventRect.setFill(Color.AQUA);
 
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(eventRect);
@@ -173,7 +173,78 @@ public class DayView extends BorderPane {
     }
 
     public void updateGridWithTasks(List<Task> tasks, LocalDate currentDate) {
-        //completar
+        clearGrid();
+        double spacing = 2.0;
+
+        // Sort the events by start time
+        //tasks.sort(Comparator.comparing(Task::getExpDate));
+
+        Map<Integer, List<Task>> tasksPerHour = new HashMap<>();
+        Map<Task, Integer> taskRelativePosition = new HashMap<>();
+
+        // First pass: calculate the number of overlapping events for each hour
+        for (Task task : tasks) {
+            LocalDateTime taskStart = LocalDateTime.now();
+            LocalDateTime taskEnd = task.getExpDate();
+
+            int startHour = taskStart.toLocalTime().getHour();
+            int endHour = taskEnd.toLocalDate().isAfter(currentDate) ? 23 : taskEnd.toLocalTime().getHour();
+
+            for (int hour = startHour; hour <= endHour; hour++) {
+                tasksPerHour.computeIfAbsent(hour, k -> new ArrayList<>()).add(task);
+            }
+
+            taskRelativePosition.put(task, tasksPerHour.get(startHour).indexOf(task));
+        }
+
+        // Second pass: draw the events with the calculated widths and positions
+        for (Task task : tasks) {
+            LocalDateTime taskStart = LocalDateTime.now();
+            LocalDateTime taskEnd = task.getExpDate();
+
+            int startHour = taskStart.toLocalTime().getHour();
+            int endHour = taskEnd.toLocalDate().isAfter(currentDate) ? 23 : taskEnd.toLocalTime().getHour();
+
+            int maxOverlap = 1;
+            for (int hour = startHour; hour <= endHour; hour++) {
+                maxOverlap = Math.max(maxOverlap, tasksPerHour.get(hour).size());
+            }
+
+            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
+            double taskWidth = totalWidth / maxOverlap;
+
+            double positionX = taskRelativePosition.get(task) * (taskWidth + spacing);
+
+            for (int hour = startHour; hour <= endHour; hour++) {
+                drawTask(task, hour, taskWidth, positionX);
+            }
+        }
+    }
+
+    private void drawTask(Task task, int hour, double taskWidth, double positionX) {
+        Pane hourCell = (Pane) getNodeFromGridPane(gridPane, 1, hour + 1);
+        LocalDateTime taskStart = LocalDateTime.now();
+
+        RectangleTask taskRect = new RectangleTask(task);
+        taskRect.setWidth(taskWidth);
+        taskRect.setHeight(hourCell.getHeight());
+        taskRect.setFill(Color.GREEN);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(taskRect);
+
+        // Add text to the first rectangle
+        if (hour == taskStart.getHour()) {
+            Text taskText = new Text(task.getTitle());
+            stackPane.getChildren().add(taskText);
+        }
+
+        stackPane.setLayoutX(positionX);
+
+        hourCell.getChildren().add(stackPane);
+
+        taskRect.setOnMouseClicked(event1 -> TaskRectangleView
+                .showDetails(taskRect, hourCell, mainController));
     }
 }
 
