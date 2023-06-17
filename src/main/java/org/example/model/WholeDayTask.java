@@ -6,7 +6,7 @@ public class WholeDayTask extends Task {
     private LocalDate taskDate;
 
     public WholeDayTask(String title, String description, LocalDate taskDate){
-        super(title, description, null);
+        super(title, description, taskDate.atTime(23,59,59));
         this.taskDate = taskDate;
     }
 
