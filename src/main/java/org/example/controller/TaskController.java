@@ -22,7 +22,6 @@ public class TaskController {
         if (taskData != null) {
             String title = (String) taskData.get("title");
             String description = (String) taskData.get("description");
-            //LocalDateTime startDateTime = (LocalDateTime) taskData.get("startDateTime");
             LocalDateTime expDate = (LocalDateTime) taskData.get("expDate");
 
             calendar.createTask(title, description, expDate);

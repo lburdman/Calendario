@@ -51,7 +51,7 @@ public class MainController {
                 case "Month view":
                     mainView.setCenter(mainView.getMonthView());
                     stage.setWidth(DAY_WIDTH * 3);
-                    stage.setHeight(DAY_WIDTH * 2);
+                    stage.setHeight(DAY_WIDTH * 2.5);
                     updateEventsInView();
                     updateTaskInView();
                     break;
