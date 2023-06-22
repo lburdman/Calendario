@@ -8,14 +8,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.controller.MainController;
-import org.example.model.Event;
 import org.example.model.Task;
 
 public class TaskRectangleView {
     public static void showDetails(RectangleTask rectangleTask, Pane hourCell, MainController mainController) {
         Task task = rectangleTask.getTask();
 
-        Stage eventWindow = new Stage();
+        Stage taskWindow = new Stage();
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
 
@@ -31,12 +30,12 @@ public class TaskRectangleView {
             //mainController.removeTask(task);
             hourCell.getChildren().remove(rectangleTask);
 
-            eventWindow.close();
+            taskWindow.close();
         });
 
         Scene scene = new Scene(layout);
-        eventWindow.setScene(scene);
-        eventWindow.setTitle("Event Details");
-        eventWindow.show();
+        taskWindow.setScene(scene);
+        taskWindow.setTitle("Task Details");
+        taskWindow.show();
     }
 }

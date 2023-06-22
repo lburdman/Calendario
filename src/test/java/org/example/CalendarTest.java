@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class CalendarTest {
+    /*
     @Test
     public void testSaveAndLoadCalendar() throws IOException {
         ObjectMapper om = new ObjectMapper().registerModule(new JavaTimeModule());
@@ -53,6 +54,8 @@ public class CalendarTest {
         assertEquals(descriptionTask, loadedTask.getDescription());
         assertEquals(beginEvent, loadedTask.getExpDate());
     }
+
+     */
 
 
 

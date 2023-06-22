@@ -10,6 +10,7 @@ import org.example.view.TaskDialog;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Map;
 
@@ -38,21 +39,22 @@ public class MainController {
                     mainView.setCenter(mainView.getDayView());
                     stage.setWidth(DAY_WIDTH);
                     stage.setHeight(DAY_WIDTH * 2.2);
-                    updateEventsInView();
+                    //updateEventsInView();
                     updateTaskInView();
                     break;
                 case "Week view":
                     mainView.setCenter(mainView.getWeekView());
                     stage.setWidth(DAY_WIDTH * 4.2);
                     stage.setHeight(DAY_WIDTH * 2.2);
-                    updateEventsInView();
+                    //updateEventsInView();
                     updateTaskInView();
                     break;
                 case "Month view":
                     mainView.setCenter(mainView.getMonthView());
                     stage.setWidth(DAY_WIDTH * 3);
                     stage.setHeight(DAY_WIDTH * 2.5);
-                    updateEventsInView();
+                    //mainView.getMonthView().updateGrid(monthController.getStartDate());
+                    //updateEventsInView();
                     updateTaskInView();
                     break;
             }
@@ -100,7 +102,8 @@ public class MainController {
                 break;
             case "Month view":
                 LocalDate startMonthDay = monthController.getStartDate();
-                events = calendar.listEventsBetween(startMonthDay, startMonthDay.plusMonths(1).minusDays(1));
+                events = calendar.listEventsBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
+                //mainView.getMonthView().updateGrid(startMonthDay);
                 mainView.getMonthView().updateGridWithEvents(events, startMonthDay);
                 break;
         }
@@ -134,7 +137,6 @@ public class MainController {
         if (taskData != null) {
             String title = (String) taskData.get("title");
             String description = (String) taskData.get("description");
-            //LocalDateTime startDateTime = (LocalDateTime) taskData.get("startDateTime");
             LocalDateTime expDate = (LocalDateTime) taskData.get("expDate");
 
             calendar.createTask(title, description, expDate);
@@ -159,7 +161,7 @@ public class MainController {
                 break;
             case "Month view":
                 LocalDate startMonthDay = monthController.getStartDate();
-                tasks = calendar.listTasksBetween(startMonthDay, startMonthDay.plusMonths(1).minusDays(1));
+                tasks = calendar.listTasksBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
                 mainView.getMonthView().updateGridWithTasks(tasks, startMonthDay);
                 break;
         }

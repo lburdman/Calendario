@@ -9,6 +9,7 @@ import org.example.view.WeekView;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 public class MonthController {
@@ -21,18 +22,18 @@ public class MonthController {
         this.monthView = monthView;
         this.startDate = LocalDate.now().withDayOfMonth(1);
         initialize();
-        updateEventsInView();
+        //updateEventsInView();
         updateTasksInView();
     }
 
     private void updateEventsInView() {
-        LocalDate endDate = startDate.plusMonths(1).minusDays(1);
+        LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
         List<Event> events = calendar.listEventsBetween(startDate, endDate);
         monthView.updateGridWithEvents(events, startDate);
     }
 
     private void updateTasksInView() {
-        LocalDate endDate = startDate.plusMonths(1).minusDays(1);
+        LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
         List<Task> tasks = calendar.listTasksBetween(startDate, endDate);
         monthView.updateGridWithTasks(tasks, startDate);
     }
@@ -42,7 +43,7 @@ public class MonthController {
             startDate = startDate.minusMonths(1);
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
-            updateEventsInView();
+            //updateEventsInView();
             updateTasksInView();
 
         });
@@ -50,7 +51,7 @@ public class MonthController {
             startDate = startDate.plusMonths(1);
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
-            updateEventsInView();
+            //updateEventsInView();
             updateTasksInView();
         });
 
@@ -59,4 +60,5 @@ public class MonthController {
     public LocalDate getStartDate() {
         return startDate;
     }
+
 }

@@ -18,7 +18,7 @@ public class DayController {
         this.dayView = dayView;
         this.currentDate = LocalDate.now();
         initialize();
-        updateEventsInView();
+        //updateEventsInView();
         updateTasksInView();
     }
 
@@ -36,13 +36,13 @@ public class DayController {
         dayView.getPrevDayButton().setOnAction(event -> {
             currentDate = currentDate.minusDays(1);
             dayView.setDateLabel(currentDate);
-            updateEventsInView();
+            //updateEventsInView();
             updateTasksInView();
         });
         dayView.getNextDayButton().setOnAction(event -> {
             currentDate = currentDate.plusDays(1);
             dayView.setDateLabel(currentDate);
-            updateEventsInView();
+            //updateEventsInView();
             updateTasksInView();
         });
     }

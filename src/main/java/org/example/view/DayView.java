@@ -177,7 +177,7 @@ public class DayView extends BorderPane {
         double spacing = 2.0;
 
         // Sort the events by start time
-        //tasks.sort(Comparator.comparing(Task::getExpDate));
+        //tasks.sort(Comparator.comparing(Task::getStartDateTime));
 
         Map<Integer, List<Task>> tasksPerHour = new HashMap<>();
         Map<Task, Integer> taskRelativePosition = new HashMap<>();
@@ -187,7 +187,8 @@ public class DayView extends BorderPane {
             LocalDateTime taskStart = LocalDateTime.now();
             LocalDateTime taskEnd = task.getExpDate();
 
-            int startHour = taskStart.toLocalTime().getHour();
+
+            int startHour = taskStart.toLocalDate().isBefore(currentDate) ? 0 : taskStart.toLocalTime().getHour();
             int endHour = taskEnd.toLocalDate().isAfter(currentDate) ? 23 : taskEnd.toLocalTime().getHour();
 
             for (int hour = startHour; hour <= endHour; hour++) {
@@ -202,7 +203,7 @@ public class DayView extends BorderPane {
             LocalDateTime taskStart = LocalDateTime.now();
             LocalDateTime taskEnd = task.getExpDate();
 
-            int startHour = taskStart.toLocalTime().getHour();
+            int startHour = taskStart.toLocalDate().isBefore(currentDate) ? 0 : taskStart.toLocalTime().getHour();
             int endHour = taskEnd.toLocalDate().isAfter(currentDate) ? 23 : taskEnd.toLocalTime().getHour();
 
             int maxOverlap = 1;
@@ -223,18 +224,17 @@ public class DayView extends BorderPane {
 
     private void drawTask(Task task, int hour, double taskWidth, double positionX) {
         Pane hourCell = (Pane) getNodeFromGridPane(gridPane, 1, hour + 1);
-        LocalDateTime taskStart = LocalDateTime.now();
 
         RectangleTask taskRect = new RectangleTask(task);
         taskRect.setWidth(taskWidth);
         taskRect.setHeight(hourCell.getHeight());
-        taskRect.setFill(Color.GREEN);
+        taskRect.setFill(Color.DARKSALMON);
 
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(taskRect);
 
         // Add text to the first rectangle
-        if (hour == taskStart.getHour()) {
+        if (hour == LocalDateTime.now().getHour()) {
             Text taskText = new Text(task.getTitle());
             stackPane.getChildren().add(taskText);
         }
