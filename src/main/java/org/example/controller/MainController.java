@@ -39,14 +39,14 @@ public class MainController {
                     mainView.setCenter(mainView.getDayView());
                     stage.setWidth(DAY_WIDTH);
                     stage.setHeight(DAY_WIDTH * 2.2);
-                    //updateEventsInView();
+                    updateEventsInView();
                     updateTaskInView();
                     break;
                 case "Week view":
                     mainView.setCenter(mainView.getWeekView());
                     stage.setWidth(DAY_WIDTH * 4.2);
                     stage.setHeight(DAY_WIDTH * 2.2);
-                    //updateEventsInView();
+                    updateEventsInView();
                     updateTaskInView();
                     break;
                 case "Month view":
@@ -54,7 +54,7 @@ public class MainController {
                     stage.setWidth(DAY_WIDTH * 3);
                     stage.setHeight(DAY_WIDTH * 2.5);
                     //mainView.getMonthView().updateGrid(monthController.getStartDate());
-                    //updateEventsInView();
+                    updateEventsInView();
                     updateTaskInView();
                     break;
             }
@@ -68,6 +68,7 @@ public class MainController {
             showTaskDialog();
             updateTaskInView();
         });
+
     }
 
     private void showEventDialog() {
@@ -103,7 +104,6 @@ public class MainController {
             case "Month view":
                 LocalDate startMonthDay = monthController.getStartDate();
                 events = calendar.listEventsBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
-                //mainView.getMonthView().updateGrid(startMonthDay);
                 mainView.getMonthView().updateGridWithEvents(events, startMonthDay);
                 break;
         }
@@ -124,6 +124,11 @@ public class MainController {
     public void removeEvent(Event event) {
         calendar.removeEvent(event.getId());
         updateEventsInView();
+    }
+
+    public void removeTask(Task task) {
+        calendar.removeTask(task.getId());
+        updateTaskInView();
     }
 
     public void setMainView(MainView mainView) {

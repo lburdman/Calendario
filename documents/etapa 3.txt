@@ -3,7 +3,6 @@ Etapa 3
 - Eventos: No se muestran bien en month view o week view, porque cuando se pasa de mes tira error o muestra mal.
 - Tasks: Mostrar en la view del mes, semana y dia.
 - Task -> hay un problema en el modelo porque no guarda las tareas en listtaskbetween ... me tira siempre que exp date es nulo y por seso no guarda.
-- Agregar cartel de tarea /evento agregado exitosamente.
 - Eventos: Falta agregar repeatable spec
 - alarmas
 - Persistencia.

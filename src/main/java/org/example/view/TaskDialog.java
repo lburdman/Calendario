@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class TaskDialog {
     public TaskDialog() {
@@ -71,18 +72,31 @@ public class TaskDialog {
                 String description = descriptionField.getText();
 
                 //LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
-                LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);
+                LocalDateTime expDate = LocalDateTime.of(endDate, endTime);
 
                 Map<String, Object> result = new HashMap<>();
                 result.put("title", title);
                 result.put("description", description);
-                result.put("endDateTime", endDateTime);
+                result.put("endDateTime", expDate);
 
                 return result;
             }
             return null;
         });
 
-        return dialog.showAndWait().orElse(null);
+        Optional<Map<String, Object>> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            showSuccessDialog("Task added successfully!");
+            return result.get();
+        }
+        return null;
+    }
+
+    private void showSuccessDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

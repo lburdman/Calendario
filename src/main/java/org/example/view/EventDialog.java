@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class EventDialog {
 
@@ -17,6 +18,7 @@ public class EventDialog {
     }
 
     public Map<String, Object> displayAndGetEventData() {
+
         Dialog<Map<String, Object>> dialog = new Dialog<>();
         dialog.setTitle("Add Event");
         dialog.setHeaderText("Enter event details:");
@@ -77,6 +79,19 @@ public class EventDialog {
             return null;
         });
 
-        return dialog.showAndWait().orElse(null);
+        Optional<Map<String, Object>> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            showSuccessDialog("Event added successfully!"); // Show success dialog
+            return result.get();
+        }
+        return null;
+    }
+
+    private void showSuccessDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

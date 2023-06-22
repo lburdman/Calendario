@@ -22,9 +22,16 @@ public class TaskController {
         if (taskData != null) {
             String title = (String) taskData.get("title");
             String description = (String) taskData.get("description");
-            LocalDateTime expDate = (LocalDateTime) taskData.get("expDate");
+            LocalDateTime expDate = (LocalDateTime) taskData.get("endDateTime");
 
             calendar.createTask(title, description, expDate);
         }
     }
+    /*
+    mainView.getAddTaskButton().setOnAction(event -> {
+        showTaskDialog();
+        updateTaskInView();
+    });
+
+     */
 }
