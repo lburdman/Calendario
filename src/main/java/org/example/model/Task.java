@@ -40,15 +40,7 @@ public class Task extends CalendarItem {
 
     @Override
     public boolean isCalendarItemBetween(LocalDate startDate, LocalDate endDate) {
-        //return (expDate != null && expDate.toLocalDate().equals(startDate));
-
-        if (expDate == null) {
-            return false; // Task doesn't have an expiration date
-        }
-
-        LocalDate taskDate = expDate.toLocalDate();
-
-        return taskDate.isEqual(startDate) || (taskDate.isAfter(startDate) && taskDate.isBefore(endDate));
+        return (expDate != null && expDate.toLocalDate().equals(startDate));
     }
 
 }

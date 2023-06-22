@@ -3,6 +3,7 @@ package org.example.view;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -22,9 +23,19 @@ public class TaskRectangleView {
         Text description = new Text("Description: " + task.getDescription());
         //Text startDateTime = new Text("Start: " + task. event.getStartDateTime().withSecond(0).withNano(0));
         Text endDateTime = new Text("End: " + task.getExpDate());
+        CheckBox isComplete = new CheckBox("Is The Task Complete? ");
+
+        isComplete.setSelected(task.getComplete());
+
         Button deleteButton = new Button("Delete Task");
 
-        layout.getChildren().addAll(title, description, endDateTime, deleteButton);
+        layout.getChildren().addAll(title, description, endDateTime, isComplete, deleteButton);
+
+        isComplete.setOnAction(event -> {
+                    if (isComplete.isSelected()) {
+                        task.setComplete();
+                    }
+        });
 
         deleteButton.setOnAction(actionEvent -> {
             mainController.removeTask(task);
