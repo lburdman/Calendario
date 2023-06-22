@@ -27,7 +27,7 @@ public class TaskRectangleView {
         layout.getChildren().addAll(title, description, endDateTime, deleteButton);
 
         deleteButton.setOnAction(actionEvent -> {
-            //mainController.removeTask(task);
+            mainController.removeTask(task);
             hourCell.getChildren().remove(rectangleTask);
 
             taskWindow.close();

@@ -39,23 +39,23 @@ public class MainController {
                     mainView.setCenter(mainView.getDayView());
                     stage.setWidth(DAY_WIDTH);
                     stage.setHeight(DAY_WIDTH * 2.2);
-                    updateEventsInView();
-                    updateTaskInView();
+                    //updateEventsInView();
+                    //updateTaskInView();
                     break;
                 case "Week view":
                     mainView.setCenter(mainView.getWeekView());
                     stage.setWidth(DAY_WIDTH * 4.2);
                     stage.setHeight(DAY_WIDTH * 2.2);
-                    updateEventsInView();
-                    updateTaskInView();
+                    //updateEventsInView();
+                    //updateTaskInView();
                     break;
                 case "Month view":
                     mainView.setCenter(mainView.getMonthView());
                     stage.setWidth(DAY_WIDTH * 3);
                     stage.setHeight(DAY_WIDTH * 2.5);
                     //mainView.getMonthView().updateGrid(monthController.getStartDate());
-                    updateEventsInView();
-                    updateTaskInView();
+                    //updateEventsInView();
+                    //updateTaskInView();
                     break;
             }
         });

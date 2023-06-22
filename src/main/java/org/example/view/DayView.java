@@ -177,7 +177,7 @@ public class DayView extends BorderPane {
         double spacing = 2.0;
 
         // Sort the events by start time
-        //tasks.sort(Comparator.comparing(Task::getStartDateTime));
+        tasks.sort(Comparator.comparing(Task::getExpDate));
 
         Map<Integer, List<Task>> tasksPerHour = new HashMap<>();
         Map<Task, Integer> taskRelativePosition = new HashMap<>();

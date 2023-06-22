@@ -77,7 +77,7 @@ public class TaskDialog {
                 Map<String, Object> result = new HashMap<>();
                 result.put("title", title);
                 result.put("description", description);
-                result.put("endDateTime", expDate);
+                result.put("expDate", expDate);
 
                 return result;
             }

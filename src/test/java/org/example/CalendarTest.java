@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -102,7 +103,6 @@ public class CalendarTest {
 
         Calendar c = new Calendar();
         Task t = c.createTask("Hacer ejercicio", "Hacer ejercicio antes del 30 de abril", expDate);
-
 
         assertEquals(title, t.getTitle());
         assertEquals(description, t.getDescription());
