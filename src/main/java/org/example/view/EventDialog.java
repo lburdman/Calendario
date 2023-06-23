@@ -4,17 +4,21 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import jfxtras.scene.control.LocalTimePicker;
+import org.example.model.Alarm;
+import org.example.model.Calendar;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class EventDialog {
+    private final Calendar calendar;
+    private final List<Alarm> alarms;
 
-    public EventDialog() {
+    public EventDialog(Calendar calendar) {
+        this.alarms = new ArrayList<>();
+        this.calendar = calendar;
     }
 
     public Map<String, Object> displayAndGetEventData() {
@@ -40,6 +44,17 @@ public class EventDialog {
         LocalTimePicker startTimePicker = new LocalTimePicker();
         LocalTimePicker endTimePicker = new LocalTimePicker();
 
+        Button alarmButton = new Button("Add Alarm");
+        alarmButton.setOnAction(event -> {
+            AlarmDialog alarmDialog = new AlarmDialog(calendar);
+            alarmDialog.showAlarmDialog();
+
+            Alarm newAlarm = alarmDialog.createAlarm();
+            if (newAlarm != null) {
+                alarms.add(newAlarm);
+            }
+        });
+
 
         grid.add(new Label("Title:"), 0, 0);
         grid.add(titleField, 1, 0);
@@ -53,6 +68,7 @@ public class EventDialog {
         grid.add(endDatePicker, 1, 4);
         grid.add(new Label("End Time:"), 0, 5);
         grid.add(endTimePicker, 1, 5);
+        grid.add(alarmButton, 0, 6);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -73,6 +89,7 @@ public class EventDialog {
                 result.put("description", description);
                 result.put("startDateTime", startDateTime);
                 result.put("endDateTime", endDateTime);
+                result.put("alarms", alarms);
 
                 return result;
             }

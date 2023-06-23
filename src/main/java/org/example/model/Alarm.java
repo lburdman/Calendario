@@ -1,11 +1,10 @@
 package org.example.model;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public abstract class Alarm {
     private LocalDateTime triggerDate; //If it has a certain date where it triggers
-    private Duration relativeInterval;
+    private long relativeInterval;
     private AlarmType alarmType;
     private boolean active = true;
 
@@ -16,7 +15,7 @@ public abstract class Alarm {
         this.alarmType = alarmType;
     }
 
-    public Alarm(Duration relativeInterval, AlarmType alarmType) {
+    public Alarm(long relativeInterval, AlarmType alarmType) {
         this.relativeInterval = relativeInterval;
         this.alarmType = alarmType;
     }
@@ -45,11 +44,11 @@ public abstract class Alarm {
         this.alarmType = alarmType;
     }
 
-    public Duration getRelativeInterval() {
+    public long getRelativeInterval() {
         return relativeInterval;
     }
 
-    public void setRelativeInterval(Duration relativeInterval) {
+    public void setRelativeInterval(long relativeInterval) {
         this.relativeInterval = relativeInterval;
     }
 

@@ -7,11 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-import java.io.File;
-import java.io.IOException;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -201,10 +196,12 @@ public class CalendarTest {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 6, 5, 12, 0);
         LocalDateTime endEvent = LocalDateTime.of(2023, 6, 5, 15, 0);
         Event e = c.createEvent(title, description, beginEvent, endEvent);
-        UUID id = e.getId();
 
-        assertTrue(c.addAlarmToEvent(id, LocalDateTime.of(2023, 6, 3, 16, 0), AlarmType.NOTIFICATION));
+        c.addAlarmWithDateTime(e, LocalDateTime.of(2023, 6, 3, 16, 0), AlarmType.NOTIFICATION);
 
+        List<Alarm> alarms = e.getAlarms();
+
+        assertEquals(c.getEvent(e.getId()).getAlarms(), alarms);
     }
 
     @Test
@@ -216,9 +213,11 @@ public class CalendarTest {
         Calendar c = new Calendar();
         Task t = c.createTask(title, description, expDate);
 
-        UUID id = t.getId();
+        c.addAlarmWithDateTime(t, LocalDateTime.of(2023, 6, 3, 16, 0), AlarmType.NOTIFICATION);
 
-        assertTrue(c.addAlarmToTask(id, LocalDateTime.of(2023, 6, 3, 16, 0), AlarmType.NOTIFICATION));
+        List<Alarm> alarms = t.getAlarms();
+
+        assertEquals(c.getTask(t.getId()).getAlarms(), alarms);
     }
 
     @Test
@@ -230,9 +229,11 @@ public class CalendarTest {
         Calendar c = new Calendar();
         Task t = c.createTask(title, description, expDate);
 
-        UUID id = t.getId();
+        c.addAlarmWithDateTime(t, LocalDateTime.of(2023, 6, 3, 16, 0), AlarmType.NOTIFICATION);
 
-        assertTrue(c.addAlarmToTask(id, LocalDateTime.of(2023, 6, 3, 16, 0), AlarmType.NOTIFICATION));
+        List<Alarm> alarms = t.getAlarms();
+
+        assertEquals(c.getTask(t.getId()).getAlarms(), alarms);
     }
 
     @Test

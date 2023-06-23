@@ -50,23 +50,21 @@ public class Calendar {
         return this.tasks.get(id);
     }
 
-    public boolean updateEvent(UUID id, String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public void updateEvent(UUID id, String title, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         Event event = this.events.get(id);
-        if (event == null) return false;
+        if (event == null) return;
         event.setTitle(title);
         event.setDescription(description);
         event.setStartDateTime(startDateTime);
         event.setEndDateTime(endDateTime);
-        return true;
     }
 
-    public boolean updateTask(UUID id, String title, String description, LocalDateTime dueDate) {
+    public void updateTask(UUID id, String title, String description, LocalDateTime dueDate) {
         Task task = this.tasks.get(id);
-        if (task == null) return false;
+        if (task == null) return;
         task.setTitle(title);
         task.setDescription(description);
         task.setExpDate(dueDate);
-        return true;
     }
 
     public boolean removeEvent(UUID id) {
@@ -81,7 +79,7 @@ public class Calendar {
         return true;
     }
 
-    public boolean addAlarmToEvent(UUID eventId, LocalDateTime triggerDate, AlarmType alarmType) {
+    /*public boolean addAlarmToEvent(UUID eventId, LocalDateTime triggerDate, AlarmType alarmType) {
         Event event = this.events.get(eventId);
         if (event == null) return false;
 
@@ -101,19 +99,32 @@ public class Calendar {
 
         task.addAlarm(alarm);
         return true;
+    }*/
+
+    public void addAlarmWithDateTime(CalendarItem ci, LocalDateTime triggerDate, AlarmType alarmType) {
+        ci.addAlarm(createAlarmWithTriggerDate(triggerDate, alarmType));
     }
 
-    private Alarm createAlarm(LocalDateTime triggerDate, AlarmType alarmType) {
-        switch (alarmType) {
-            case NOTIFICATION:
-                return new Notification(triggerDate);
-            case SOUND:
-                return new Sound(triggerDate);
-            case EMAIL:
-                return new Email(triggerDate);
-            default:
-                throw new IllegalArgumentException();
-        }
+    public void addAlarmWithRelativeInterval(CalendarItem ci, long relativeInterval, AlarmType alarmType) {
+        ci.addAlarm(createAlarmWithRelativeInterval(relativeInterval, alarmType));
+    }
+
+    public Alarm createAlarmWithTriggerDate(LocalDateTime triggerDate, AlarmType alarmType) {
+        return switch (alarmType) {
+            case NOTIFICATION -> new Notification(triggerDate);
+            case SOUND -> new Sound(triggerDate);
+            case EMAIL -> new Email(triggerDate);
+            default -> throw new IllegalArgumentException();
+        };
+    }
+
+    public Alarm createAlarmWithRelativeInterval(long relativeInterval, AlarmType alarmType) {
+        return switch (alarmType) {
+            case NOTIFICATION -> new Notification(relativeInterval);
+            case SOUND -> new Sound(relativeInterval);
+            case EMAIL -> new Email(relativeInterval);
+            default -> throw new IllegalArgumentException();
+        };
     }
 
     public List<Event> listEventsBetween(LocalDate startDate, LocalDate endDate) {

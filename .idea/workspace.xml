@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Corrección de la etapa 2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/AlarmDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Alarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Alarm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Email.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Notification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Sound.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/TaskRectangleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/TaskRectangleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/EventDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/EventDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AlarmTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/AlarmTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/CalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/CalendarTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/TaskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/TaskTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +65,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
@@ -86,8 +100,6 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;etapa-3&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/ceci.jurgens/Downloads/github&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/lucas/IdeaProjects/etapa1/src/main/java/org/example/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
@@ -153,16 +165,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="etapa1" />
+    <configuration name="RepeatableSpecTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="calendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.*" />
+          <option name="PATTERN" value="org.example.model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example" />
-      <option name="MAIN_CLASS_NAME" value="org.example.CalendarTest" />
+      <option name="MAIN_CLASS_NAME" value="org.example.RepeatableSpecTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -200,17 +212,17 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.MainApp" />
-      <item itemvalue="JUnit.CalendarTest" />
       <item itemvalue="JUnit.All in etapa1" />
+      <item itemvalue="JUnit.RepeatableSpecTest" />
       <item itemvalue="JUnit.TaskTest.testTaskAlreadyExpired" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainApp" />
-        <item itemvalue="JUnit.CalendarTest" />
         <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in etapa1" />
+        <item itemvalue="JUnit.RepeatableSpecTest" />
       </list>
     </recent_temporary>
   </component>

@@ -1,6 +1,5 @@
 package org.example.model;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Email extends Alarm {
@@ -12,7 +11,7 @@ public class Email extends Alarm {
         super(activationDate, AlarmType.EMAIL);
     }
 
-    public Email(Duration relativeInterval) {
+    public Email(long relativeInterval) {
         super(relativeInterval, AlarmType.EMAIL);
     }
 }

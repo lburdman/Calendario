@@ -1,6 +1,5 @@
 package org.example.model;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Notification extends Alarm {
@@ -12,7 +11,7 @@ public class Notification extends Alarm {
         super(activationDate, AlarmType.NOTIFICATION);
     }
 
-    public Notification(Duration relativeInterval) {
+    public Notification(long relativeInterval) {
         super(relativeInterval, AlarmType.NOTIFICATION);
     }
 }

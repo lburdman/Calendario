@@ -61,7 +61,7 @@ public class TaskTest {
         assertEquals(title, wholeDayTask.getTitle());
         assertEquals(description, wholeDayTask.getDescription());
         assertEquals(wholeDayDate, wholeDayTask.getTaskDate());
-        assertNull(wholeDayTask.getExpDate());
+        assertEquals(wholeDayTask.getExpDate(), wholeDayDate.atTime(23, 59, 59));
         assertFalse(wholeDayTask.getComplete());
     }
 }

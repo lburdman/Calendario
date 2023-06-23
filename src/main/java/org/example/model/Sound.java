@@ -1,6 +1,5 @@
 package org.example.model;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Sound extends Alarm {
@@ -12,7 +11,7 @@ public class Sound extends Alarm {
         super(activationDate, AlarmType.SOUND);
     }
 
-    public Sound(Duration relativeInterval) {
+    public Sound(long relativeInterval) {
         super(relativeInterval, AlarmType.SOUND);
     }
 }

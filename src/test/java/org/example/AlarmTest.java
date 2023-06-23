@@ -3,9 +3,7 @@ package org.example;
 import org.example.model.*;
 import org.junit.Test;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 import static org.junit.Assert.*;
 
@@ -22,9 +20,8 @@ public class AlarmTest {
 
     @Test
     public void testNewNotificationWithRelativeInterval() {
-        Duration interval = Duration.of(30, ChronoUnit.MINUTES);
+        long interval = 30;
         Alarm alarm = new Notification(interval);
-        LocalDateTime alarmDate = LocalDateTime.of(2023, 7, 22, 14, 0);
 
         assertEquals(alarm.getAlarmType(), AlarmType.NOTIFICATION);
         assertEquals(alarm.getRelativeInterval(), interval);
@@ -41,8 +38,7 @@ public class AlarmTest {
 
     @Test
     public void testNewEmailWithRelativeInterval() {
-        Duration interval = Duration.of(30, ChronoUnit.MINUTES);
-        LocalDateTime alarmDate = LocalDateTime.of(2023, 4, 30, 18, 0);
+        long interval = 30;
         Alarm alarm = new Email(interval);
 
         assertEquals(alarm.getAlarmType(), AlarmType.EMAIL);
@@ -60,8 +56,7 @@ public class AlarmTest {
 
     @Test
     public void testNewSoundWithRelativeInterval() {
-        Duration interval = Duration.of(30, ChronoUnit.MINUTES);
-        LocalDateTime alarmDate = LocalDateTime.of(2023, 4, 30, 18, 0);
+        long interval = 30;
         Alarm alarm = new Sound(interval);
 
         assertEquals(alarm.getAlarmType(), AlarmType.SOUND);
