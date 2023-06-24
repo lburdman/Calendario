@@ -3,10 +3,7 @@ package org.example.controller;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import org.example.model.Alarm;
-import org.example.model.Calendar;
-import org.example.model.Event;
-import org.example.model.Task;
+import org.example.model.*;
 import org.example.view.EventDialog;
 import org.example.view.MainView;
 import org.example.view.TaskDialog;
@@ -44,33 +41,28 @@ public class MainController {
                     stage.setWidth(DAY_WIDTH);
                     stage.setHeight(DAY_WIDTH * 2.2);
                 }
-                //updateEventsInView();
-                //updateTaskInView();
                 case "Week view" -> {
                     mainView.setCenter(mainView.getWeekView());
                     stage.setWidth(DAY_WIDTH * 4.2);
                     stage.setHeight(DAY_WIDTH * 2.2);
                 }
-                //updateEventsInView();
-                //updateTaskInView();
                 case "Month view" -> {
                     mainView.setCenter(mainView.getMonthView());
                     stage.setWidth(DAY_WIDTH * 3);
                     stage.setHeight(DAY_WIDTH * 2.5);
                 }
-                //mainView.getMonthView().updateGrid(monthController.getStartDate());
-                //updateEventsInView();
-                //updateTaskInView();
             }
         });
         mainView.getAddEventButton().setOnAction(event -> {
             showEventDialog();
-            updateEventsInView();
+            //updateEventsInView();
+            updateCalendarItemInView();
         });
 
         mainView.getAddTaskButton().setOnAction(event -> {
             showTaskDialog();
-            updateTaskInView();
+            //updateTaskInView();
+            updateCalendarItemInView();
         });
 
     }
@@ -84,12 +76,20 @@ public class MainController {
             String description = (String) eventData.get("description");
             LocalDateTime startDateTime = (LocalDateTime) eventData.get("startDateTime");
             LocalDateTime endDateTime = (LocalDateTime) eventData.get("endDateTime");
-
+            Boolean isDailyRepetition = (Boolean) eventData.get("isDailyRepetition");
+            LocalDate expDate = (LocalDate) eventData.get("expDate");
             Event event = calendar.createEvent(title, description, startDateTime.withSecond(0).withNano(0), endDateTime.withSecond(0).withNano(0));
+
+            if (isDailyRepetition) {
+                Integer interval = (Integer) eventData.get("interval");
+                calendar.asignDailyRepToEvent(interval, event, expDate);
+            }
+
+            //Event event = calendar.createEvent(title, description, startDateTime.withSecond(0).withNano(0), endDateTime.withSecond(0).withNano(0));
             calendar.getEvent(event.getId()).setAlarms((List<Alarm>) eventData.get("alarms"));
         }
     }
-
+/*
     private void updateEventsInView() {
         String currentView = mainView.getViewSelector().getValue();
 
@@ -114,6 +114,8 @@ public class MainController {
         }
     }
 
+ */
+
     public DayController getDayController() {
         return dayController;
     }
@@ -128,12 +130,14 @@ public class MainController {
 
     public void removeEvent(Event event) {
         calendar.removeEvent(event.getId());
-        updateEventsInView();
+        //updateEventsInView();
+        updateCalendarItemInView();
     }
 
     public void removeTask(Task task) {
         calendar.removeTask(task.getId());
-        updateTaskInView();
+        //updateTaskInView();
+        updateCalendarItemInView();
     }
 
     public void setMainView(MainView mainView) {
@@ -141,7 +145,7 @@ public class MainController {
     }
 
     private void showTaskDialog() {
-        TaskDialog taskDialog = new TaskDialog();
+        TaskDialog taskDialog = new TaskDialog(calendar);
         Map<String, Object> taskData = taskDialog.displayAndGetTaskData();
 
         if (taskData != null) {
@@ -149,10 +153,14 @@ public class MainController {
             String description = (String) taskData.get("description");
             LocalDateTime expDate = (LocalDateTime) taskData.get("expDate");
 
-            calendar.createTask(title, description, expDate);
+            Task task = calendar.createTask(title, description, expDate.withSecond(0).withNano(0));
+            calendar.getTask(task.getId()).setAlarms((List<Alarm>) taskData.get("alarms"));
+
+            //calendar.createTask(title, description, expDate);
         }
     }
 
+/*
     private void updateTaskInView() {
         String currentView = mainView.getViewSelector().getValue();
 
@@ -176,6 +184,10 @@ public class MainController {
             }
         }
     }
+
+ */
+
+
 
     public void checkForAlarms() {
         LocalDateTime currentDateTime = LocalDateTime.now().withSecond(0).withNano(0);
@@ -218,4 +230,32 @@ public class MainController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void updateCalendarItemInView() {
+        String currentView = mainView.getViewSelector().getValue();
+
+        switch (currentView) {
+            case "Day view" -> {
+                LocalDate currentDate = dayController.getCurrentDate();
+                List<Event> events = calendar.listEventsBetween(currentDate, currentDate);
+                List<Task> tasks = calendar.listTasksBetween(currentDate, currentDate);
+                mainView.getDayView().updateGridWithCalendarItem(events, tasks, currentDate);
+            }
+            case "Week view" -> {
+                LocalDate startWeekDay = weekController.getStartDate();
+                List<Event> events = calendar.listEventsBetween(startWeekDay, startWeekDay.plusDays(6));
+                List<Task> tasks = calendar.listTasksBetween(startWeekDay, startWeekDay.plusDays(6));
+                mainView.getWeekView().updateGridWithCalendarItem(events,tasks,startWeekDay);
+            }
+            case "Month view" -> {
+                LocalDate startMonthDay = monthController.getStartDate();
+                List<Event> events = calendar.listEventsBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
+                List<Task> tasks = calendar.listTasksBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
+                mainView.getMonthView().updateGridWithCalendarItem(events, tasks, startMonthDay);
+            }
+        }
+    }
+
+
+
 }

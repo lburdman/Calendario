@@ -22,7 +22,7 @@ public class TaskRectangleView {
         Text title = new Text("Title: " + task.getTitle());
         Text description = new Text("Description: " + task.getDescription());
         //Text startDateTime = new Text("Start: " + task. event.getStartDateTime().withSecond(0).withNano(0));
-        Text endDateTime = new Text("End: " + task.getExpDate());
+        Text endDateTime = new Text("End: " + task.getExpDate().withSecond(0).withNano(0));
         CheckBox isComplete = new CheckBox("Is The Task Complete? ");
 
         isComplete.setSelected(task.getComplete());

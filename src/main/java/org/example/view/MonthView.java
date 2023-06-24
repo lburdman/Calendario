@@ -55,6 +55,13 @@ public class MonthView extends BorderPane {
         this.mainController = mainController;
     }
 
+    public void updateGridWithCalendarItem(List<Event> events, List<Task> tasks, LocalDate currentDate){
+
+        //clearGrid();
+        updateGridWithEvents(events, currentDate);
+        updateGridWithTasks(tasks, currentDate);
+    };
+
     public void updateGrid(LocalDate firstDayOfMonth) {
 
         // Clear the existing grid
@@ -243,9 +250,9 @@ public class MonthView extends BorderPane {
     public Label getMonthLabel(){
         return monthLabel;
     }
-
+/*
     public void updateGridWithTasks(List<Task> tasks, LocalDate startDate) {
-        clearGrid();
+        //clearGrid();
 
         double spacing = 2.0;
 
@@ -302,6 +309,8 @@ public class MonthView extends BorderPane {
             }
         }
     }
+
+ */
 
     public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
         clearGrid();
@@ -408,6 +417,7 @@ public class MonthView extends BorderPane {
         eventRect.setOnMouseClicked(event1 -> EventRectangleView.showDetails(eventRect, dayCell, mainController));
     }
 
+    /*
     private void drawTask(Task task, int day, double taskWidth, double positionX, int startColumn) {
         int row = (day + startColumn - 2) / NUM_DAYS_IN_WEEK + 1;
         int rowCell = (row >= 2 && row <= 6) ? row * 2 : row + 1;
@@ -419,7 +429,99 @@ public class MonthView extends BorderPane {
             taskRect.setHeight(dayCell.getHeight());
         }
 
-        taskRect.setFill(Color.GREENYELLOW);
+        taskRect.setFill(Color.DARKSALMON);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(taskRect);
+
+        // Add text to the first rectangle
+        if (day == LocalDate.now().getDayOfMonth()) {
+            Text taskText = new Text(task.getTitle());
+            stackPane.getChildren().add(taskText);
+        }
+
+        stackPane.setLayoutX(positionX);
+
+        if (dayCell != null) {
+            dayCell.getChildren().add(stackPane);
+        }
+
+        taskRect.setOnMouseClicked(event1 -> TaskRectangleView.showDetails(taskRect, dayCell, mainController));
+    }
+
+     */
+
+    public void updateGridWithTasks(List<Task> tasks, LocalDate startDate) {
+        //clearGrid();
+
+        double spacing = 2.0;
+
+        // Sort the events by start time
+        //tasks.sort(Comparator.comparing(Task::getExpDate));
+
+        Map<Integer, List<Task>> tasksPerDay = new HashMap<>();
+        Map<Task, Integer> taskRelativePosition = new HashMap<>();
+
+        LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
+
+        // First pass: calculate the number of overlapping events for each day
+        for (Task task : tasks) {
+            LocalDateTime taskStart = LocalDateTime.now();
+            LocalDateTime taskEnd = task.getExpDate();
+
+            int startDay = taskStart.toLocalDate().isBefore(startDate) ? 1 : taskStart.toLocalDate().getDayOfMonth();
+            int endDay = taskEnd.toLocalDate().isAfter(endDate) ? taskEnd.toLocalDate().lengthOfMonth() : taskEnd.toLocalDate().getDayOfMonth();
+
+            for (int day = startDay; day <= endDay; day++) {
+                tasksPerDay.computeIfAbsent(day, k -> new ArrayList<>()).add(task);
+            }
+
+            taskRelativePosition.put(task, tasksPerDay.get(startDay).indexOf(task));
+        }
+
+        // Second pass: draw the events with the calculated widths and positions
+        for (Task task : tasks) {
+            LocalDate taskStart = LocalDate.now();
+            LocalDate taskEnd = task.getExpDate().toLocalDate();
+
+            int startDay = taskStart.isBefore(startDate) ? 1 : taskStart.getDayOfMonth();
+            int endDay = taskEnd.isAfter(endDate) ? taskEnd.lengthOfMonth() : taskEnd.getDayOfMonth();
+
+            int maxOverlap = 1;
+            for (int day = startDay; day <= endDay; day++) {
+                maxOverlap = Math.max(maxOverlap, tasksPerDay.get(day).size());
+            }
+
+            int startColumn = LocalDate.now().withDayOfMonth(1).getDayOfWeek().getValue();
+            int row = (startDay + startColumn - 2) / NUM_DAYS_IN_WEEK + 1;
+            int rowCell = (row >= 2 && row <= 6) ? row * 2 : row + 1;
+
+            Node cellNode = getNodeFromGridPane(gridPane, (startDay + startColumn - 2) % NUM_DAYS_IN_WEEK, rowCell);
+            if (cellNode instanceof Pane) {
+                double totalWidth = ((Pane) cellNode).getWidth() - (maxOverlap + 1) * spacing;
+                double taskWidth = totalWidth / maxOverlap;
+
+                double positionX = taskRelativePosition.get(task) * (taskWidth + spacing);
+
+                for (int day = startDay; day <= endDay; day++) {
+                    drawTask(task, day, taskWidth, positionX,startColumn);
+                }
+            }
+        }
+    }
+
+    private void drawTask(Task task, int day, double taskWidth, double positionX, int startColumn) {
+        int row = (day + startColumn - 2) / NUM_DAYS_IN_WEEK + 1;
+        int rowCell = (row >= 2 && row <= 6) ? row * 2 : row + 1;
+        Pane dayCell = (Pane) getNodeFromGridPane(gridPane, (day + startColumn - 2) % NUM_DAYS_IN_WEEK, rowCell);
+
+        RectangleTask taskRect = new RectangleTask(task);
+        taskRect.setWidth(taskWidth);
+        if (dayCell != null) {
+            taskRect.setHeight(dayCell.getHeight());
+        }
+
+        taskRect.setFill(Color.VIOLET);
 
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(taskRect);

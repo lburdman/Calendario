@@ -5,22 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Corrección de la etapa 2">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/view/AlarmDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documents/etapa 3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/documents/etapa 3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Alarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Alarm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/TaskController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/WeekController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/WeekController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Email.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Notification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Sound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/EventDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/EventDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/EventRectangleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/EventRectangleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/TaskDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/TaskDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/TaskRectangleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/TaskRectangleView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AlarmTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/AlarmTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/CalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/CalendarTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/TaskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/TaskTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

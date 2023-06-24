@@ -29,7 +29,6 @@ public class EventRectangleView {
         deleteButton.setOnAction(actionEvent -> {
             mainController.removeEvent(event);
             hourCell.getChildren().remove(rectangleEvent);
-
             eventWindow.close();
         });
 

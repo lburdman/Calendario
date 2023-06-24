@@ -43,6 +43,18 @@ public class EventDialog {
         endDatePicker.setValue(LocalDate.now());
         LocalTimePicker startTimePicker = new LocalTimePicker();
         LocalTimePicker endTimePicker = new LocalTimePicker();
+        CheckBox repetition = new CheckBox();
+        Spinner<Integer> numberSpinner = new Spinner<>(0, 50, 0); // Range: 0 to 100, initial value: 0
+        numberSpinner.setEditable(true); // Allow manual input
+        DatePicker expDatePicker = new DatePicker();
+        expDatePicker.setValue(LocalDate.now());
+        numberSpinner.setDisable(true);
+        expDatePicker.setDisable(true);
+
+        repetition.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            numberSpinner.setDisable(!newValue);
+            expDatePicker.setDisable(!newValue);
+        });
 
         Button alarmButton = new Button("Add Alarm");
         alarmButton.setOnAction(event -> {
@@ -68,7 +80,13 @@ public class EventDialog {
         grid.add(endDatePicker, 1, 4);
         grid.add(new Label("End Time:"), 0, 5);
         grid.add(endTimePicker, 1, 5);
-        grid.add(alarmButton, 0, 6);
+        grid.add(new Label("Do you want daily Repetitions?"), 0, 6);
+        grid.add(repetition,1,6);
+        grid.add(new Label("Interval: "), 0,7);
+        grid.add(numberSpinner,1,7);
+        grid.add(new Label("Expiration:"), 0, 8);
+        grid.add(expDatePicker,1,8);
+        grid.add(alarmButton, 0, 9);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -80,6 +98,9 @@ public class EventDialog {
                 LocalTime endTime = endTimePicker.getLocalTime();
                 String title = titleField.getText();
                 String description = descriptionField.getText();
+                Integer selectedNumber = numberSpinner.getValue();
+                Boolean isDailyRepetition = repetition.isSelected();
+                LocalDate expDate = expDatePicker.getValue();
 
                 LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
                 LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);
@@ -90,6 +111,9 @@ public class EventDialog {
                 result.put("startDateTime", startDateTime);
                 result.put("endDateTime", endDateTime);
                 result.put("alarms", alarms);
+                result.put("interval", selectedNumber);
+                result.put("isDailyRepetition", isDailyRepetition);
+                result.put("expDate", expDate);
 
                 return result;
             }

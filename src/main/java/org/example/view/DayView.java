@@ -1,12 +1,10 @@
 package org.example.view;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -49,6 +47,12 @@ public class DayView extends BorderPane {
         this.setCenter(gridPane);
         this.mainController = mainController;
     }
+
+    public void updateGridWithCalendarItem(List<Event> events, List<Task> tasks, LocalDate currentDate){
+        //clearGrid();
+        updateGridWithEvents(events, currentDate);
+        updateGridWithTasks(tasks, currentDate);
+    };
 
     public void updateGridWithEvents(List<Event> events, LocalDate currentDate) {
         clearGrid();
@@ -173,7 +177,7 @@ public class DayView extends BorderPane {
     }
 
     public void updateGridWithTasks(List<Task> tasks, LocalDate currentDate) {
-        clearGrid();
+        //clearGrid();
         double spacing = 2.0;
 
         // Sort the events by start time

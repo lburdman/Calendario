@@ -19,10 +19,21 @@ public class WeekController {
         this.weekView = weekView;
         this.startDate = LocalDate.now().with(DayOfWeek.MONDAY); // Set to the start of the current week (Monday)
         initialize();
-        updateEventsInView();
-        updateTasksInView();
+        //updateEventsInView();
+        //updateTasksInView();
+        updateCalendarItemInView();
     }
 
+    private void updateCalendarItemInView(){
+        LocalDate endDate = startDate.plusDays(6);
+        List<Event> events = calendar.listEventsBetween(startDate, endDate);
+        List<Task> tasks = calendar.listTasksBetween(startDate, endDate);
+        weekView.updateGridWithCalendarItem(events,tasks,startDate);
+        //weekView.updateGridWithEvents(events, startDate);
+        //weekView.updateGridWithTasks(tasks, startDate);
+
+    }
+/*
     private void updateEventsInView() {
         LocalDate endDate = startDate.plusDays(6);
         List<Event> events = calendar.listEventsBetween(startDate, endDate);
@@ -35,18 +46,18 @@ public class WeekController {
         weekView.updateGridWithTasks(tasks, startDate);
     }
 
+ */
+
     private void initialize() {
         weekView.getPrevWeekButton().setOnAction(event -> {
             startDate = startDate.minusWeeks(1);
             weekView.setWeekLabel(startDate);
-            updateEventsInView();
-            updateTasksInView();
+            updateCalendarItemInView();
         });
         weekView.getNextWeekButton().setOnAction(event -> {
             startDate = startDate.plusWeeks(1);
             weekView.setWeekLabel(startDate);
-            updateEventsInView();
-            updateTasksInView();
+            updateCalendarItemInView();
         });
     }
 

@@ -4,16 +4,21 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import jfxtras.scene.control.LocalTimePicker;
+import org.example.model.Alarm;
+import org.example.model.Calendar;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class TaskDialog {
-    public TaskDialog() {
+    private final Calendar calendar;
+    private final List<Alarm> alarms;
+
+    public TaskDialog(Calendar calendar) {
+        this.alarms = new ArrayList<>();
+        this.calendar = calendar;
     }
 
     public Map<String, Object> displayAndGetTaskData() {
@@ -35,10 +40,17 @@ public class TaskDialog {
         DatePicker expDatePicker = new DatePicker();
         expDatePicker.setValue(LocalDate.now());
         LocalTimePicker endTimePicker = new LocalTimePicker();
-        CheckBox alarmField = new CheckBox();
 
-        ComboBox<String>typeAlarm = new ComboBox<>();
-        typeAlarm.getItems().addAll("Sound", "Notification", "Email");
+        Button alarmButton = new Button("Add Alarm");
+        alarmButton.setOnAction(event -> {
+            AlarmDialog alarmDialog = new AlarmDialog(calendar);
+            alarmDialog.showAlarmDialog();
+
+            Alarm newAlarm = alarmDialog.createAlarm();
+            if (newAlarm != null) {
+                alarms.add(newAlarm);
+            }
+        });
 
 
         expDatePicker.setDisable(true);
@@ -57,27 +69,23 @@ public class TaskDialog {
         grid.add(expDatePicker, 1, 3);
         grid.add(new Label("End Time:"), 0, 4);
         grid.add(endTimePicker, 1, 4);
-        grid.add(new Label ("Alarm: "), 0,5);
-        grid.add(alarmField, 1, 5);
-        grid.add(new Label("Type alarm:"), 0,6);
-        grid.add(typeAlarm,1,6);
+        grid.add(alarmButton, 0, 5);
+
 
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButton) {
                 LocalDate endDate = expDatePicker.getValue();
-                LocalTime endTime = endTimePicker.getLocalTime();
                 String title = titleField.getText();
                 String description = descriptionField.getText();
-
-                //LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
-                LocalDateTime expDate = LocalDateTime.of(endDate, endTime);
+                LocalDateTime expDate = (wholeDayField.isSelected()) ? LocalDateTime.of(endDate, LocalTime.MAX) : LocalDateTime.of(endDate, endTimePicker.getLocalTime());
 
                 Map<String, Object> result = new HashMap<>();
                 result.put("title", title);
                 result.put("description", description);
                 result.put("expDate", expDate);
+                result.put("alarms", alarms);
 
                 return result;
             }

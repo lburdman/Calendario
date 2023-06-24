@@ -42,6 +42,12 @@ public class Calendar {
         return task;
     }
 
+    public Task createWholeDayTask(String title, String description, LocalDate dueDate) {
+        Task wholeDay = new WholeDayTask(title, description, dueDate);
+        this.tasks.put(wholeDay.getId(), wholeDay);
+        return wholeDay;
+    }
+
     public Event getEvent(UUID id){
         return this.events.get(id);
     }

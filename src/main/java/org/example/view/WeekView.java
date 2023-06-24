@@ -15,7 +15,9 @@ import org.example.model.Task;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 public class WeekView extends BorderPane {
@@ -30,6 +32,7 @@ public class WeekView extends BorderPane {
     public WeekView(MainController mainController) {
         weekLabel = new Label("");
         LocalDate startDate = LocalDate.now().with(DayOfWeek.MONDAY);
+        //LocalDate startDate = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         setWeekLabel(startDate);
 
         prevWeekButton = new Button("<");
@@ -52,8 +55,14 @@ public class WeekView extends BorderPane {
         this.mainController = mainController;
     }
 
-    public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
+    public void updateGridWithCalendarItem(List<Event> events, List<Task> tasks, LocalDate currentDate){
         clearGrid();
+        updateGridWithEvents(events, currentDate);
+        updateGridWithTasks(tasks, currentDate);
+    };
+
+    public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
+        //clearGrid();
         double spacing = 2.0;
 
         // Sort the events by start time
@@ -87,14 +96,16 @@ public class WeekView extends BorderPane {
 
             int firstKey = startDay * 24 + startHour;
             eventRelativePosition.put(event, eventsPerDayAndHour.get(firstKey).indexOf(event));
+            //eventRelativePosition.put(event, eventsPerDayAndHour.computeIfAbsent(firstKey, k -> new ArrayList<>()).indexOf(event));
+
         }
 
         // Second pass: draw the events with the calculated widths and positions
         for (Event event : events) {
             int startHour = event.getStartDateTime().toLocalTime().getHour();
             int endHour = event.getEndDateTime().toLocalTime().getHour();
-            int startDay = event.getStartDateTime().toLocalDate().getDayOfWeek().getValue() % 7;
-            int endDay = event.getEndDateTime().toLocalDate().getDayOfWeek().getValue() % 7;
+            int startDay = event.getStartDateTime().toLocalDate().getDayOfWeek().getValue() % 7 ;
+            int endDay = event.getEndDateTime().toLocalDate().getDayOfWeek().getValue() % 7 ;
 
             int maxOverlap = 1;
             for (int day = startDay; day <= endDay; day++) {
@@ -107,7 +118,7 @@ public class WeekView extends BorderPane {
                 }
             }
 
-            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, startDay + 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
+            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, startDay + 1, startHour + 1 )).getWidth() - (maxOverlap + 1) * spacing;
             double eventWidth = totalWidth / maxOverlap;
 
             double positionX = eventRelativePosition.get(event) * (eventWidth + spacing);
@@ -126,9 +137,9 @@ public class WeekView extends BorderPane {
 
 
     private void drawEvent(Event event, int day, int hour, double eventWidth, double positionX) {
-        Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);
+        Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day +1 , hour +1 );
 
-        Rectangle eventRect = new Rectangle();
+        RectangleEvent eventRect = new RectangleEvent(event);
         eventRect.setWidth(eventWidth);
         eventRect.setHeight(dayHourCell.getHeight());
         eventRect.setFill(Color.GREENYELLOW);
@@ -144,6 +155,9 @@ public class WeekView extends BorderPane {
 
         stackPane.setLayoutX(positionX);
         dayHourCell.getChildren().add(stackPane);
+
+        eventRect.setOnMouseClicked(event1 -> EventRectangleView
+                .showDetails(eventRect, dayHourCell, mainController));
     }
 
 
@@ -291,8 +305,99 @@ public class WeekView extends BorderPane {
         weekLabel.setText("Week from " + formattedStartDate + " to " + formattedEndDate);
     }
 
-    public void updateGridWithTasks(List<Task> tasks, LocalDate currentDate) {
-        //completar
+    public void updateGridWithTasks(List<Task> tasks, LocalDate startDate) {
+        //clearGrid();
+        double spacing = 2.0;
+
+        // Sort the events by start time
+        //tasks.sort(Comparator.comparing(Task::getExpDate));
+
+        Map<Integer, List<Task>> taskPerDayAndHour = new HashMap<>();
+        Map<Task, Integer> taskRelativePosition = new HashMap<>();
+
+        LocalDate endDate = startDate.plusDays(6);
+
+        // First pass: calculate the number of overlapping events for each day and hour
+        for (Task task : tasks) {
+            LocalDate taskStart = LocalDate.now();
+            LocalDate taskEnd = task.getExpDate().toLocalDate();
+
+            int startHour = LocalDateTime.now().toLocalTime().getHour();
+            int endHour = task.getExpDate().toLocalTime().getHour();
+
+            int startDay = taskStart.isBefore(startDate) ? 0 : taskStart.getDayOfWeek().getValue() % 7;
+            int endDay = taskEnd.isAfter(endDate) ? 6 : taskEnd.getDayOfWeek().getValue() % 7;
+
+            for (int day = startDay; day <= endDay; day++) {
+                int currentStartHour = (day == startDay) ? startHour : 0;
+                int currentEndHour = (day == endDay) ? endHour : 23;
+
+                for (int hour = currentStartHour; hour <= currentEndHour; hour++) {
+                    int key = day * 24 + hour;
+                    taskPerDayAndHour.computeIfAbsent(key, k -> new ArrayList<>()).add(task);
+                }
+            }
+
+            int firstKey = startDay * 24 + startHour;
+            taskRelativePosition.put(task, taskPerDayAndHour.get(firstKey).indexOf(task));
+        }
+
+        // Second pass: draw the events with the calculated widths and positions
+        for (Task task : tasks) {
+            int startHour = LocalDateTime.now().toLocalTime().getHour();
+            int endHour = task.getExpDate().toLocalTime().getHour();
+            int startDay = LocalDateTime.now().toLocalDate().getDayOfWeek().getValue() % 7;
+            int endDay = task.getExpDate().toLocalDate().getDayOfWeek().getValue() % 7;
+
+            int maxOverlap = 1;
+            for (int day = startDay; day <= endDay; day++) {
+                int currentStartHour = (day == startDay) ? startHour : 0;
+                int currentEndHour = (day == endDay) ? endHour : 23;
+
+                for (int hour = currentStartHour; hour <= currentEndHour; hour++) {
+                    int key = day * 24 + hour;
+                    maxOverlap = Math.max(maxOverlap, taskPerDayAndHour.get(key).size());
+                }
+            }
+
+            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, startDay + 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
+            double taskWidth = totalWidth / maxOverlap;
+
+            double positionX = taskRelativePosition.get(task) * (taskWidth + spacing);
+
+            // Draw the event in the grid
+            for (int day = startDay; day <= endDay; day++) {
+                int currentStartHour = (day == startDay) ? startHour : 0;
+                int currentEndHour = (day == endDay) ? endHour : 23;
+
+                for (int hour = currentStartHour; hour <= currentEndHour; hour++) {
+                    drawTask(task, day, hour, taskWidth, positionX);
+                }
+            }
+        }
+
+    }
+
+
+    private void drawTask(Task task, int day, int hour, double taskWidth, double positionX) {
+        Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);
+
+        Rectangle taskRect = new Rectangle();
+        taskRect.setWidth(taskWidth);
+        taskRect.setHeight(dayHourCell.getHeight());
+        taskRect.setFill(Color.ORCHID);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(taskRect);
+
+        // If it's the first hour of the event, add the event title
+        if (hour == LocalDateTime.now().toLocalTime().getHour() && day == LocalDateTime.now().toLocalDate().getDayOfWeek().getValue() % 7) {
+            Text taskText = new Text(task.getTitle());
+            stackPane.getChildren().add(taskText);
+        }
+
+        stackPane.setLayoutX(positionX);
+        dayHourCell.getChildren().add(stackPane);
     }
 }
 

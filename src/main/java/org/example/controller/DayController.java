@@ -19,9 +19,18 @@ public class DayController {
         this.currentDate = LocalDate.now();
         initialize();
         //updateEventsInView();
-        updateTasksInView();
+        //updateTasksInView();
+        updateCalendarItemInView();
     }
 
+    private void updateCalendarItemInView(){
+        List<Event> events = calendar.listEventsBetween(currentDate, currentDate);
+        List<Task> tasks = calendar.listTasksBetween(currentDate, currentDate);
+        dayView.updateGridWithEvents(events, currentDate);
+        dayView.updateGridWithTasks(tasks, currentDate);
+
+    }
+/*
     private void updateEventsInView() {
         List<Event> events = calendar.listEventsBetween(currentDate, currentDate);
         dayView.updateGridWithEvents(events, currentDate);
@@ -32,18 +41,18 @@ public class DayController {
         dayView.updateGridWithTasks(tasks, currentDate);
     }
 
+ */
+
     private void initialize() {
         dayView.getPrevDayButton().setOnAction(event -> {
             currentDate = currentDate.minusDays(1);
             dayView.setDateLabel(currentDate);
-            //updateEventsInView();
-            updateTasksInView();
+            updateCalendarItemInView();
         });
         dayView.getNextDayButton().setOnAction(event -> {
             currentDate = currentDate.plusDays(1);
             dayView.setDateLabel(currentDate);
-            //updateEventsInView();
-            updateTasksInView();
+            updateCalendarItemInView();
         });
     }
 

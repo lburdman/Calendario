@@ -4,11 +4,8 @@ import org.example.model.Calendar;
 import org.example.model.Event;
 import org.example.model.Task;
 import org.example.view.MonthView;
-import org.example.view.WeekView;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
@@ -22,20 +19,17 @@ public class MonthController {
         this.monthView = monthView;
         this.startDate = LocalDate.now().withDayOfMonth(1);
         initialize();
-        //updateEventsInView();
-        updateTasksInView();
+        updateCalendarItemInView(startDate);
     }
 
-    private void updateEventsInView() {
+    private void updateCalendarItemInView(LocalDate startDate){
         LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
         List<Event> events = calendar.listEventsBetween(startDate, endDate);
-        monthView.updateGridWithEvents(events, startDate);
-    }
-
-    private void updateTasksInView() {
-        LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
         List<Task> tasks = calendar.listTasksBetween(startDate, endDate);
-        monthView.updateGridWithTasks(tasks, startDate);
+        monthView.updateGridWithCalendarItem(events, tasks, startDate);
+        //monthView.updateGridWithEvents(events, startDate);
+        //monthView.updateGridWithTasks(tasks, startDate);
+
     }
 
     private void initialize() {
@@ -43,16 +37,14 @@ public class MonthController {
             startDate = startDate.minusMonths(1);
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
-            //updateEventsInView();
-            updateTasksInView();
+            updateCalendarItemInView(startDate);
 
         });
         monthView.getNextMonthButton().setOnAction(event -> {
             startDate = startDate.plusMonths(1);
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
-            //updateEventsInView();
-            updateTasksInView();
+            updateCalendarItemInView(startDate);
         });
 
     }
