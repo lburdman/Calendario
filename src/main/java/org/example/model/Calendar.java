@@ -148,6 +148,11 @@ public class Calendar {
                     result.add(event);
                 }
             }
+            else {
+                if(event.getParentId() == null) {
+                    result.add(event);
+                }
+            }
         }
 
         return result;
