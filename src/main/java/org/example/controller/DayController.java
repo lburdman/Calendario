@@ -30,18 +30,6 @@ public class DayController {
         dayView.updateGridWithTasks(tasks, currentDate);
 
     }
-/*
-    private void updateEventsInView() {
-        List<Event> events = calendar.listEventsBetween(currentDate, currentDate);
-        dayView.updateGridWithEvents(events, currentDate);
-    }
-
-    private void updateTasksInView() {
-        List<Task> tasks = calendar.listTasksBetween(currentDate, currentDate);
-        dayView.updateGridWithTasks(tasks, currentDate);
-    }
-
- */
 
     private void initialize() {
         dayView.getPrevDayButton().setOnAction(event -> {

@@ -52,7 +52,7 @@ public class DayView extends BorderPane {
         //clearGrid();
         updateGridWithEvents(events, currentDate);
         updateGridWithTasks(tasks, currentDate);
-    };
+    }
 
     public void updateGridWithEvents(List<Event> events, LocalDate currentDate) {
         clearGrid();
@@ -97,8 +97,10 @@ public class DayView extends BorderPane {
 
             double positionX = eventRelativePosition.get(event) * (eventWidth + spacing);
 
-            for (int hour = startHour; hour <= endHour; hour++) {
-                drawEvent(event, hour, eventWidth, positionX);
+            if (eventStart.toLocalDate().equals(currentDate) || eventEnd.toLocalDate().equals(currentDate)) {
+                for (int hour = startHour; hour <= endHour; hour++) {
+                    drawEvent(event, hour, eventWidth, positionX);
+                }
             }
         }
     }

@@ -137,18 +137,19 @@ public class Calendar {
         List<Event> result = new ArrayList<>();
 
         for(Event event : this.events.values()) {
-            if(event.isCalendarItemBetween(startDate, endDate)) {
-                result.add(event);
-                if(event.isRepeatable()) {
-                    List<Event> repeatedEvents = event.getRepeatableSpec().getEventRepetitions(event);
-                    for(Event repeatedEvent : repeatedEvents) {
-                        if(repeatedEvent.isCalendarItemBetween(startDate, endDate)) {
-                            result.add(repeatedEvent);
-                        }
+            if(event.isRepeatable()) {
+                List<Event> repeatedEvents = event.getRepeatableSpec().getEventRepetitions(event);
+                for(Event repeatedEvent : repeatedEvents) {
+                    if(repeatedEvent.isCalendarItemBetween(startDate, endDate)) {
+                        result.add(repeatedEvent);
                     }
+                }
+                if (event.isCalendarItemBetween(startDate, endDate)) {
+                    result.add(event);
                 }
             }
         }
+
         return result;
     }
 

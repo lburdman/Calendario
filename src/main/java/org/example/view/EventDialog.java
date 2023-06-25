@@ -98,9 +98,9 @@ public class EventDialog {
                 LocalTime endTime = endTimePicker.getLocalTime();
                 String title = titleField.getText();
                 String description = descriptionField.getText();
-                Integer selectedNumber = numberSpinner.getValue();
                 Boolean isDailyRepetition = repetition.isSelected();
                 LocalDate expDate = expDatePicker.getValue();
+                Integer selectedNumber = numberSpinner.getValue();
 
                 LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
                 LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);

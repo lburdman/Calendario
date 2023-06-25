@@ -83,6 +83,7 @@ public class MainController {
             if (isDailyRepetition) {
                 Integer interval = (Integer) eventData.get("interval");
                 calendar.asignDailyRepToEvent(interval, event, expDate);
+                System.out.println("Entramoooo" + event.toString());
             }
 
             //Event event = calendar.createEvent(title, description, startDateTime.withSecond(0).withNano(0), endDateTime.withSecond(0).withNano(0));
