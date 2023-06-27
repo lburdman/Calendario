@@ -49,7 +49,6 @@ public class DayView extends BorderPane {
     }
 
     public void updateGridWithCalendarItem(List<Event> events, List<Task> tasks, LocalDate currentDate){
-        //clearGrid();
         updateGridWithEvents(events, currentDate);
         updateGridWithTasks(tasks, currentDate);
     }

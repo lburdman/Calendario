@@ -149,7 +149,7 @@ public class Calendar {
                 }
             }
             else {
-                if(event.getParentId() == null) {
+                if(event.getParentId() == null && event.isCalendarItemBetween(startDate, endDate)) {
                     result.add(event);
                 }
             }

@@ -18,8 +18,6 @@ public class DayController {
         this.dayView = dayView;
         this.currentDate = LocalDate.now();
         initialize();
-        //updateEventsInView();
-        //updateTasksInView();
         updateCalendarItemInView();
     }
 

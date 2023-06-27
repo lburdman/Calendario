@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Eventos repetitivos correctamente pintados&#10;Pequeño bug, cuando pasas a la fecha de la primera aparicion repetitiva del evento, se pintan todas las repeticiones en el mismo dia...">
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Arreglos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/DayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/WeekController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/WeekController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -452,7 +456,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687716572478</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Arreglos">
+      <created>1687719399734</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1687719399734</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -514,7 +525,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Arreglos en TaskTest, un poco de logica de Task, falta hacer funcionar testTaskAlreadyExpired()" />
     <MESSAGE value="Mejoras en Task, preparación de Alarm, agregue subclases Notification, Email, Sound que extienden a Alarm" />
     <MESSAGE value="Reorganizacion" />
     <MESSAGE value="Reorganizacion, se agregaron varias clases para el manejo de objetos.&#10;DailyRepeat y RepeatableSpec para los eventos repetitivos.&#10;Finalization como interfaz implementada por EndInDate, EndAfterRepetitions. &#10;CalendarItem como superclase de Task y Event" />
@@ -539,7 +549,29 @@
     <MESSAGE value="Se separaron las responsabilidades de controladores. MainView tiene una view, el viewSelector y los botones para agregar eventos y tareas. MainController maneja las acciones de estos" />
     <MESSAGE value="Corrección de la etapa 2" />
     <MESSAGE value="Eventos repetitivos correctamente pintados&#10;Pequeño bug, cuando pasas a la fecha de la primera aparicion repetitiva del evento, se pintan todas las repeticiones en el mismo dia..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Eventos repetitivos correctamente pintados&#10;Pequeño bug, cuando pasas a la fecha de la primera aparicion repetitiva del evento, se pintan todas las repeticiones en el mismo dia..." />
+    <MESSAGE value="Arreglos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Arreglos" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/WeekController.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/model/Calendar.java</url>
+          <line>138</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1684796559155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
