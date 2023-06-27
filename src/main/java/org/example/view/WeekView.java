@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.example.controller.MainController;
 import org.example.model.Event;
@@ -31,7 +31,6 @@ public class WeekView extends BorderPane {
     public WeekView(MainController mainController) {
         weekLabel = new Label("");
         LocalDate startDate = LocalDate.now().with(DayOfWeek.MONDAY);
-        //LocalDate startDate = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         setWeekLabel(startDate);
 
         prevWeekButton = new Button("<");
@@ -43,8 +42,8 @@ public class WeekView extends BorderPane {
 
         gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPadding(new Insets(10));
-        gridPane.setVgap(1);
+        gridPane.setPadding(new Insets(5));
+        gridPane.setVgap(0);
         gridPane.setHgap(1);
 
         makeGrid();
@@ -56,7 +55,7 @@ public class WeekView extends BorderPane {
 
     public void updateGridWithCalendarItem(List<Event> events, List<Task> tasks, LocalDate currentDate){
         updateGridWithEvents(events, currentDate);
-        //updateGridWithTasks(tasks, currentDate);
+        updateGridWithTasks(tasks, currentDate);
     }
 
     public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
@@ -118,7 +117,10 @@ public class WeekView extends BorderPane {
                 }
             }
 
-            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, startDay, startHour + 1 )).getWidth() - (maxOverlap + 1) * spacing;
+            VBox hourCellContainer = (VBox) getNodeFromGridPane(gridPane, startDay, startHour + 1);
+            Pane eventsPane = (Pane) hourCellContainer.getChildren().get(0);
+
+            double totalWidth = eventsPane.getWidth() - (maxOverlap + 1) * spacing;
             double eventWidth = totalWidth / maxOverlap;
 
             double positionX = eventRelativePosition.get(event) * (eventWidth + spacing);
@@ -135,15 +137,16 @@ public class WeekView extends BorderPane {
         }
     }
 
-
     private void drawEvent(Event event, int day, int hour, double eventWidth, double positionX) {
-        Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day, hour +1 );
+        VBox hourCellContainer = (VBox) getNodeFromGridPane(gridPane, day, hour + 1);
+        //Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day, hour +1 );
 
-        if (dayHourCell != null) {
+        if (hourCellContainer != null) {
+            Pane eventsPane = (Pane) hourCellContainer.getChildren().get(0);
 
             RectangleEvent eventRect = new RectangleEvent(event);
             eventRect.setWidth(eventWidth);
-            eventRect.setHeight(dayHourCell.getHeight());
+            eventRect.setHeight(eventsPane.getHeight() - 2);
             eventRect.setFill(Color.GREENYELLOW);
 
             StackPane stackPane = new StackPane();
@@ -156,21 +159,29 @@ public class WeekView extends BorderPane {
             }
 
             stackPane.setLayoutX(positionX);
-            dayHourCell.getChildren().add(stackPane);
+            eventsPane.getChildren().add(stackPane);
 
             eventRect.setOnMouseClicked(event1 -> EventRectangleView
-                    .showDetails(eventRect, dayHourCell, mainController));
+                    .showDetails(eventRect, eventsPane, mainController));
         }
     }
 
     private void clearGrid() {
         for (int day = 0; day < 7; day++) {
             for (int hour = 0; hour < 24; hour++) {
-                Pane hourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);
-                if (hourCell != null) {
-                    hourCell.getChildren().clear();
-                    hourCell.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 160px;");
-                }
+                VBox hourCellContainer = (VBox) getNodeFromGridPane(gridPane, day + 1, hour + 1);
+                hourCellContainer.setSpacing(0);
+                hourCellContainer.setPadding(new Insets(0));
+                hourCellContainer.setBorder(Border.EMPTY);
+
+
+                Pane eventsPane = (Pane) hourCellContainer.getChildren().get(0);
+                Pane tasksPane = (Pane) hourCellContainer.getChildren().get(1);
+                eventsPane.getChildren().clear();
+                tasksPane.getChildren().clear();
+                eventsPane.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 180px; -fx-pref-height: 15px;");
+                tasksPane.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 180px; -fx-pref-height: 10px;");
+                hourCellContainer.setPrefSize(150, 30);
             }
         }
     }
@@ -199,10 +210,18 @@ public class WeekView extends BorderPane {
             gridPane.add(hourLabel, 0, hour + 1);
 
             for (int dayIndex = 0; dayIndex < DAYS_OF_WEEK.length; dayIndex++) {
-                Pane cellPane = new Pane();
-                cellPane.setPrefSize(100, 30);
-                cellPane.setStyle("-fx-background-color: white; -fx-border-color: gray;");
-                gridPane.add(cellPane, dayIndex + 1, hour + 1);
+                Pane eventsPane = new Pane();
+                Pane tasksPane = new Pane();
+
+                VBox hourCell = new VBox();
+                hourCell.setSpacing(0);
+                hourCell.getChildren().addAll(eventsPane, tasksPane);
+                eventsPane.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray;");
+                tasksPane.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray;");
+                //Pane cellPane = new Pane();
+                //cellPane.setPrefSize(100, 30);
+                //cellPane.setStyle("-fx-background-color: white; -fx-border-color: gray;");
+                gridPane.add(hourCell, dayIndex + 1, hour + 1);
             }
         }
     }
@@ -230,7 +249,7 @@ public class WeekView extends BorderPane {
         double spacing = 2.0;
 
         // Sort the events by start time
-        //tasks.sort(Comparator.comparing(Task::getExpDate));
+        tasks.sort(Comparator.comparing(Task::getExpDate));
 
         Map<Integer, List<Task>> taskPerDayAndHour = new HashMap<>();
         Map<Task, Integer> taskRelativePosition = new HashMap<>();
@@ -245,8 +264,8 @@ public class WeekView extends BorderPane {
             int startHour = LocalDateTime.now().toLocalTime().getHour();
             int endHour = task.getExpDate().toLocalTime().getHour();
 
-            int startDay = taskStart.isBefore(startDate) ? 0 : (taskStart.getDayOfWeek().getValue()-1) % 7;
-            int endDay = taskEnd.isAfter(endDate) ? 6 : (taskEnd.getDayOfWeek().getValue()-1) % 7;
+            int startDay = taskStart.isBefore(startDate) ? 1 : taskStart.getDayOfWeek().getValue();
+            int endDay = taskEnd.isAfter(endDate) ? 7 : taskEnd.getDayOfWeek().getValue();
 
             for (int day = startDay; day <= endDay; day++) {
                 int currentStartHour = (day == startDay) ? startHour : 0;
@@ -266,8 +285,8 @@ public class WeekView extends BorderPane {
         for (Task task : tasks) {
             int startHour = LocalDateTime.now().toLocalTime().getHour();
             int endHour = task.getExpDate().toLocalTime().getHour();
-            int startDay = LocalDateTime.now().toLocalDate().getDayOfWeek().getValue() % 7;
-            int endDay = task.getExpDate().toLocalDate().getDayOfWeek().getValue() % 7;
+            int startDay = LocalDateTime.now().toLocalDate().getDayOfWeek().getValue();
+            int endDay = task.getExpDate().toLocalDate().getDayOfWeek().getValue();
 
             int maxOverlap = 1;
             for (int day = startDay; day <= endDay; day++) {
@@ -280,7 +299,10 @@ public class WeekView extends BorderPane {
                 }
             }
 
-            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, startDay + 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
+            VBox hourCellContainer = (VBox) getNodeFromGridPane(gridPane, startDay, startHour + 1);
+            Pane tasksPane = (Pane) hourCellContainer.getChildren().get(1);
+
+            double totalWidth = tasksPane.getWidth() - (maxOverlap + 1) * spacing;
             double taskWidth = totalWidth / maxOverlap;
 
             double positionX = taskRelativePosition.get(task) * (taskWidth + spacing);
@@ -295,16 +317,16 @@ public class WeekView extends BorderPane {
                 }
             }
         }
-
     }
 
-
     private void drawTask(Task task, int day, int hour, double taskWidth, double positionX) {
-        Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);
+        VBox hourCellContainer = (VBox) getNodeFromGridPane(gridPane, day, hour + 1);
+        Pane tasksPane = (Pane) hourCellContainer.getChildren().get(1);
+        //Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);
 
-        Rectangle taskRect = new Rectangle();
+        RectangleTask taskRect = new RectangleTask(task);
         taskRect.setWidth(taskWidth);
-        taskRect.setHeight(dayHourCell.getHeight());
+        taskRect.setHeight(tasksPane.getHeight() - 2);
         taskRect.setFill(Color.ORCHID);
 
         StackPane stackPane = new StackPane();
@@ -313,93 +335,14 @@ public class WeekView extends BorderPane {
         // If it's the first hour of the event, add the event title
         if (hour == LocalDateTime.now().toLocalTime().getHour() && day == LocalDateTime.now().toLocalDate().getDayOfWeek().getValue() % 7) {
             Text taskText = new Text(task.getTitle());
+            taskText.setFont(new Font(9));
             stackPane.getChildren().add(taskText);
         }
 
         stackPane.setLayoutX(positionX);
-        dayHourCell.getChildren().add(stackPane);
+        tasksPane.getChildren().add(stackPane);
+
+        taskRect.setOnMouseClicked(event1 -> TaskRectangleView
+                .showDetails(taskRect, tasksPane, mainController));
     }
 }
-
-
-    /*public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
-        clearGrid();
-        double spacing = 2.0;
-
-        events.sort(Comparator.comparing(Event::getStartDateTime));
-
-        Map<Integer, List<Event>> eventsPerDayAndHour = new HashMap<>();
-        Map<Event, Double> eventWidths = new HashMap<>();
-        Map<Event, Double> eventPositions = new HashMap<>();
-
-        LocalDate endDate = startDate.plusDays(6);
-
-        for (Event event : events) {
-            LocalDate eventStart = event.getStartDateTime().toLocalDate();
-            LocalDate eventEnd = event.getEndDateTime().toLocalDate();
-
-            int startHour = event.getStartDateTime().toLocalTime().getHour();
-            int endHour = event.getEndDateTime().toLocalTime().getHour();
-
-            int startDay = eventStart.isBefore(startDate) ? 0 : eventStart.getDayOfWeek().getValue() % 7;
-            int endDay = eventEnd.isAfter(endDate) ? 6 : eventEnd.getDayOfWeek().getValue() % 7;
-
-            for (int day = startDay; day <= endDay; day++) {
-                for (int hour = startHour; hour <= endHour; hour++) {
-                    int key = day * 24 + hour;
-                    eventsPerDayAndHour.computeIfAbsent(key, k -> new ArrayList<>()).add(event);
-                }
-            }
-        }
-
-        for (Event event : events) {
-            int startHour = event.getStartDateTime().toLocalTime().getHour();
-            int endHour = event.getEndDateTime().toLocalTime().getHour();
-            int startDay = event.getStartDateTime().toLocalDate().getDayOfWeek().getValue() % 7;
-            int endDay = event.getEndDateTime().toLocalDate().getDayOfWeek().getValue() % 7;
-
-            int maxOverlap = 1;
-            for (int day = startDay; day <= endDay; day++) {
-                for (int hour = startHour; hour <= endHour; hour++) {
-                    int key = day * 24 + hour;
-                    maxOverlap = Math.max(maxOverlap, eventsPerDayAndHour.get(key).size());
-                }
-            }
-
-            double totalWidth = ((Pane) getNodeFromGridPane(gridPane, startDay + 1, startHour + 1)).getWidth() - (maxOverlap + 1) * spacing;
-            double eventWidth = totalWidth / maxOverlap;
-            eventWidths.put(event, eventWidth);
-
-            double positionX;
-
-            for (int day = startDay; day <= endDay; day++) {
-                for (int hour = startHour; hour <= endHour; hour++) {
-                    int key = day * 24 + hour;
-                    List<Event> eventsInThisHour = eventsPerDayAndHour.get(key);
-                    Pane hourCell = (Pane) getNodeFromGridPane(gridPane, day + 1, hour + 1);
-
-                    if (hour == startHour && day == startDay) {
-                        positionX = eventsInThisHour.indexOf(event) * (eventWidth + spacing);
-                        eventPositions.put(event, positionX);
-                    }
-
-                    Rectangle eventRect = new Rectangle();
-                    eventRect.setWidth(eventWidth);
-                    eventRect.setHeight(hourCell.getHeight());
-                    eventRect.setFill(Color.GREENYELLOW);
-
-                    StackPane stackPane = new StackPane();
-                    stackPane.getChildren().add(eventRect);
-
-                    if (hour == startHour && day == startDay) {
-                        Text eventText = new Text(event.getTitle());
-                        stackPane.getChildren().add(eventText);
-                    }
-
-                    stackPane.setLayoutX(eventPositions.get(event));
-                    hourCell.getChildren().add(stackPane);
-                }
-            }
-        }
-    }*/
-

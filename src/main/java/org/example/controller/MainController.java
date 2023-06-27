@@ -38,8 +38,8 @@ public class MainController {
             switch (newValue) {
                 case "Day view" -> {
                     mainView.setCenter(mainView.getDayView());
-                    stage.setWidth(DAY_WIDTH);
-                    stage.setHeight(DAY_WIDTH * 1.5);
+                    //stage.setWidth(DAY_WIDTH);
+                    //stage.setHeight(DAY_WIDTH * 1.5);
                 }
                 case "Week view" -> {
                     mainView.setCenter(mainView.getWeekView());
@@ -94,32 +94,6 @@ public class MainController {
             calendar.getEvent(event.getId()).setAlarms((List<Alarm>) eventData.get("alarms"));
         }
     }
-/*
-    private void updateEventsInView() {
-        String currentView = mainView.getViewSelector().getValue();
-
-        List<Event> events;
-
-        switch (currentView) {
-            case "Day view" -> {
-                LocalDate currentDate = dayController.getCurrentDate();
-                events = calendar.listEventsBetween(currentDate, currentDate);
-                mainView.getDayView().updateGridWithEvents(events, currentDate);
-            }
-            case "Week view" -> {
-                LocalDate startWeekDay = weekController.getStartDate();
-                events = calendar.listEventsBetween(startWeekDay, startWeekDay.plusDays(6));
-                mainView.getWeekView().updateGridWithEvents(events, startWeekDay);
-            }
-            case "Month view" -> {
-                LocalDate startMonthDay = monthController.getStartDate();
-                events = calendar.listEventsBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
-                mainView.getMonthView().updateGridWithEvents(events, startMonthDay);
-            }
-        }
-    }
-
- */
 
     public DayController getDayController() {
         return dayController;
@@ -135,13 +109,11 @@ public class MainController {
 
     public void removeEvent(Event event) {
         calendar.removeEvent(event.getId());
-        //updateEventsInView();
         updateCalendarItemInView();
     }
 
     public void removeTask(Task task) {
         calendar.removeTask(task.getId());
-        //updateTaskInView();
         updateCalendarItemInView();
     }
 
@@ -160,39 +132,8 @@ public class MainController {
 
             Task task = calendar.createTask(title, description, expDate.withSecond(0).withNano(0));
             calendar.getTask(task.getId()).setAlarms((List<Alarm>) taskData.get("alarms"));
-
-            //calendar.createTask(title, description, expDate);
         }
     }
-
-/*
-    private void updateTaskInView() {
-        String currentView = mainView.getViewSelector().getValue();
-
-        List<Task> tasks;
-
-        switch (currentView) {
-            case "Day view" -> {
-                LocalDate currentDate = dayController.getCurrentDate();
-                tasks = calendar.listTasksBetween(currentDate, currentDate);
-                mainView.getDayView().updateGridWithTasks(tasks, currentDate);
-            }
-            case "Week view" -> {
-                LocalDate startWeekDay = weekController.getStartDate();
-                tasks = calendar.listTasksBetween(startWeekDay, startWeekDay.plusDays(6));
-                mainView.getWeekView().updateGridWithTasks(tasks, startWeekDay);
-            }
-            case "Month view" -> {
-                LocalDate startMonthDay = monthController.getStartDate();
-                tasks = calendar.listTasksBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
-                mainView.getMonthView().updateGridWithTasks(tasks, startMonthDay);
-            }
-        }
-    }
-
- */
-
-
 
     public void checkForAlarms() {
         LocalDateTime currentDateTime = LocalDateTime.now().withSecond(0).withNano(0);
@@ -203,7 +144,7 @@ public class MainController {
         for (Event event : events.values()) {
             if (event.getAlarms() != null) {
                 for (Alarm alarm : event.getAlarms()) {
-                    if (/*alarm.getTriggerDate().withSecond(0).withNano(0).equals(currentDateTime) ||*/ event.getStartDateTime().withSecond(0).withNano(0).minusMinutes(alarm.getRelativeInterval()).equals(currentDateTime)) {
+                    if (event.getStartDateTime().withSecond(0).withNano(0).minusMinutes(alarm.getRelativeInterval()).equals(currentDateTime)) {
                         Platform.runLater(() -> {
                             showNotification("Event alarm", "Alarm for event: " + event.getTitle());
                             alarm.deactivateAlarm();
@@ -213,7 +154,7 @@ public class MainController {
             }
         }
 
-        /*for (Task task : tasks.values()) {
+        for (Task task : tasks.values()) {
             if (task.getAlarms() != null) {
                 for (Alarm alarm : task.getAlarms()) {
                     if (alarm.getTriggerDate().withSecond(0).withNano(0).equals(currentDateTime)) {
@@ -225,7 +166,7 @@ public class MainController {
                     }
                 }
             }
-        }*/
+        }
     }
 
     private void showNotification(String title, String message) {

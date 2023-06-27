@@ -162,11 +162,9 @@ public class Calendar {
         List<Task> result = new ArrayList<>();
 
         for(Task task : this.tasks.values()) {
-
             if (task.isCalendarItemBetween(startDate, endDate)) {
                 result.add(task);
             }
-
         }
         return result;
     }
