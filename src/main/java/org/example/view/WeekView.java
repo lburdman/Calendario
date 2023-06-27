@@ -139,7 +139,6 @@ public class WeekView extends BorderPane {
 
     private void drawEvent(Event event, int day, int hour, double eventWidth, double positionX) {
         VBox hourCellContainer = (VBox) getNodeFromGridPane(gridPane, day, hour + 1);
-        //Pane dayHourCell = (Pane) getNodeFromGridPane(gridPane, day, hour +1 );
 
         if (hourCellContainer != null) {
             Pane eventsPane = (Pane) hourCellContainer.getChildren().get(0);
@@ -218,9 +217,6 @@ public class WeekView extends BorderPane {
                 hourCell.getChildren().addAll(eventsPane, tasksPane);
                 eventsPane.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray;");
                 tasksPane.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray;");
-                //Pane cellPane = new Pane();
-                //cellPane.setPrefSize(100, 30);
-                //cellPane.setStyle("-fx-background-color: white; -fx-border-color: gray;");
                 gridPane.add(hourCell, dayIndex + 1, hour + 1);
             }
         }

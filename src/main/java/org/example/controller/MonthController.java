@@ -22,14 +22,11 @@ public class MonthController {
         updateCalendarItemInView(startDate);
     }
 
-    private void updateCalendarItemInView(LocalDate startDate){
+    public void updateCalendarItemInView(LocalDate startDate){
         LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
         List<Event> events = calendar.listEventsBetween(startDate, endDate);
         List<Task> tasks = calendar.listTasksBetween(startDate, endDate);
         monthView.updateGridWithCalendarItem(events, tasks, startDate);
-        //monthView.updateGridWithEvents(events, startDate);
-        //monthView.updateGridWithTasks(tasks, startDate);
-
     }
 
     private void initialize() {
@@ -38,7 +35,6 @@ public class MonthController {
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
             updateCalendarItemInView(startDate);
-
         });
         monthView.getNextMonthButton().setOnAction(event -> {
             startDate = startDate.plusMonths(1);
@@ -46,11 +42,9 @@ public class MonthController {
             monthView.updateGrid(startDate);
             updateCalendarItemInView(startDate);
         });
-
     }
 
     public LocalDate getStartDate() {
         return startDate;
     }
-
 }

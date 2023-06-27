@@ -151,7 +151,6 @@ public class DayView extends BorderPane {
             eventsPane.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 200px; -fx-pref-height: 15px;");
             tasksPane.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: gray; -fx-pref-width: 200px; -fx-pref-height: 10px;");
             hourCellContainer.setPrefSize(200, 30);
-
         }
     }
 

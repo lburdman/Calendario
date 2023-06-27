@@ -188,10 +188,7 @@ public class MainController {
                 weekController.updateCalendarItemInView();
             }
             case "Month view" -> {
-                LocalDate startMonthDay = monthController.getStartDate();
-                List<Event> events = calendar.listEventsBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
-                List<Task> tasks = calendar.listTasksBetween(startMonthDay, startMonthDay.with(TemporalAdjusters.lastDayOfMonth()));
-                mainView.getMonthView().updateGridWithCalendarItem(events, tasks, startMonthDay);
+                monthController.updateCalendarItemInView(monthController.getStartDate());
             }
         }
     }
