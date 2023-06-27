@@ -52,6 +52,12 @@ public class MainController {
                     stage.setHeight(DAY_WIDTH * 2.5);
                 }
             }
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    updateCalendarItemInView();
+                }
+            });
         });
         mainView.getAddEventButton().setOnAction(event -> {
             showEventDialog();
@@ -232,21 +238,15 @@ public class MainController {
         alert.showAndWait();
     }
 
-    private void updateCalendarItemInView() {
+    public void updateCalendarItemInView() {
         String currentView = mainView.getViewSelector().getValue();
 
         switch (currentView) {
             case "Day view" -> {
-                LocalDate currentDate = dayController.getCurrentDate();
-                List<Event> events = calendar.listEventsBetween(currentDate, currentDate);
-                List<Task> tasks = calendar.listTasksBetween(currentDate, currentDate);
-                mainView.getDayView().updateGridWithCalendarItem(events, tasks, currentDate);
+                dayController.updateCalendarItemInView();
             }
             case "Week view" -> {
-                LocalDate startWeekDay = weekController.getStartDate();
-                List<Event> events = calendar.listEventsBetween(startWeekDay, startWeekDay.plusDays(6));
-                List<Task> tasks = calendar.listTasksBetween(startWeekDay, startWeekDay.plusDays(6));
-                mainView.getWeekView().updateGridWithCalendarItem(events,tasks,startWeekDay);
+                weekController.updateCalendarItemInView();
             }
             case "Month view" -> {
                 LocalDate startMonthDay = monthController.getStartDate();
@@ -256,7 +256,4 @@ public class MainController {
             }
         }
     }
-
-
-
 }

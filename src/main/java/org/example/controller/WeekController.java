@@ -22,7 +22,7 @@ public class WeekController {
         updateCalendarItemInView();
     }
 
-    private void updateCalendarItemInView(){
+    public void updateCalendarItemInView(){
         LocalDate endDate = startDate.plusDays(6);
         List<Event> events = calendar.listEventsBetween(startDate, endDate);
         List<Task> tasks = calendar.listTasksBetween(startDate, endDate);

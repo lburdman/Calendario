@@ -21,7 +21,7 @@ public class DayController {
         updateCalendarItemInView();
     }
 
-    private void updateCalendarItemInView(){
+    public void updateCalendarItemInView(){
         List<Event> events = calendar.listEventsBetween(currentDate, currentDate);
         List<Task> tasks = calendar.listTasksBetween(currentDate, currentDate);
         dayView.updateGridWithEvents(events, currentDate);

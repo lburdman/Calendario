@@ -58,15 +58,16 @@ public class DailyRepeat extends RepeatableSpec {
     }
 
     private List<Event> listDailyRepetitionsForEndDate(Event e, LocalDate endDate) {
-        LocalDateTime startDateTime = e.getStartDateTime();
-        LocalDateTime endDateTime = e.getEndDateTime();
+        LocalDateTime startDateTime = e.getStartDateTime().plusDays(this.interval);
+        LocalDateTime endDateTime = e.getEndDateTime().plusDays(this.interval);
         List<Event> result = new ArrayList<>();
 
-        while(!startDateTime.toLocalDate().isAfter(endDate)) {
-            startDateTime = startDateTime.plusDays(this.interval);
-            Event clonedEvent = e.clone(startDateTime, endDateTime.plusDays(this.interval));
+        do {
+            Event clonedEvent = e.clone(startDateTime, endDateTime);
             result.add(clonedEvent);
-        }
+            startDateTime = startDateTime.plusDays(this.interval);
+            endDateTime = endDateTime.plusDays(this.interval);
+        } while(!startDateTime.toLocalDate().isAfter(endDate) && !startDateTime.toLocalDate().equals(endDate));
 
         return result;
     }
