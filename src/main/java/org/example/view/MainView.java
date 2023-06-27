@@ -33,7 +33,7 @@ public class MainView extends BorderPane {
         addEventButton = new Button("Add Event");
         addTaskButton = new Button("Add Task");
         HBox buttonsBox = new HBox(10);
-        buttonsBox.setPadding(new Insets(10));
+        buttonsBox.setPadding(new Insets(0,5,5,5));
         buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.getChildren().addAll(addEventButton, addTaskButton);
 

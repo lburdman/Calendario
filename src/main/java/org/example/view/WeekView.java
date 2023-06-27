@@ -17,7 +17,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 public class WeekView extends BorderPane {
@@ -58,7 +57,7 @@ public class WeekView extends BorderPane {
     public void updateGridWithCalendarItem(List<Event> events, List<Task> tasks, LocalDate currentDate){
         updateGridWithEvents(events, currentDate);
         //updateGridWithTasks(tasks, currentDate);
-    };
+    }
 
     public void updateGridWithEvents(List<Event> events, LocalDate startDate) {
         clearGrid();

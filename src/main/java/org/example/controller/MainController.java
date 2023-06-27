@@ -21,7 +21,7 @@ public class MainController {
     private DayController dayController;
     private WeekController weekController;
     private MonthController monthController;
-    private final Integer DAY_WIDTH = 300;
+    private final Integer DAY_WIDTH = 320;
     private final Calendar calendar;
 
     public MainController(Stage stage) {
@@ -39,7 +39,7 @@ public class MainController {
                 case "Day view" -> {
                     mainView.setCenter(mainView.getDayView());
                     stage.setWidth(DAY_WIDTH);
-                    stage.setHeight(DAY_WIDTH * 2.2);
+                    stage.setHeight(DAY_WIDTH * 1.5);
                 }
                 case "Week view" -> {
                     mainView.setCenter(mainView.getWeekView());
@@ -61,13 +61,11 @@ public class MainController {
         });
         mainView.getAddEventButton().setOnAction(event -> {
             showEventDialog();
-            //updateEventsInView();
             updateCalendarItemInView();
         });
 
         mainView.getAddTaskButton().setOnAction(event -> {
             showTaskDialog();
-            //updateTaskInView();
             updateCalendarItemInView();
         });
 
