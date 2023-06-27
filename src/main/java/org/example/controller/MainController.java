@@ -10,7 +10,6 @@ import org.example.view.TaskDialog;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -52,12 +51,7 @@ public class MainController {
                     stage.setHeight(DAY_WIDTH * 2.5);
                 }
             }
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    updateCalendarItemInView();
-                }
-            });
+            Platform.runLater(() -> updateCalendarItemInView());
         });
         mainView.getAddEventButton().setOnAction(event -> {
             showEventDialog();
@@ -87,7 +81,6 @@ public class MainController {
             if (isDailyRepetition) {
                 Integer interval = (Integer) eventData.get("interval");
                 calendar.asignDailyRepToEvent(interval, event, expDate);
-                System.out.println("Entramoooo" + event.toString());
             }
 
             //Event event = calendar.createEvent(title, description, startDateTime.withSecond(0).withNano(0), endDateTime.withSecond(0).withNano(0));

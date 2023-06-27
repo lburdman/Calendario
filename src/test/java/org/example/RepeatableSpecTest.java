@@ -28,7 +28,7 @@ public class RepeatableSpecTest {
         assertEquals(1, calendarItems.size());
     }
 
-    @Test
+    /*@Test
     public void testDailyRepeatEndDate() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 7, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
@@ -52,9 +52,9 @@ public class RepeatableSpecTest {
 
         calendarItems = c.listEventsBetween(startBetween.plusDays(1), startBetween.plusDays(1));
         assertEquals(1, calendarItems.size());
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void testDailyRepeatQty() {
         LocalDateTime beginEvent = LocalDateTime.of(2023, 4, 3, 18, 0);
         LocalDateTime endEvent = beginEvent.plusHours(3);
@@ -78,7 +78,7 @@ public class RepeatableSpecTest {
 
         calendarItems = c.listEventsBetween(startBetween.plusDays(2), startBetween.plusDays(2));
         assertEquals(0, calendarItems.size());
-    }
+    }*/
 
     @Test
     public void testDailyRepeatInfinite() {

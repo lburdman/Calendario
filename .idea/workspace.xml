@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Task/Event sobreposicion arreglado en WeekView">
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="MonthView con Event/Task separado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/DayView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/WeekView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +115,7 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainApp">
+  <component name="RunManager" selected="JUnit.All in etapa1">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.model.Main" />
       <module name="etapa1" />
@@ -208,8 +206,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainApp" />
         <item itemvalue="JUnit.All in etapa1" />
+        <item itemvalue="Application.MainApp" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="JUnit.RepeatableSpecTest" />
@@ -491,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687898247231</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="MonthView con Event/Task separado">
+      <created>1687902634744</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1687902634744</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -553,7 +558,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test de Alarm terminados." />
     <MESSAGE value="Test RepeatableSpec.&#10;listEventsBetween(), listEventRepetitions()" />
     <MESSAGE value="Arreglos en la implementacion de Alarm con un intervalo de tiempo (redondeo sin nanosegundos)&#10;Correccion asimismo en sus tests" />
     <MESSAGE value="Implementacion de listEventRepetitions() en AnnuallyRepeat y MonthlyRepeat.&#10;Se eliminaron Finalization, y sus subclases porque no se usan" />
@@ -578,7 +582,39 @@
     <MESSAGE value="BUG RESUELTO, Week y Day repiten excelente. &#10;Falta: dibujar task que no se pise, revisar Month" />
     <MESSAGE value="Task/Event sobreposicion arreglado" />
     <MESSAGE value="Task/Event sobreposicion arreglado en WeekView" />
-    <option name="LAST_COMMIT_MESSAGE" value="Task/Event sobreposicion arreglado en WeekView" />
+    <MESSAGE value="MonthView con Event/Task separado" />
+    <option name="LAST_COMMIT_MESSAGE" value="MonthView con Event/Task separado" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java</url>
+          <line>137</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java</url>
+          <line>198</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java</url>
+          <line>138</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/etapa1$All_in_etapa1.ic" NAME="All in etapa1 Coverage Results" MODIFIED="1684796559155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

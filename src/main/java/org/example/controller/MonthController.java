@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import javafx.application.Platform;
 import org.example.model.Calendar;
 import org.example.model.Event;
 import org.example.model.Task;
@@ -19,7 +20,7 @@ public class MonthController {
         this.monthView = monthView;
         this.startDate = LocalDate.now().withDayOfMonth(1);
         initialize();
-        updateCalendarItemInView(startDate);
+        Platform.runLater(() -> updateCalendarItemInView(startDate));
     }
 
     public void updateCalendarItemInView(LocalDate startDate){
@@ -34,13 +35,13 @@ public class MonthController {
             startDate = startDate.minusMonths(1);
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
-            updateCalendarItemInView(startDate);
+            Platform.runLater(() -> updateCalendarItemInView(startDate));
         });
         monthView.getNextMonthButton().setOnAction(event -> {
             startDate = startDate.plusMonths(1);
             monthView.setMonthLabel(startDate);
             monthView.updateGrid(startDate);
-            updateCalendarItemInView(startDate);
+            Platform.runLater(() -> updateCalendarItemInView(startDate));
         });
     }
 

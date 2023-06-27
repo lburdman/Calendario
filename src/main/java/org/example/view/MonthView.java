@@ -174,7 +174,7 @@ public class MonthView extends BorderPane {
                 maxOverlap = Math.max(maxOverlap, eventsPerDay.get(day).size());
             }
 
-            int startColumn = LocalDate.now().withDayOfMonth(1).getDayOfWeek().getValue();
+            int startColumn = mainController.getMonthController().getStartDate().getDayOfWeek().getValue();
             int row = (startDay + startColumn - 2) / NUM_DAYS_IN_WEEK + 1;
             int rowCell = (row >= 2 && row <= 6) ? row * 2 : row + 1;
 
@@ -195,8 +195,8 @@ public class MonthView extends BorderPane {
     }
 
     private void clearGrid() {
-        int startColumn = LocalDate.now().withDayOfMonth(1).getDayOfWeek().getValue();
-        int lastDayOfMonth = LocalDate.now().lengthOfMonth();
+        int startColumn = mainController.getMonthController().getStartDate().getDayOfWeek().getValue();
+        int lastDayOfMonth = mainController.getMonthController().getStartDate().lengthOfMonth();
 
         for (int day = 1; day <= lastDayOfMonth; day++) {
             int row = (day + startColumn - 2) / NUM_DAYS_IN_WEEK + 1;
