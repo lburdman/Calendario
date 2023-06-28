@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="MonthView con Event/Task separado">
+    <list default="true" id="a34d72c6-4593-4da7-846f-dcfeaff8e902" name="Changes" comment="Arreglo en MonthView">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/FilePersistenceHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/view/MonthView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +114,7 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in etapa1">
+  <component name="RunManager" selected="Application.MainApp">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.model.Main" />
       <module name="etapa1" />
@@ -206,8 +205,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="Application.MainApp" />
+        <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in etapa1" />
         <item itemvalue="JUnit.RepeatableSpecTest" />
@@ -496,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687902634744</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Arreglo en MonthView">
+      <created>1687908484837</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1687908484837</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -558,7 +564,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test RepeatableSpec.&#10;listEventsBetween(), listEventRepetitions()" />
     <MESSAGE value="Arreglos en la implementacion de Alarm con un intervalo de tiempo (redondeo sin nanosegundos)&#10;Correccion asimismo en sus tests" />
     <MESSAGE value="Implementacion de listEventRepetitions() en AnnuallyRepeat y MonthlyRepeat.&#10;Se eliminaron Finalization, y sus subclases porque no se usan" />
     <MESSAGE value="Implementacion de listEventRepetitions() en WeeklyRepeat." />
@@ -583,14 +588,15 @@
     <MESSAGE value="Task/Event sobreposicion arreglado" />
     <MESSAGE value="Task/Event sobreposicion arreglado en WeekView" />
     <MESSAGE value="MonthView con Event/Task separado" />
-    <option name="LAST_COMMIT_MESSAGE" value="MonthView con Event/Task separado" />
+    <MESSAGE value="Arreglo en MonthView" />
+    <option name="LAST_COMMIT_MESSAGE" value="Arreglo en MonthView" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java</url>
-          <line>50</line>
+          <line>40</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -605,7 +611,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/MonthController.java</url>
-          <line>40</line>
+          <line>35</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

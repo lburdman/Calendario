@@ -22,11 +22,12 @@ public class MainController {
     private MonthController monthController;
     private final Integer DAY_WIDTH = 320;
     private final Calendar calendar;
+    private final PersistenceHandler persistenceHandler = new FilePersistenceHandler();
 
     public MainController(Stage stage) {
         this.stage = stage;
-        this.calendar = new Calendar(); // Then it will be loaded
-
+        //this.calendar = new Calendar(); // Then it will be loaded
+        calendar = persistenceHandler.deserialize();
     }
 
     public void initialize() {
@@ -54,15 +55,19 @@ public class MainController {
             Platform.runLater(() -> updateCalendarItemInView());
         });
         mainView.getAddEventButton().setOnAction(event -> {
-            showEventDialog();
-            updateCalendarItemInView();
+            onCalendarItemAdded();
         });
 
         mainView.getAddTaskButton().setOnAction(event -> {
-            showTaskDialog();
-            updateCalendarItemInView();
+            onCalendarItemAdded();
         });
 
+    }
+
+    private void onCalendarItemAdded() {
+        showEventDialog();
+        updateCalendarItemInView();
+        persistenceHandler.serialize(calendar);
     }
 
     private void showEventDialog() {
@@ -83,7 +88,6 @@ public class MainController {
                 calendar.asignDailyRepToEvent(interval, event, expDate);
             }
 
-            //Event event = calendar.createEvent(title, description, startDateTime.withSecond(0).withNano(0), endDateTime.withSecond(0).withNano(0));
             calendar.getEvent(event.getId()).setAlarms((List<Alarm>) eventData.get("alarms"));
         }
     }
@@ -103,11 +107,13 @@ public class MainController {
     public void removeEvent(Event event) {
         calendar.removeEvent(event.getId());
         updateCalendarItemInView();
+        persistenceHandler.serialize(calendar);
     }
 
     public void removeTask(Task task) {
         calendar.removeTask(task.getId());
         updateCalendarItemInView();
+        persistenceHandler.serialize(calendar);
     }
 
     public void setMainView(MainView mainView) {
