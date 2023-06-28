@@ -22,9 +22,18 @@ public class EventRectangleView {
         Text description = new Text("Description: " + event.getDescription());
         Text startDateTime = new Text("Start: " + event.getStartDateTime().withSecond(0).withNano(0));
         Text endDateTime = new Text("End: " + event.getEndDateTime().withSecond(0).withNano(0));
+        Text isDailyRepe = new Text("There is daily Repetititions? " + event.isRepeatable());
+
         Button deleteButton = new Button("Delete Event");
 
-        layout.getChildren().addAll(title, description, startDateTime, endDateTime, deleteButton);
+        layout.getChildren().addAll(title, description, startDateTime, endDateTime,isDailyRepe);
+        if (event.isRepeatable()){
+            Text endDate = new Text("Repetitions End Time: " + event.getRepeatableSpec().getEndDate());
+            layout.getChildren().add(endDate);
+        }
+        layout.getChildren().add(deleteButton);
+
+        //layout.getChildren().addAll(title, description, startDateTime, endDateTime, deleteButton);
 
         deleteButton.setOnAction(actionEvent -> {
             mainController.removeEvent(event);
